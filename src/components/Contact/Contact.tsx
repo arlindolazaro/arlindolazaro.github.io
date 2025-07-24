@@ -1,8 +1,8 @@
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLinkedin, faGithub } from '@fortawesome/free-brands-svg-icons';
-import { faEnvelope, faPhone, faMapMarkerAlt, faPaperPlane } from '@fortawesome/free-solid-svg-icons';
+import { faEnvelope, faPhone, faMapMarkerAlt, faPaperPlane, faCheck } from '@fortawesome/free-solid-svg-icons';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -13,7 +13,7 @@ const Contact = () => {
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [showSuccessPopup, setShowSuccessPopup] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -26,7 +26,6 @@ const Contact = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    setSubmitStatus('idle');
 
     try {
       const response = await fetch('https://formsubmit.co/ajax/arlindolazaro202@gmail.com', {
@@ -48,18 +47,16 @@ const Contact = () => {
       const result = await response.json();
       
       if (result.success) {
-        setSubmitStatus('success');
         setFormData({
           name: '',
           email: '',
           subject: '',
           message: ''
         });
-      } else {
-        setSubmitStatus('error');
+        setShowSuccessPopup(true);
+        setTimeout(() => setShowSuccessPopup(false), 3000);
       }
     } catch (error) {
-      setSubmitStatus('error');
       console.error('Erro no envio:', error);
     } finally {
       setIsSubmitting(false);
@@ -193,49 +190,48 @@ const Contact = () => {
                   required
                 ></textarea>
               </div>
-              
-              <div className="flex items-center gap-4">
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className={`flex items-center gap-2 bg-indigo-600 text-white px-6 py-3 rounded-md hover:bg-indigo-700 transition-colors ${
-                    isSubmitting ? 'opacity-70 cursor-not-allowed' : ''
-                  }`}
-                >
-                  {isSubmitting ? (
-                    'ENVIANDO...'
-                  ) : (
-                    <>
-                      <FontAwesomeIcon icon={faPaperPlane} />
-                      ENVIAR MENSAGEM
-                    </>
-                  )}
-                </button>
-                
-                {submitStatus === 'success' && (
-                  <motion.div
-                    initial={{ opacity: 0, x: 10 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    className="text-green-600 font-medium"
-                  >
-                    Mensagem enviada com sucesso!
-                  </motion.div>
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="bg-indigo-600 text-white px-6 py-3 rounded-md hover:bg-indigo-700 transition-colors flex items-center justify-center gap-2"
+              >
+                {isSubmitting ? (
+                  <>
+                    <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    ENVIANDO...
+                  </>
+                ) : (
+                  <>
+                    <FontAwesomeIcon icon={faPaperPlane} />
+                    ENVIAR
+                  </>
                 )}
-                
-                {submitStatus === 'error' && (
-                  <motion.div
-                    initial={{ opacity: 0, x: 10 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    className="text-red-600 font-medium"
-                  >
-                    Erro ao enviar. Tente novamente.
-                  </motion.div>
-                )}
-              </div>
+              </button>
             </form>
           </motion.div>
         </div>
       </div>
+
+      {/* Popup de sucesso */}
+      <AnimatePresence>
+        {showSuccessPopup && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 20 }}
+            transition={{ duration: 0.3 }}
+            className="fixed bottom-8 right-8 z-50 bg-green-100 text-green-800 p-4 rounded-lg shadow-lg flex items-center gap-3"
+          >
+            <div className="bg-green-200 p-2 rounded-full">
+              <FontAwesomeIcon icon={faCheck} className="text-green-600" />
+            </div>
+            <span className="font-medium">Mensagem enviada com sucesso!</span>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 };
