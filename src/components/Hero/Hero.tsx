@@ -1,50 +1,106 @@
-import minhaFoto from '../../assets/images/photo1.jpeg'; // ajuste o caminho se necessário
 import { motion } from 'framer-motion';
+import { FaChevronDown } from 'react-icons/fa';
 
 const Hero = () => {
-  return (
-    <section className="min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-50 to-indigo-50 pt-20">
-      <div className="container mx-auto px-4 py-16 flex flex-col md:flex-row items-center">
-        <motion.div
-          initial={{ opacity: 0, x: -50 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8 }}
-          className="md:w-1/2 mb-10 md:mb-0"
-        >
-          <h2 className="text-4xl md:text-6xl font-bold text-gray-800 mb-4">OLÁ, EU SOU</h2>
-          <h1 className="text-5xl md:text-7xl font-bold text-gray-900 mb-6">ARLINDO CAU</h1>
-          <h3 className="text-2xl md:text-3xl text-indigo-600 mb-8">WEB DEVELOPER</h3>
+  const scrollToNextSection = () => {
+    document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' });
+  };
 
-          <div className="flex space-x-4">
-            <a
+  return (
+    <section id="home" className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 to-gray-800 px-6">
+      <div className="container mx-auto flex flex-col items-center justify-between min-h-[calc(100vh-5rem)] py-20">
+        {/* Conteúdo Principal */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="max-w-3xl mx-auto text-center"
+        >
+          <motion.p
+            className="text-lg md:text-xl text-indigo-400 mb-4 font-mono"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.2 }}
+          >
+            OLÁ, EU SOU
+          </motion.p>
+
+          <motion.h1
+            className="text-4xl md:text-6xl font-bold text-white mb-6"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.4 }}
+          >
+            ARLINDO <span className="text-indigo-400">CAU</span>
+          </motion.h1>
+
+          <motion.h2
+            className="text-2xl md:text-3xl font-semibold text-gray-300 mb-8"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.6 }}
+          >
+            Desenvolvedor Full-Stack
+          </motion.h2>
+
+          <motion.p
+            className="text-gray-400 mb-12 max-w-2xl mx-auto text-lg"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.8 }}
+          >
+            Especializado em desenvolvimento de sistemas web com Java, Spring Boot e React.
+          </motion.p>
+
+          <div className="flex flex-col sm:flex-row justify-center gap-4">
+            <motion.a
               href="#contact"
-              className="bg-indigo-600 text-white px-6 py-3 rounded-md hover:bg-indigo-700 transition-colors"
+              className="bg-indigo-600 hover:bg-indigo-700 text-white px-8 py-3 rounded-lg font-medium transition-colors"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
               CONTRATE-ME
-            </a>
-            <a
+            </motion.a>
+            <motion.a
               href="/Arlindo_Cau_CV.pdf"
               download
-              className="border-2 border-indigo-600 text-indigo-600 px-6 py-3 rounded-md hover:bg-indigo-50 transition-colors"
+              className="border-2 border-indigo-400 hover:bg-indigo-900/30 text-indigo-400 px-8 py-3 rounded-lg font-medium transition-colors"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
               BAIXAR CV
-            </a>
+            </motion.a>
           </div>
         </motion.div>
 
+        {/* Botão "Saiba Mais" - Agora perfeitamente centralizado */}
         <motion.div
-          initial={{ opacity: 0, x: 50 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8 }}
-          className="md:w-1/2 flex justify-center"
+          className="flex flex-col items-center justify-center mb-8"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.2 }}
         >
-          <div className="w-64 h-64 md:w-80 md:h-80 bg-indigo-200 rounded-full overflow-hidden border-4 border-white shadow-lg">
-            <img
-              src={minhaFoto}
-              alt="Foto de Arlindo Cau"
-              className="w-full h-full object-cover"
-            />
-          </div>
+          <motion.button
+            onClick={scrollToNextSection}
+            className="flex flex-col items-center group"
+            aria-label="Scroll para próxima seção"
+            whileHover={{ scale: 1.05 }}
+          >
+            <span className="text-sm text-gray-400 mb-3 group-hover:text-indigo-300 transition-colors">
+              SAIBA MAIS
+            </span>
+            <motion.div
+              animate={{ y: [0, 8, 0] }}
+              transition={{ 
+                duration: 1.5,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+              className="w-10 h-10 rounded-full border-2 border-gray-400 group-hover:border-indigo-400 flex items-center justify-center text-gray-300 group-hover:text-indigo-300 transition-colors"
+            >
+              <FaChevronDown className="text-lg" />
+            </motion.div>
+          </motion.button>
         </motion.div>
       </div>
     </section>

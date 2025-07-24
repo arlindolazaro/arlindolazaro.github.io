@@ -14,10 +14,9 @@ const Footer = () => {
             viewport={{ once: true }}
             className="mb-8"
           >
-            <h2 className="text-3xl font-bold">ARLINDO CAU</h2>
-            <p className="text-gray-400 text-center mt-2">Engenheiro de Software Full-Stack</p>
+            <h2 className="text-3xl font-bold">Web Developer</h2>
           </motion.div>
-          
+
           <div className="flex space-x-6 mb-8">
             <motion.a
               whileHover={{ scale: 1.1 }}
@@ -38,7 +37,7 @@ const Footer = () => {
               <FontAwesomeIcon icon={faGithub} size="lg" />
             </motion.a>
           </div>
-          
+
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -46,7 +45,7 @@ const Footer = () => {
             viewport={{ once: true }}
             className="text-gray-400 text-center"
           >
-            © {new Date().getFullYear()} Arlindo Lázaro Cau Júnior. Todos os direitos reservados.
+            © {new Date().getFullYear()}. Todos os direitos reservados.
           </motion.p>
         </div>
       </div>

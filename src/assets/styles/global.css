@@ -44,3 +44,29 @@
     @apply outline-2 outline-offset-2 outline-indigo-600;
   }
 }
+
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Button transitions */
+.btn-transition {
+  transition: all 0.3s ease;
+}
+
+/* Gradient text */
+.text-gradient {
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+/* No seu arquivo global.css */
+html {
+  scroll-behavior: smooth;
+}
+
+.scroll-btn {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
