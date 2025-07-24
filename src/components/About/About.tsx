@@ -13,7 +13,7 @@ const About = () => {
         >
           <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-6">SOBRE MIM</h2>
           <p className="text-gray-600 mb-6">
-            Engenheiro de Software com 3 anos de experiência em desenvolvimento de sistemas completos,
+            Desenvolvedor Web com 3 anos de experiência em desenvolvimento de sistemas completos,
             incluindo APIs robustas e interfaces modernas.
           </p>
           <p className="text-gray-600">

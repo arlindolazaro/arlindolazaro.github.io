@@ -19,7 +19,7 @@ const experiences = [
             "Colaborei com equipes multidisciplinares para entrega de projectos com alta qualidade",
             "Documentei processos técnicos e treinei novos desenvolvedores"
         ],
-        techStack: ["Java", "Spring Boot", "React", "PostgreSQL"]
+        techStack: ["Java", "Spring Boot", "React", "MySQL"]
     },
     {
         position: "Técnico de Redes de Computadores",

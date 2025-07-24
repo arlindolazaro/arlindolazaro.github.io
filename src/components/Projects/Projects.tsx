@@ -1,4 +1,4 @@
-import { FaGithub, FaJava, FaReact, FaNodeJs, FaBootstrap } from 'react-icons/fa';
+import { FaGithub, FaJava, FaReact, FaBootstrap, FaPhp } from 'react-icons/fa';
 import { SiSpringboot, SiTypescript, SiTailwindcss, SiMysql } from 'react-icons/si';
 import { motion } from 'framer-motion';
 
@@ -19,7 +19,7 @@ const Projects = () => {
       title: "Loja Masculina",
       description: "E-commerce de vestuário masculino desenvolvido como projeto final de Programação Web Avançada.",
       technologies: [
-        { name: "JavaScript", icon: <FaNodeJs className="text-yellow-600" /> },
+        { name: "PHP", icon: <FaPhp className="text-indigo-600" /> },
         { name: "Bootstrap", icon: <FaBootstrap className="text-purple-600" /> },
       ],
       githubUrl: "https://github.com/devLazarus258/LojaMasculina.git",
