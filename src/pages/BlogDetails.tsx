@@ -8,7 +8,7 @@ const BlogDetails = () => {
       <main className="min-h-screen pt-32 pb-20">
         <div className="container mx-auto px-4">
           <h1 className="text-4xl font-bold text-gray-800 mb-8">Blog Details</h1>
-          {/* Blog content would go here */}
+          {/* Conteúdo do blog aqui */}
         </div>
       </main>
       <Footer />
