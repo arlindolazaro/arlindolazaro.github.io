@@ -64,7 +64,7 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="py-20 bg-gray-50">
+    <section id="contact" className="py-20 bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800">
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
@@ -73,13 +73,17 @@ const Contact = () => {
           viewport={{ once: true }}
           className="max-w-2xl mx-auto text-center mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">CONTACTO</h2>
-          <p className="text-gray-600">
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-800 dark:text-white mb-4">
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-purple-600">
+              Vamos Conversar
+            </span>
+          </h2>
+          <p className="text-lg text-gray-600 dark:text-gray-300">
             Estou disponível para oportunidades e colaborações. Entre em contacto!
           </p>
         </motion.div>
 
-        <div className="flex flex-col lg:flex-row gap-12">
+        <div className="flex flex-col lg:flex-row gap-8 lg:gap-12">
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -87,52 +91,71 @@ const Contact = () => {
             viewport={{ once: true }}
             className="lg:w-1/2"
           >
-            <div className="space-y-6">
-              <div className="flex items-start space-x-4">
-                <FontAwesomeIcon icon={faMapMarkerAlt} className="text-indigo-600 mt-1" />
-                <div>
-                  <h3 className="text-xl font-bold text-gray-800 mb-1">Localização</h3>
-                  <p className="text-gray-600">1110, Matola, Maputo, Moçambique</p>
+            <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 h-full">
+              <div className="space-y-8">
+                <div className="flex items-start space-x-4">
+                  <div className="flex-shrink-0">
+                    <div className="bg-indigo-100 dark:bg-indigo-900/50 p-3 rounded-lg">
+                      <FontAwesomeIcon icon={faMapMarkerAlt} className="text-indigo-600 dark:text-indigo-400 text-xl" />
+                    </div>
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold text-gray-800 dark:text-white mb-1">Localização</h3>
+                    <p className="text-gray-600 dark:text-gray-300">1110, Matola, Maputo, Moçambique</p>
+                  </div>
                 </div>
-              </div>
 
-              <div className="flex items-start space-x-4">
-                <FontAwesomeIcon icon={faEnvelope} className="text-indigo-600 mt-1" />
-                <div>
-                  <h3 className="text-xl font-bold text-gray-800 mb-1">Email</h3>
-                  <a href="mailto:arlindolazaro202@gmail.com" className="text-gray-600 hover:text-indigo-600">
-                    arlindolazaro202@gmail.com
-                  </a>
+                <div className="flex items-start space-x-4">
+                  <div className="flex-shrink-0">
+                    <div className="bg-indigo-100 dark:bg-indigo-900/50 p-3 rounded-lg">
+                      <FontAwesomeIcon icon={faEnvelope} className="text-indigo-600 dark:text-indigo-400 text-xl" />
+                    </div>
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold text-gray-800 dark:text-white mb-1">Email</h3>
+                    <a 
+                      href="mailto:arlindolazaro202@gmail.com" 
+                      className="text-gray-600 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
+                    >
+                      arlindolazaro202@gmail.com
+                    </a>
+                  </div>
                 </div>
-              </div>
 
-              <div className="flex items-start space-x-4">
-                <FontAwesomeIcon icon={faPhone} className="text-indigo-600 mt-1" />
-                <div>
-                  <h3 className="text-xl font-bold text-gray-800 mb-1">Telefone</h3>
-                  <p className="text-gray-600">+258 86 530 4919</p>
+                <div className="flex items-start space-x-4">
+                  <div className="flex-shrink-0">
+                    <div className="bg-indigo-100 dark:bg-indigo-900/50 p-3 rounded-lg">
+                      <FontAwesomeIcon icon={faPhone} className="text-indigo-600 dark:text-indigo-400 text-xl" />
+                    </div>
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold text-gray-800 dark:text-white mb-1">Telefone</h3>
+                    <p className="text-gray-600 dark:text-gray-300">+258 86 530 4919</p>
+                  </div>
                 </div>
-              </div>
 
-              <div className="pt-4">
-                <h3 className="text-xl font-bold text-gray-800 mb-4">Redes Sociais</h3>
-                <div className="flex space-x-6">
-                  <a
-                    href="https://www.linkedin.com/in/arlindo-lázaro-974932267/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-gray-600 hover:text-indigo-600 transition-colors"
-                  >
-                    <FontAwesomeIcon icon={faLinkedin} size="2x" />
-                  </a>
-                  <a
-                    href="https://github.com/devLazarus258"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-gray-600 hover:text-indigo-600 transition-colors"
-                  >
-                    <FontAwesomeIcon icon={faGithub} size="2x" />
-                  </a>
+                <div className="pt-4">
+                  <h3 className="text-xl font-bold text-gray-800 dark:text-white mb-4">Redes Sociais</h3>
+                  <div className="flex space-x-6">
+                    <motion.a
+                      href="https://www.linkedin.com/in/arlindo-lázaro-974932267/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      whileHover={{ y: -3 }}
+                      className="text-gray-600 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
+                    >
+                      <FontAwesomeIcon icon={faLinkedin} size="2x" />
+                    </motion.a>
+                    <motion.a
+                      href="https://github.com/devLazarus258"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      whileHover={{ y: -3 }}
+                      className="text-gray-600 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
+                    >
+                      <FontAwesomeIcon icon={faGithub} size="2x" />
+                    </motion.a>
+                  </div>
                 </div>
               </div>
             </div>
@@ -145,72 +168,80 @@ const Contact = () => {
             viewport={{ once: true }}
             className="lg:w-1/2"
           >
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <div>
-                <input
-                  type="text"
-                  name="name"
-                  placeholder="Seu Nome"
-                  value={formData.name}
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                  required
-                />
-              </div>
-              <div>
-                <input
-                  type="email"
-                  name="email"
-                  placeholder="Seu Email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                  required
-                />
-              </div>
-              <div>
-                <input
-                  type="text"
-                  name="subject"
-                  placeholder="Assunto"
-                  value={formData.subject}
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                  required
-                />
-              </div>
-              <div>
-                <textarea
-                  name="message"
-                  placeholder="Sua Mensagem"
-                  rows={4}
-                  value={formData.message}
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                  required
-                ></textarea>
-              </div>
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className="bg-indigo-600 text-white px-6 py-3 rounded-md hover:bg-indigo-700 transition-colors flex items-center justify-center gap-2"
-              >
-                {isSubmitting ? (
-                  <>
-                    <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                    </svg>
-                    ENVIANDO...
-                  </>
-                ) : (
-                  <>
-                    <FontAwesomeIcon icon={faPaperPlane} />
-                    ENVIAR
-                  </>
-                )}
-              </button>
-            </form>
+            <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 h-full">
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <motion.div whileHover={{ scale: 1.01 }}>
+                  <input
+                    type="text"
+                    name="name"
+                    placeholder="Seu Nome"
+                    value={formData.name}
+                    onChange={handleChange}
+                    className="w-full px-5 py-4 border border-gray-200 dark:border-gray-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-gray-50 dark:bg-gray-700/50 transition-all"
+                    required
+                  />
+                </motion.div>
+                
+                <motion.div whileHover={{ scale: 1.01 }}>
+                  <input
+                    type="email"
+                    name="email"
+                    placeholder="Seu Email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    className="w-full px-5 py-4 border border-gray-200 dark:border-gray-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-gray-50 dark:bg-gray-700/50 transition-all"
+                    required
+                  />
+                </motion.div>
+                
+                <motion.div whileHover={{ scale: 1.01 }}>
+                  <input
+                    type="text"
+                    name="subject"
+                    placeholder="Assunto"
+                    value={formData.subject}
+                    onChange={handleChange}
+                    className="w-full px-5 py-4 border border-gray-200 dark:border-gray-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-gray-50 dark:bg-gray-700/50 transition-all"
+                    required
+                  />
+                </motion.div>
+                
+                <motion.div whileHover={{ scale: 1.01 }}>
+                  <textarea
+                    name="message"
+                    placeholder="Sua Mensagem"
+                    rows={5}
+                    value={formData.message}
+                    onChange={handleChange}
+                    className="w-full px-5 py-4 border border-gray-200 dark:border-gray-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-gray-50 dark:bg-gray-700/50 transition-all"
+                    required
+                  ></textarea>
+                </motion.div>
+                
+                <motion.button
+                  type="submit"
+                  disabled={isSubmitting}
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-6 py-4 rounded-xl hover:from-indigo-700 hover:to-purple-700 transition-all flex items-center justify-center gap-3 font-medium shadow-lg shadow-indigo-500/20"
+                >
+                  {isSubmitting ? (
+                    <>
+                      <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                      </svg>
+                      ENVIANDO...
+                    </>
+                  ) : (
+                    <>
+                      <FontAwesomeIcon icon={faPaperPlane} />
+                      ENVIAR MENSAGEM
+                    </>
+                  )}
+                </motion.button>
+              </form>
+            </div>
           </motion.div>
         </div>
       </div>
@@ -223,10 +254,10 @@ const Contact = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 20 }}
             transition={{ duration: 0.3 }}
-            className="fixed bottom-8 right-8 z-50 bg-green-100 text-green-800 p-4 rounded-lg shadow-lg flex items-center gap-3"
+            className="fixed bottom-8 right-8 z-50 bg-white dark:bg-gray-800 text-green-600 dark:text-green-400 p-4 rounded-xl shadow-2xl flex items-center gap-3 border border-green-200 dark:border-green-800/50"
           >
-            <div className="bg-green-200 p-2 rounded-full">
-              <FontAwesomeIcon icon={faCheck} className="text-green-600" />
+            <div className="bg-green-100 dark:bg-green-900/50 p-2 rounded-full">
+              <FontAwesomeIcon icon={faCheck} className="text-green-600 dark:text-green-400" />
             </div>
             <span className="font-medium">Mensagem enviada com sucesso!</span>
           </motion.div>

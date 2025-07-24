@@ -15,7 +15,7 @@ const services = [
   },
   {
     title: "CONSULTORIA EM TI",
-    description: "Orientação técnica para projetos de software, arquitetura de sistemas e melhores práticas de desenvolvimento."
+    description: "Orientação técnica para projectos de software, arquitetura de sistemas e melhores práticas de desenvolvimento."
   }
 ];
 

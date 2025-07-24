@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 const navItems = [
   { name: 'INÍCIO', path: '#home' },
   { name: 'SOBRE', path: '#about' },
-  { name: 'HABILIDADES', path: '#skills' },
+  { name: 'PROJECTOS', path: '#projects' }, 
   { name: 'EXPERIÊNCIA', path: '#experience' },
   { name: 'CONTACTO', path: '#contact' },
 ];
@@ -27,7 +27,6 @@ const Header = () => {
             <a href="#home" className="text-white flex items-center justify-center">
               <FontAwesomeIcon icon={faCode} className="text-indigo-400" size="2x" />
             </a>
-
           </motion.div>
 
           {/* Desktop Navigation */}
@@ -36,7 +35,7 @@ const Header = () => {
               <motion.a
                 key={item.name}
                 href={item.path}
-                className="relative text-gray-300 hover:text-white px-3 py-2 text-sm font-medium transition-colors"
+                className="relative text-gray-300 hover:text-white px-3 py-2 text-sm font-medium transition-colors group"
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 * index }}

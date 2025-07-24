@@ -22,11 +22,11 @@ const Hero = () => {
     if (!isMounted || isDownloading) return;
 
     setIsDownloading(true);
-    
+
     try {
       // Solução com fallback para diferentes cenários
       const pdfUrl = '/documents/Arlindo_Cau_CV.pdf';
-      
+
       // Método 1: Tentativa com anchor tag
       const link = document.createElement('a');
       link.href = pdfUrl;
@@ -84,7 +84,7 @@ const Hero = () => {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.6 }}
           >
-            Desenvolvedor Full-Stack
+            Web Developer
           </motion.h2>
 
           <motion.p
@@ -93,7 +93,7 @@ const Hero = () => {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.8 }}
           >
-            Especializado em desenvolvimento de sistemas web com Java, Spring Boot e React.
+            Especializado no desenvolvimento de sistemas web com PHP, TypeScript, Java, Spring Boot e React.
           </motion.p>
 
           <div className="flex flex-col sm:flex-row justify-center gap-4">
@@ -105,7 +105,7 @@ const Hero = () => {
             >
               CONTRATE-ME
             </motion.a>
-            
+
             <motion.button
               onClick={handleDownloadCV}
               disabled={isDownloading}
