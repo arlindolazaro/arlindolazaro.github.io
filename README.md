@@ -31,9 +31,8 @@ Portfólio profissional desenvolvido com React + TypeScript + Vite, apresentando
 🔲 Integração com CMS para conteúdo  
 🔲 Testes automatizados (Jest + RTL)  
 
-## 🛠️ Configuração do Ambiente
+🛠️ Configuração do Ambiente
 
-```bash
 # Clone o repositório
 git clone https://github.com/devLazarus258/portfolio.git
 
@@ -47,7 +46,6 @@ npm run dev
 
 Acesse online: https://arlindo-portfolio.vercel.app
 📊 Status do Projeto
-typescript
 
 {
   cleanCode: "em progresso", 
@@ -61,5 +59,3 @@ typescript
 Arlindo Lázaro Cau Júnior
 📧 arlindolazaro202@gmail.com
 📞 +258 865 304 919
-🔗 LinkedIn https://www.linkedin.com/in/arlindo-lázaro-974932267/
-<div align="center"> ⭐ Destaque: Desenvolvido com boas práticas e em constante evolução profissional. </div> ```
