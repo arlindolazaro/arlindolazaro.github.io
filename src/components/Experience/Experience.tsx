@@ -74,6 +74,7 @@ const Experience = () => {
                             Experiência Profissional
                         </span>
                     </h2>
+                    <div className="h-1 w-24 bg-indigo-500 mx-auto mb-6 rounded-full" />
                     <p className="text-xl text-gray-600 dark:text-gray-300">
                         Minha jornada profissional e conquistas significativas
                     </p>

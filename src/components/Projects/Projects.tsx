@@ -47,9 +47,11 @@ const Projects = () => {
           transition={{ duration: 0.5 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl font-bold text-gray-900 dark:text-white">
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
             Meus <span className="text-indigo-600 dark:text-indigo-400">Projectos</span>
           </h2>
+          
+          <div className="h-1 w-24 bg-indigo-500 mx-auto mb-6 rounded-full" />
           <p className="mt-4 text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
             Explore meus trabalhos mais recentes e as tecnologias utilizadas em cada projeto
           </p>
@@ -66,7 +68,7 @@ const Projects = () => {
               className="group relative"
             >
               <div className={`absolute -inset-0.5 ${project.accentColor} rounded-lg blur opacity-75 group-hover:opacity-100 transition duration-200`}></div>
-              
+
               <div className="relative h-full bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 overflow-hidden transition-all duration-300 group-hover:border-transparent">
                 <div className="p-6">
                   <div className="flex items-start mb-4">
@@ -88,11 +90,11 @@ const Projects = () => {
                       </div>
                     </div>
                   </div>
-                  
+
                   <p className="text-gray-600 dark:text-gray-300 mb-6">
                     {project.description}
                   </p>
-                  
+
                   <div className="flex flex-wrap gap-2 mb-6">
                     {project.technologies.map((tech, i) => (
                       <motion.div
@@ -105,7 +107,7 @@ const Projects = () => {
                       </motion.div>
                     ))}
                   </div>
-                  
+
                   <motion.a
                     href={project.githubUrl}
                     target="_blank"

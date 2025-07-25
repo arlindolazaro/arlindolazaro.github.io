@@ -45,7 +45,7 @@ const Footer = () => {
             viewport={{ once: true }}
             className="text-gray-400 text-center"
           >
-            © {new Date().getFullYear()}. Todos os direitos reservados.
+            © {new Date().getFullYear()} Arlindo Lázaro. Todos os direitos reservados.
           </motion.p>
         </div>
       </div>

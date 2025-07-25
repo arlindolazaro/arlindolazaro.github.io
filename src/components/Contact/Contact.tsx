@@ -45,7 +45,7 @@ const Contact = () => {
       });
 
       const result = await response.json();
-      
+
       if (result.success) {
         setFormData({
           name: '',
@@ -78,6 +78,7 @@ const Contact = () => {
               Vamos Conversar
             </span>
           </h2>
+          <div className="h-1 w-24 bg-indigo-500 mx-auto mb-6 rounded-full" />
           <p className="text-lg text-gray-600 dark:text-gray-300">
             Estou disponível para oportunidades e colaborações. Entre em contacto!
           </p>
@@ -113,8 +114,8 @@ const Contact = () => {
                   </div>
                   <div>
                     <h3 className="text-xl font-bold text-gray-800 dark:text-white mb-1">Email</h3>
-                    <a 
-                      href="mailto:arlindolazaro202@gmail.com" 
+                    <a
+                      href="mailto:arlindolazaro202@gmail.com"
                       className="text-gray-600 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
                     >
                       arlindolazaro202@gmail.com
@@ -181,7 +182,7 @@ const Contact = () => {
                     required
                   />
                 </motion.div>
-                
+
                 <motion.div whileHover={{ scale: 1.01 }}>
                   <input
                     type="email"
@@ -193,7 +194,7 @@ const Contact = () => {
                     required
                   />
                 </motion.div>
-                
+
                 <motion.div whileHover={{ scale: 1.01 }}>
                   <input
                     type="text"
@@ -205,7 +206,7 @@ const Contact = () => {
                     required
                   />
                 </motion.div>
-                
+
                 <motion.div whileHover={{ scale: 1.01 }}>
                   <textarea
                     name="message"
@@ -217,7 +218,7 @@ const Contact = () => {
                     required
                   ></textarea>
                 </motion.div>
-                
+
                 <motion.button
                   type="submit"
                   disabled={isSubmitting}

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { FaBars, FaTimes } from 'react-icons/fa';
 import { faCode } from '@fortawesome/free-solid-svg-icons';
@@ -21,16 +21,36 @@ const Header = () => {
     setIsMenuOpen(false);
   };
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      const offsets = navItems.map(item => {
+        const el = document.querySelector(item.path);
+        if (!el) return null;
+
+        const top = el.getBoundingClientRect().top + window.scrollY;
+        return { path: item.path, offsetTop: top };
+      }).filter(Boolean) as { path: string, offsetTop: number }[];
+
+      const current = offsets.reduce((acc, item) => {
+        return scrollY >= item.offsetTop - 80 ? item.path : acc;
+      }, '#home');
+
+      setActiveItem(current);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    handleScroll();
+
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
     <header className="fixed w-full z-50 bg-gray-900/80 backdrop-blur-sm shadow-md">
       <div className="container mx-auto px-6 py-4">
         <div className="flex justify-between items-center">
           {/* Logo */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5 }}
-          >
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
             <a href="#home" className="text-white flex items-center justify-center">
               <FontAwesomeIcon icon={faCode} className="text-indigo-400" size="2x" />
             </a>
@@ -47,9 +67,7 @@ const Header = () => {
                   href={item.path}
                   onClick={() => handleClick(item.path)}
                   className={`px-3 py-2 text-sm font-medium transition-colors ${
-                    isActive
-                      ? 'text-indigo-400'
-                      : 'text-gray-300 hover:text-white'
+                    isActive ? 'text-indigo-400' : 'text-gray-300 hover:text-white'
                   }`}
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -89,9 +107,7 @@ const Header = () => {
                     href={item.path}
                     onClick={() => handleClick(item.path)}
                     className={`px-4 py-2 rounded transition-colors ${
-                      isActive
-                        ? 'text-indigo-400'
-                        : 'text-white hover:text-indigo-300'
+                      isActive ? 'text-indigo-400' : 'text-white hover:text-indigo-300'
                     }`}
                   >
                     {item.name}
