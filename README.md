@@ -42,7 +42,7 @@ bash
 
 npm run dev
 
-🌐 Acesso Online
+## 🌐 Acesso Online
 
 Disponível em: https://arlindocau.vercel.app
 📄 Nota Técnica
@@ -56,7 +56,7 @@ typescript
   tests: "planejado para Q3/2024"
 }
 
-📬 Contato
+## 📬 Contato
 
 Arlindo Lázaro Cau Júnior
 📧 arlindolazaro202@gmail.com
