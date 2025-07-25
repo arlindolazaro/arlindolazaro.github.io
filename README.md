@@ -1,69 +1,61 @@
-# React + TypeScript + Vite
+# 📌 Visão Geral
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![Screenshot da Tela Inicial](./screenshot.png) <!-- Adicione o caminho correto para sua imagem -->
 
-Currently, two official plugins are available:
+Portfólio profissional desenvolvido com React + TypeScript + Vite, apresentando minha experiência, projetos e habilidades como Engenheiro de Software Full-Stack.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Recursos Principais
+- ✔️ Design responsivo e moderno  
+- ✔️ Seção de experiências profissionais com efeito parallax  
+- ✔️ Referências profissionais verificáveis  
+- ✔️ Animções fluidas com Framer Motion  
+- ✔️ Integração com GitHub API (em desenvolvimento)  
 
-## Expanding the ESLint configuration
+## 🛠️ Stack Tecnológico
+<div style="display: flex; gap: 10px; margin: 15px 0;">
+  <img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react" alt="React">
+  <img src="https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript" alt="TypeScript">
+  <img src="https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite" alt="Vite">
+  <img src="https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css" alt="TailwindCSS">
+</div>
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## � Roadmap
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### Versão 1.0 (Atual)
+✅ Estrutura básica do portfólio  
+✅ Seção de experiências profissionais  
+✅ Referências contactáveis  
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+### Versão 1.1 (Próxima)
+🔲 Sistema de temas (dark/light mode)  
+🔲 Integração com CMS para conteúdo  
+🔲 Testes automatizados (Jest + RTL)  
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+🛠️ Configuração do Ambiente
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+# Clone o repositório
+git clone https://github.com/devLazarus258/arlindo-portfolio.git
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+# Instale as dependências
+npm install
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+# Inicie o servidor
+npm run dev
+
+🌐 Deploy
+
+Acesse online: https://arlindo-portfolio.vercel.app
+📊 Status do Projeto
+
+{
+  cleanCode: "em progresso", 
+  performance: "otimização em andamento",
+  tests: "planejado para Q3/2024",
+  lastUpdate: "Julho 2024"
+}
+
+📞 Contato
+
+Arlindo Lázaro Cau Júnior
+📧 arlindolazaro202@gmail.com
+📞 +258 865 304 919
