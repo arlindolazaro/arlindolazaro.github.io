@@ -14,11 +14,18 @@ const navItems = [
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [activeItem, setActiveItem] = useState('#home');
+
+  const handleClick = (path: string) => {
+    setActiveItem(path);
+    setIsMenuOpen(false);
+  };
 
   return (
     <header className="fixed w-full z-50 bg-gray-900/80 backdrop-blur-sm shadow-md">
       <div className="container mx-auto px-6 py-4">
         <div className="flex justify-between items-center">
+          {/* Logo */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -31,19 +38,27 @@ const Header = () => {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex space-x-6">
-            {navItems.map((item, index) => (
-              <motion.a
-                key={item.name}
-                href={item.path}
-                className="relative text-gray-300 hover:text-white px-3 py-2 text-sm font-medium transition-colors group"
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.1 * index }}
-              >
-                {item.name}
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-indigo-500 transition-all duration-300 group-hover:w-full" />
-              </motion.a>
-            ))}
+            {navItems.map((item, index) => {
+              const isActive = activeItem === item.path;
+
+              return (
+                <motion.a
+                  key={item.name}
+                  href={item.path}
+                  onClick={() => handleClick(item.path)}
+                  className={`px-3 py-2 text-sm font-medium transition-colors ${
+                    isActive
+                      ? 'text-indigo-400'
+                      : 'text-gray-300 hover:text-white'
+                  }`}
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.1 * index }}
+                >
+                  {item.name}
+                </motion.a>
+              );
+            })}
           </nav>
 
           {/* Mobile Menu Button */}
@@ -56,7 +71,7 @@ const Header = () => {
           </button>
         </div>
 
-        {/* Mobile Menu */}
+        {/* Mobile Navigation */}
         {isMenuOpen && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
@@ -65,16 +80,24 @@ const Header = () => {
             className="md:hidden mt-4 overflow-hidden"
           >
             <div className="flex flex-col space-y-2 py-4">
-              {navItems.map((item) => (
-                <a
-                  key={item.name}
-                  href={item.path}
-                  className="px-4 py-2 text-white hover:bg-gray-800 rounded transition-colors"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  {item.name}
-                </a>
-              ))}
+              {navItems.map((item) => {
+                const isActive = activeItem === item.path;
+
+                return (
+                  <a
+                    key={item.name}
+                    href={item.path}
+                    onClick={() => handleClick(item.path)}
+                    className={`px-4 py-2 rounded transition-colors ${
+                      isActive
+                        ? 'text-indigo-400'
+                        : 'text-white hover:text-indigo-300'
+                    }`}
+                  >
+                    {item.name}
+                  </a>
+                );
+              })}
             </div>
           </motion.div>
         )}
