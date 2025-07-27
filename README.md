@@ -45,11 +45,3 @@ npm run dev
 🌐 Deploy
 
 Acesse online: https://arlindo-portfolio.vercel.app
-📊 Status do Projeto
-
-
-📞 Contato
-
-Arlindo Lázaro Cau Júnior
-📧 arlindolazaro202@gmail.com
-📞 +258 865 304 919
