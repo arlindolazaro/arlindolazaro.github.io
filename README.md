@@ -47,12 +47,6 @@ npm run dev
 Acesse online: https://arlindo-portfolio.vercel.app
 📊 Status do Projeto
 
-{
-  cleanCode: "em progresso", 
-  performance: "otimização em andamento",
-  tests: "planejado para Q3/2024",
-  lastUpdate: "Julho 2024"
-}
 
 📞 Contato
 
