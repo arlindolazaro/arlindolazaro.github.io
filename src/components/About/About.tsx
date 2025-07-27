@@ -18,7 +18,7 @@ import {
 
 // Constantes para evitar repetição e facilitar manutenção
 const SECTION_ID = 'about';
-const SECTION_CLASSES = 'py-24 bg-white scroll-mt-28';
+const SECTION_CLASSES = 'py-24 bg-white scroll-mt-22';
 const TITLE_CLASSES = 'text-4xl md:text-5xl font-extrabold text-black text-center mb-4';
 const DIVIDER_CLASSES = 'h-1 w-24 bg-indigo-500 mx-auto mb-10 rounded-full';
 const DESCRIPTION_CLASSES = 'text-gray-700 text-lg leading-relaxed';

@@ -47,7 +47,7 @@ const Header = () => {
 
   return (
     <header className="fixed w-full z-50 bg-gray-900/80 backdrop-blur-sm shadow-md">
-      <div className="container mx-auto px-6 py-4">
+      <div className="container mx-auto px-6 py-3">
         <div className="flex justify-between items-center">
           {/* Logo */}
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
