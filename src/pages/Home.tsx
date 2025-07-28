@@ -1,25 +1,25 @@
-import Header from '../components/Header/Header';
-import Hero from '../components/Hero/Hero';
-import About from '../components/About/About';
-import Services from '../components/Services/Services';
-import Project from '../components/Projects/Projects';
-import Experience from '../components/Experience/Experience';
-import Contact from '../components/Contact/Contact';
-import Footer from '../components/Footer/Footer';
+import { ScrollToTop } from '../components/utils/ScrollToTop';
+import Header from '../components/sections/Header/Header';
+import Hero from '../components/sections/Hero/Hero';
+import About from '../components/sections/About/About'; // <- CORREÇÃO AQUI
+import Services from '../components/sections/Services/Services';
+import Projects from '../components/sections/Projects/Projects';
+import Experience from '../components/sections/Experience/Experience';
+import Contact from '../components/sections/Contact/Contact';
+import Footer from '../components/sections/Footer/Footer';
 
-const Home = () => {
+export const Home = () => {
   return (
     <div className="overflow-x-hidden">
       <Header />
       <Hero />
       <About />
       <Services />
-      <Project />
+      <Projects />
       <Experience />
       <Contact />
       <Footer />
+      <ScrollToTop />
     </div>
   );
 };
-
-export default Home;

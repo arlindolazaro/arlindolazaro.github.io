@@ -2,7 +2,7 @@
 
 ![Screenshot da Tela Inicial](./screenshot.png) <!-- Adicione o caminho correto para sua imagem -->
 
-Portfólio profissional desenvolvido com React + TypeScript + Vite, apresentando minha experiência, projetos e habilidades como Engenheiro de Software Full-Stack.
+Portfólio profissional desenvolvido com React + TypeScript + Vite, apresentando minha experiência, projectos e habilidades como Engenheiro de Software Full-Stack.
 
 ## 🚀 Recursos Principais
 - ✔️ Design responsivo e moderno  

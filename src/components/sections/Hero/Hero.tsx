@@ -1,10 +1,10 @@
 import { motion } from 'framer-motion';
-import { FaChevronDown, FaDownload } from 'react-icons/fa';
+import { FaChevronDown } from 'react-icons/fa';
 import { useEffect, useState } from 'react';
+import HeroButtons from './HeroButtons';
 
-const Hero = () => {
+export const Hero = () => {
   const [isMounted, setIsMounted] = useState(false);
-  const [isDownloading, setIsDownloading] = useState(false);
 
   useEffect(() => {
     setIsMounted(true);
@@ -13,32 +13,7 @@ const Hero = () => {
 
   const scrollToNextSection = () => {
     const aboutSection = document.getElementById('about');
-    if (aboutSection) {
-      aboutSection.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
-  const handleDownloadCV = () => {
-    if (!isMounted || isDownloading) return;
-
-    setIsDownloading(true);
-
-    try {
-      const pdfUrl = '/documents/Arlindo_Lazaro_CV.pdf';
-
-      const link = document.createElement('a');
-      link.href = pdfUrl;
-      link.download = 'Arlindo_Lazaro_CV.pdf';
-      link.target = '_blank';
-      link.rel = 'noopener noreferrer';
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    } catch (error) {
-      console.error('Erro ao baixar CV:', error);
-    } finally {
-      setTimeout(() => setIsDownloading(false), 1000);
-    }
+    aboutSection?.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
@@ -47,7 +22,6 @@ const Hero = () => {
       className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 to-gray-800 px-6"
     >
       <div className="container mx-auto flex flex-col items-center justify-between min-h-[calc(100vh-5rem)] py-20">
-        {/* Conteúdo Principal */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -90,38 +64,9 @@ const Hero = () => {
             Especializado no desenvolvimento de sistemas web com PHP, TypeScript, Java, Spring Boot e React.
           </motion.p>
 
-          <div className="flex flex-col sm:flex-row justify-center gap-4">
-            <motion.a
-              href="#contact"
-              className="bg-indigo-600 hover:bg-indigo-700 text-white px-8 py-3 rounded-lg font-medium transition-colors flex items-center justify-center gap-2"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              CONTACTAR-ME
-            </motion.a>
-
-            <motion.button
-              onClick={handleDownloadCV}
-              disabled={isDownloading}
-              className={`border-2 border-indigo-400 ${
-                isDownloading ? 'bg-indigo-900/20' : 'hover:bg-indigo-900/20'
-              } text-indigo-400 px-8 py-3 rounded-lg font-medium transition-colors flex items-center justify-center gap-2`}
-              whileHover={!isDownloading ? { scale: 1.05 } : {}}
-              whileTap={!isDownloading ? { scale: 0.95 } : {}}
-            >
-              {isDownloading ? (
-                'BAIXANDO...'
-              ) : (
-                <>
-                  <FaDownload />
-                  BAIXAR CV
-                </>
-              )}
-            </motion.button>
-          </div>
+          <HeroButtons isMounted={isMounted} />
         </motion.div>
 
-        {/* Botão "Saiba Mais" */}
         <motion.div
           className="flex flex-col items-center justify-center mb-8"
           initial={{ opacity: 0 }}

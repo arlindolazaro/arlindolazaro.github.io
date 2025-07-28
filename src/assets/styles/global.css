@@ -1,4 +1,3 @@
-/* Reset básico e estilos globais */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -10,63 +9,75 @@
   padding: 0;
 }
 
-/* Estilos base para elementos HTML */
-@layer base {
-  :root {
-    font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-    line-height: 1.5;
-    font-weight: 400;
-    text-rendering: optimizeLegibility;
-    -webkit-font-smoothing: antialiased;
-  }
-
-  body {
-    @apply min-h-screen bg-gray-50 text-gray-900;
-  }
-
-  h1 {
-    @apply text-4xl md:text-5xl font-bold my-4;
-  }
-  
-  h2 {
-    @apply text-3xl md:text-4xl font-bold my-3;
-  }
-  
-  h3 {
-    @apply text-2xl md:text-3xl font-bold my-2;
-  }
-
-  button, [type='button'], [type='submit'] {
-    @apply rounded-lg border border-transparent px-6 py-3 transition-colors;
-  }
-
-  button:focus-visible {
-    @apply outline-2 outline-offset-2 outline-indigo-600;
-  }
-}
-
-
 /* Smooth scrolling */
 html {
   scroll-behavior: smooth;
 }
 
-/* Button transitions */
-.btn-transition {
-  transition: all 0.3s ease;
+/* Base styles */
+@layer base {
+  body {
+    @apply bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-gray-100;
+    font-family: 'Inter', system-ui, sans-serif;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, h4 {
+    @apply font-bold leading-tight;
+  }
+
+  h1 {
+    @apply text-4xl md:text-5xl;
+  }
+
+  h2 {
+    @apply text-3xl md:text-4xl;
+  }
+
+  h3 {
+    @apply text-2xl md:text-3xl;
+  }
+
+  a {
+    @apply transition-colors duration-200;
+  }
+
+  button {
+    @apply transition-all duration-200;
+  }
 }
 
-/* Gradient text */
-.text-gradient {
-  background-clip: text;
-  -webkit-background-clip: text;
-  color: transparent;
-}
-/* No seu arquivo global.css */
-html {
-  scroll-behavior: smooth;
+/* Custom utilities */
+@layer utilities {
+  .text-gradient {
+    @apply bg-clip-text text-transparent;
+    -webkit-background-clip: text;
+  }
+
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
 }
 
-.scroll-btn {
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  @apply w-2 h-2;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-gray-100 dark:bg-gray-800;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-300 dark:bg-gray-600 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-gray-400 dark:bg-gray-500;
 }

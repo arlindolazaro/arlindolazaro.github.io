@@ -4,7 +4,10 @@ import {
   faTimes,
   faEnvelope,
   faPhone,
-  faMapMarkerAlt
+  faMapMarkerAlt,
+  faPaperPlane,
+  faCheck,
+  faCode
 } from '@fortawesome/free-solid-svg-icons';
 import { 
   faLinkedin, 
@@ -17,6 +20,9 @@ library.add(
   faEnvelope,
   faPhone,
   faMapMarkerAlt,
+  faPaperPlane,
+  faCheck,
+  faCode,
   faLinkedin,
   faGithub
 );
