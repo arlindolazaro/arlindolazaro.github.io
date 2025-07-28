@@ -1,7 +1,7 @@
 // About.tsx
 import { motion } from 'framer-motion';
-import { AnimatedDivider } from '../../common/AnimatedDivider'; // seu divider animado
-import { SectionTitle } from '../../common/SectionTitle';         // seu título estilizado
+import { AnimatedDivider } from '../../common/AnimatedDivider'; 
+import { SectionTitle } from '../../common/SectionTitle';         
 import { TECHNOLOGIES } from './aboutData';
 import TechGrid from './TechGrid';
 
