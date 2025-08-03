@@ -1,7 +1,25 @@
-import { useState } from 'react';
+ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPaperPlane, faCheck } from '@fortawesome/free-solid-svg-icons';
+
+const SuccessPopup = () => (
+  <motion.div
+    initial={{ opacity: 0, y: -20 }}
+    animate={{ opacity: 1, y: 0 }}
+    exit={{ opacity: 0, y: -20 }}
+    transition={{ duration: 0.4 }}
+    className="absolute top-4 right-4 z-50 bg-white dark:bg-gray-800 border border-green-300 dark:border-green-700 rounded-xl shadow-lg px-5 py-4 flex items-center gap-4 w-[300px]"
+  >
+    <div className="flex items-center justify-center w-10 h-10 bg-green-100 dark:bg-green-700/20 rounded-full">
+      <FontAwesomeIcon icon={faCheck} className="text-green-600 dark:text-green-300" />
+    </div>
+    <div className="text-sm text-gray-800 dark:text-gray-200">
+      <p className="font-semibold">Mensagem enviada</p>
+      <p className="text-xs">Obrigado por entrar em contacto!</p>
+    </div>
+  </motion.div>
+);
 
 export const ContactForm = () => {
   const [formData, setFormData] = useState({
@@ -21,13 +39,14 @@ export const ContactForm = () => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate form submission (substituir por chamada real se necessário)
+    // Simulação de envio de formulário (substitua com sua lógica real)
     await new Promise(resolve => setTimeout(resolve, 1500));
 
     setShowSuccess(true);
     setFormData({ name: '', email: '', message: '' });
     setIsSubmitting(false);
 
+    // Oculta o popup após 3 segundos
     setTimeout(() => setShowSuccess(false), 3000);
   };
 
@@ -37,8 +56,13 @@ export const ContactForm = () => {
       whileInView={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.6 }}
       viewport={{ once: true }}
-      className="lg:w-1/2"
+      className="lg:w-1/2 relative"
     >
+      {/* Popup flutuante de sucesso */}
+      <AnimatePresence>
+        {showSuccess && <SuccessPopup />}
+      </AnimatePresence>
+
       <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 h-full">
         <form onSubmit={handleSubmit} className="space-y-6">
           {/* Nome */}
@@ -92,21 +116,6 @@ export const ContactForm = () => {
             {isSubmitting ? 'ENVIANDO...' : 'ENVIAR MENSAGEM'}
           </motion.button>
         </form>
-
-        {/* Popup de sucesso */}
-        <AnimatePresence>
-          {showSuccess && (
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 20 }}
-              className="mt-4 p-4 bg-green-100 dark:bg-green-900/50 text-green-700 dark:text-green-300 rounded-lg flex items-center gap-3"
-            >
-              <FontAwesomeIcon icon={faCheck} />
-              Mensagem enviada com sucesso!
-            </motion.div>
-          )}
-        </AnimatePresence>
       </div>
     </motion.div>
   );
