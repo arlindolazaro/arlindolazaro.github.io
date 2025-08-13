@@ -34,7 +34,7 @@ Portfólio profissional desenvolvido com React + TypeScript + Vite, apresentando
 🛠️ Configuração do Ambiente
 
 # Clone o repositório
-git clone https://github.com/devLazarus258/arlindo-portfolio.git
+git clone https://github.com/arlindolazaro/arlindo-portfolio.git
 
 # Instale as dependências
 npm install

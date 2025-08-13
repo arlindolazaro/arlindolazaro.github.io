@@ -64,7 +64,7 @@ export const ContactInfo = () => (
             <FontAwesomeIcon icon={faLinkedin} size="2x" />
           </motion.a>
           <motion.a
-            href="https://github.com/devLazarus258"
+            href="https://github.com/arlindolazaro"
             target="_blank"
             rel="noopener noreferrer"
             whileHover={{ y: -3 }}

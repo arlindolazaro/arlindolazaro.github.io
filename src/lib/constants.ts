@@ -15,7 +15,7 @@ export const SOCIAL_LINKS = [
   },
   {
     name: 'GitHub',
-    url: 'https://github.com/devLazarus258',
+    url: 'https://github.com/arlindolazaro',
     icon: 'github'
   }
 ];

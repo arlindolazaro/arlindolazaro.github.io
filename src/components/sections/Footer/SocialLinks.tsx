@@ -15,7 +15,7 @@ export const SocialLinks = () => (
     </motion.a>
     <motion.a
       whileHover={{ scale: 1.1 }}
-      href="https://github.com/devLazarus258"
+      href="https://github.com/arlindolazaro"
       target="_blank"
       rel="noopener noreferrer"
       className="text-gray-300 hover:text-white transition-colors"

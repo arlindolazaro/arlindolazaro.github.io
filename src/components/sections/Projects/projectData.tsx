@@ -1,4 +1,3 @@
-// projectData.tsx
 import { FaJava, FaReact, FaBootstrap, FaPhp } from 'react-icons/fa';
 import { SiSpringboot, SiTypescript, SiTailwindcss, SiMysql, SiNextdotjs } from 'react-icons/si';
 import type { ReactElement } from 'react';
@@ -28,7 +27,7 @@ export const projects: Project[] = [
       { name: "Spring Boot", icon: <SiSpringboot />, color: "bg-green-500" },
       { name: "MySQL", icon: <SiMysql />, color: "bg-blue-500" }
     ],
-    githubUrl: "https://github.com/devLazarus258/backend-site-noticias-spring.git",
+    githubUrl: "https://github.com/arlindolazaro/backend-site-noticias-spring.git",
     demoUrl: "https://news-api-demo.com",
     accentColor: "border-red-500",
     bgColor: "bg-red-500"
@@ -41,7 +40,7 @@ export const projects: Project[] = [
       { name: "Bootstrap", icon: <FaBootstrap />, color: "bg-purple-500" },
       { name: "MySQL", icon: <SiMysql />, color: "bg-blue-500" }
     ],
-    githubUrl: "https://github.com/devLazarus258/LojaMasculina.git",
+    githubUrl: "https://github.com/arlindolazaro/LojaMasculina.git",
     accentColor: "border-amber-500",
     bgColor: "bg-amber-500"
   },
@@ -54,9 +53,22 @@ export const projects: Project[] = [
       { name: "Tailwind CSS", icon: <SiTailwindcss />, color: "bg-cyan-400" },
       { name: "Next.js", icon: <SiNextdotjs />, color: "bg-gray-800" }
     ],
-    githubUrl: "https://github.com/devLazarus258/EventHub-Frontend.git",
+    githubUrl: "https://github.com/arlindolazaro/EventHub-Frontend.git",
     demoUrl: "https://eventhub-demo.vercel.app",
     accentColor: "border-blue-500",
     bgColor: "bg-blue-500"
+  },
+  {
+    title: "TaskManager",
+    description: "Aplicação para gestão de tarefas com autenticação JWT, backend em Spring Boot e frontend moderno com React.js e Tailwind CSS.",
+    stack: [
+      { name: "Java", icon: <FaJava />, color: "bg-red-500" },
+      { name: "Spring Boot", icon: <SiSpringboot />, color: "bg-green-500" },
+      { name: "React", icon: <FaReact />, color: "bg-blue-400" },
+      { name: "Tailwind CSS", icon: <SiTailwindcss />, color: "bg-cyan-400" }
+    ],
+    githubUrl: "https://github.com/devLazarus258/taskmanager.git",
+    accentColor: "border-cyan-500",
+    bgColor: "bg-cyan-500"
   }
 ];
