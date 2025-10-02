@@ -1,5 +1,5 @@
 import { FaJava, FaReact, FaBootstrap, FaPhp } from 'react-icons/fa';
-import { SiSpringboot, SiTypescript, SiTailwindcss, SiMysql, SiNextdotjs } from 'react-icons/si';
+import { SiSpringboot, SiTailwindcss, SiMysql } from 'react-icons/si';
 import type { ReactElement } from 'react';
 
 export interface Technology {
@@ -43,20 +43,6 @@ export const projects: Project[] = [
     githubUrl: "https://github.com/arlindolazaro/LojaMasculina.git",
     accentColor: "border-amber-500",
     bgColor: "bg-amber-500"
-  },
-  {
-    title: "EventHub Platform",
-    description: "Aplicação moderna para descoberta de eventos com filtros avançados, mapa integrado e sistema de favoritos. PWA compatível.",
-    stack: [
-      { name: "React", icon: <FaReact />, color: "bg-blue-400" },
-      { name: "TypeScript", icon: <SiTypescript />, color: "bg-blue-600" },
-      { name: "Tailwind CSS", icon: <SiTailwindcss />, color: "bg-cyan-400" },
-      { name: "Next.js", icon: <SiNextdotjs />, color: "bg-gray-800" }
-    ],
-    githubUrl: "https://github.com/arlindolazaro/EventHub-Frontend.git",
-    demoUrl: "https://eventhub-demo.vercel.app",
-    accentColor: "border-blue-500",
-    bgColor: "bg-blue-500"
   },
   {
     title: "TaskManager",
