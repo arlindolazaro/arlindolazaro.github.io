@@ -1,5 +1,6 @@
 // Projects.tsx
 import { motion } from 'framer-motion';
+import { staggerContainer } from '../../../lib/animations';
 import { AnimatedDivider } from '../../common/AnimatedDivider';
 import { SectionTitle } from '../../common/SectionTitle';
 import { projects } from './projectData';
@@ -34,13 +35,14 @@ const Projects = () => {
         </motion.div>
 
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ staggerChildren: 0.1 }}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 auto-rows-fr"
+          variants={staggerContainer}
+          initial="initial"
+          whileInView="whileInView"
+          viewport={{ once: true, amount: 0.15 }}
         >
           {projects.map((project, index) => (
-            <ProjectCard key={index} project={project} index={index} />
+            <ProjectCard key={index} project={project} />
           ))}
         </motion.div>
       </div>

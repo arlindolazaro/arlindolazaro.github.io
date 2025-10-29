@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { staggerContainer } from '../../../lib/animations';
 import { AnimatedDivider } from '../../common/AnimatedDivider';
 import { SectionTitle } from '../../common/SectionTitle';
 import { services } from './servicesData';
@@ -26,11 +27,17 @@ const Services = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {services.map((service, index) => (
-            <ServiceCard key={service.title} service={service} index={index} />
+        <motion.div
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 auto-rows-fr"
+          variants={staggerContainer}
+          initial="initial"
+          whileInView="whileInView"
+          viewport={{ once: true, amount: 0.12 }}
+        >
+          {services.map((service) => (
+            <ServiceCard key={service.title} service={service} />
           ))}
-        </div>
+        </motion.div>
       </div>
     </motion.section>
   );

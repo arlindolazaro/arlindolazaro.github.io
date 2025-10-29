@@ -10,7 +10,7 @@ import Footer from '../components/sections/Footer/Footer';
 
 export const Home = () => {
   return (
-    <div className="overflow-x-hidden">
+    <div id="site-root" className="overflow-x-hidden">
       <Header />
       <Hero />
       <About />

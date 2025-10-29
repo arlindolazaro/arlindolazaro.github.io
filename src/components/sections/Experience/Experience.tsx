@@ -2,6 +2,7 @@ import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { experiences } from './experienceData';
 import { ExperienceCard } from './ExperienceCard';
+import { staggerContainer } from '../../../lib/animations';
 import { AnimatedDivider } from '../../common/AnimatedDivider';
 import { SectionTitle } from '../../common/SectionTitle';
 import experienceBg from '../../../assets/images/bg-paralax.jpg';
@@ -51,11 +52,18 @@ export const Experience = () => {
           </p>
         </motion.div>
 
-        <div ref={ref} className="max-w-6xl mx-auto grid gap-10">
+        <motion.div
+          ref={ref}
+          className="max-w-6xl mx-auto grid gap-10"
+          variants={staggerContainer}
+          initial="initial"
+          whileInView="whileInView"
+          viewport={{ once: true, amount: 0.12 }}
+        >
           {experiences.map((experience, index) => (
-            <ExperienceCard key={index} experience={experience} index={index} />
+            <ExperienceCard key={index} experience={experience} />
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

@@ -26,10 +26,10 @@ export const HeroButtons = ({ isMounted }: { isMounted: boolean }) => {
   };
 
   return (
-    <div className="flex flex-col sm:flex-row justify-center gap-4">
+    <div className="flex flex-col sm:flex-row justify-center gap-4 w-full">
       <motion.a
         href="#contact"
-        className="bg-indigo-600 hover:bg-indigo-700 text-white px-8 py-3 rounded-lg font-medium transition-colors flex items-center justify-center gap-2"
+        className="w-full sm:w-auto bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-lg font-medium transition-colors flex items-center justify-center gap-2 text-center btn-smooth"
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
       >
@@ -39,9 +39,9 @@ export const HeroButtons = ({ isMounted }: { isMounted: boolean }) => {
       <motion.button
         onClick={handleDownloadCV}
         disabled={isDownloading}
-        className={`border-2 border-indigo-400 ${
+        className={`w-full sm:w-auto border-2 border-indigo-400 ${
           isDownloading ? 'bg-indigo-900/20' : 'hover:bg-indigo-900/20'
-        } text-indigo-400 px-8 py-3 rounded-lg font-medium transition-colors flex items-center justify-center gap-2`}
+        } text-indigo-400 px-6 py-3 rounded-lg font-medium transition-colors flex items-center justify-center gap-2 btn-smooth`}
         whileHover={!isDownloading ? { scale: 1.05 } : {}}
         whileTap={!isDownloading ? { scale: 0.95 } : {}}
       >

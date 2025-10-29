@@ -1,23 +1,20 @@
 import { motion } from 'framer-motion';
+import { fadeInUp } from '../../../lib/animations';
 import { FiExternalLink } from 'react-icons/fi';
 import type { ExperienceItem } from './experienceData';
 
 interface Props {
   experience: ExperienceItem;
-  index: number;
 }
 
-export const ExperienceCard = ({ experience, index }: Props) => (
+export const ExperienceCard = ({ experience }: Props) => (
   <motion.div
-    initial={{ opacity: 0, y: 50 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.5, delay: index * 0.15 }}
-    viewport={{ once: true }}
+    variants={fadeInUp}
     className="group relative"
   >
     <div className="absolute -inset-1 bg-gradient-to-r from-indigo-600 to-blue-500 rounded-2xl opacity-0 group-hover:opacity-20 blur transition duration-300" />
 
-    <div className="relative bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-200 dark:border-gray-700">
+  <div className="relative bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-transform duration-300 transform-gpu hover:-translate-y-1 border border-gray-200 dark:border-gray-700">
       <div className="flex flex-col lg:flex-row gap-8">
         {/* Logo */}
         <div className="flex-shrink-0 flex flex-col items-center">
