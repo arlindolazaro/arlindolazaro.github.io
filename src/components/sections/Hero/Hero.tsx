@@ -70,7 +70,8 @@ export const Hero = () => {
         </motion.div>
 
   {/* CTA fixo no rodapé do hero para uma posição consistente */}
-  <div className="absolute left-1/2 transform -translate-x-1/2 bottom-6 sm:bottom-10">
+  {/* ocultar o CTA 'SAIBA MAIS' em telas mobile */}
+  <div className="hidden sm:block absolute left-1/2 transform -translate-x-1/2 bottom-6 sm:bottom-10">
           <motion.button
             onClick={scrollToNextSection}
             className="flex flex-col items-center group focus:outline-none"
