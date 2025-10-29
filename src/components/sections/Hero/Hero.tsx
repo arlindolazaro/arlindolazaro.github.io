@@ -57,9 +57,7 @@ export const Hero = () => {
 
             <h2 className="text-xl md:text-2xl font-semibold text-gray-700 dark:text-gray-300 mb-4">Web Developer</h2>
 
-            <p className="text-gray-600 dark:text-gray-300 mb-6 max-w-2xl text-lg mx-auto md:mx-0 text-justify md:text-left">
-              Desenvolvo aplicações web modernas com foco em qualidade de código, performance e experiência do usuário. Trabalho com PHP, TypeScript, React, Java e Spring Boot. Tenho experiência construindo sistemas escaláveis e interfaces interativas.
-            </p>
+            {/* Texto longo removido para um HERO mais limpo; mantenha somente títulos e CTAs */}
 
             <div className="flex flex-wrap gap-4 items-center justify-center w-full">
               <motion.div variants={fadeIn}>

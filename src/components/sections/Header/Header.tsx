@@ -1,18 +1,18 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaBars, FaTimes, FaChevronRight } from 'react-icons/fa';
+import { FaBars, FaTimes, FaChevronRight, FaHome, FaUser, FaConciergeBell, FaProjectDiagram, FaBriefcase, FaEnvelope } from 'react-icons/fa';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCode } from '@fortawesome/free-solid-svg-icons';
 import ThemeToggle from '../../common/ThemeToggle';
 import { createPortal } from 'react-dom';
 
 const NAV_ITEMS = [
-  { name: 'INÍCIO', path: '#home' },
-  { name: 'SOBRE', path: '#about' },
-  { name: 'SERVIÇOS', path: '#servicos' },
-  { name: 'PROJECTOS', path: '#projects' },
-  { name: 'EXPERIÊNCIA', path: '#experience' },
-  { name: 'CONTACTO', path: '#contact' },
+  { name: 'INÍCIO', path: '#home', icon: <FaHome /> },
+  { name: 'SOBRE', path: '#about', icon: <FaUser /> },
+  { name: 'SERVIÇOS', path: '#servicos', icon: <FaConciergeBell /> },
+  { name: 'PROJECTOS', path: '#projects', icon: <FaProjectDiagram /> },
+  { name: 'EXPERIÊNCIA', path: '#experience', icon: <FaBriefcase /> },
+  { name: 'CONTACTO', path: '#contact', icon: <FaEnvelope /> },
 ];
 
 const Header = () => {
@@ -164,7 +164,8 @@ const Header = () => {
 
             <motion.div
               ref={panelRef}
-              className="fixed top-0 right-0 h-full w-80 max-w-full bg-white dark:bg-gray-900 shadow-2xl z-50 overflow-y-auto rounded-l-2xl"
+              // painel compacto: não ocupa toda a altura/largura, aparece abaixo do header
+              className="fixed top-16 right-4 h-auto w-64 max-w-sm bg-white dark:bg-gray-900 shadow-2xl z-50 overflow-y-auto rounded-2xl border border-gray-100 dark:border-gray-800 max-h-[80vh]"
               initial={{ x: '100%' }}
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
@@ -174,45 +175,29 @@ const Header = () => {
               aria-label="Menu de navegação"
             >
               <div className="flex flex-col h-full">
-                {/* Cabeçalho do painel */}
-                <div className="flex items-center justify-between p-4 sm:p-6 border-b border-gray-200 dark:border-gray-800">
-                  <div>
-                    <div className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white tracking-wider">
-                      ARLINDO CAU
-                    </div>
-                    <div className="text-xs sm:text-sm text-gray-600 dark:text-gray-400 mt-1">
-                      Web Developer
-                    </div>
-                  </div>
-                  <button
-                    onClick={() => setIsMenuOpen(false)}
-                    aria-label="Fechar menu"
-                    className="p-2 rounded-md text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
-                  >
-                    <FaTimes size={18} />
-                  </button>
-                </div>
+          
 
                 {/* Navegação */}
-                <nav className="flex-1 p-4 sm:p-6">
-                  <div className="space-y-2">
+                <nav className="flex-1 p-4 sm:p-4">
+                  <div className="space-y-1">
                     {NAV_ITEMS.map((item, index) => (
                       <motion.button
                         key={item.name}
                         onClick={() => handleNavClick(item.path)}
-                        className={`w-full text-left px-4 py-4 rounded-lg transition-colors flex items-center justify-between text-lg sm:text-base font-semibold ${
+                        className={`w-full text-left px-3 py-2 rounded-lg transition-colors flex items-center gap-3 text-sm font-medium ${
                           activeItem === item.path
-                            ? 'bg-indigo-600 text-white shadow-md'
-                            : 'text-gray-800 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-800'
+                            ? 'bg-indigo-600 text-white shadow'
+                            : 'text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-800'
                         }`}
                         initial={{ opacity: 0, x: 20 }}
                         animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: 0.08 + index * 0.04 }}
+                        transition={{ delay: 0.06 + index * 0.03 }}
                       >
+                        <span className="text-indigo-500 dark:text-indigo-400 text-lg w-6 h-6 flex items-center justify-center">{item.icon}</span>
                         <span className="flex-1">{item.name}</span>
                         <FaChevronRight
-                          size={14}
-                          className={`ml-3 transition-transform duration-200 ${
+                          size={12}
+                          className={`transition-transform duration-200 ${
                             activeItem === item.path ? 'text-white' : 'text-gray-400'
                           }`}
                         />
