@@ -9,9 +9,7 @@ export const Contact = () => {
       <div className="container mx-auto px-4">
         <div className="max-w-2xl mx-auto text-center mb-16">
           <SectionTitle>
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-purple-600">
               Vamos Conversar
-            </span>
           </SectionTitle>
           
           <AnimatedDivider />

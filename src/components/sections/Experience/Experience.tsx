@@ -19,37 +19,67 @@ export const Experience = () => {
   return (
     <section
       id="experience"
-      className="relative py-24 overflow-hidden bg-gradient-to-b from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800"
+      className="relative py-32 overflow-hidden"
     >
-      {/* Parallax background */}
+      {/* Background com efeito Glassmorphism e Parallax */}
       <motion.div style={{ y: yBg }} className="absolute inset-0 z-0">
         <img
           src={experienceBg}
           alt="Background profissional"
-          className="w-full h-full object-cover opacity-20 dark:opacity-10"
+          className="w-full h-full object-cover opacity-15 dark:opacity-10 filter blur-sm"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-indigo-500/5 to-indigo-900/10 dark:from-indigo-900/20 dark:to-indigo-900/40" />
+        <div className="absolute inset-0 bg-gradient-to-br from-gray-50/95 via-white/90 to-gray-100/95 dark:from-gray-900/95 dark:via-gray-900/90 dark:to-gray-800/95 backdrop-blur-sm" />
+        {/* Padrões geométricos animados */}
+        <div className="absolute inset-0">
+          <div className="absolute w-96 h-96 -top-48 -right-48 bg-indigo-500/20 rounded-full mix-blend-multiply filter blur-3xl animate-blob" />
+          <div className="absolute w-96 h-96 -bottom-48 -left-48 bg-purple-500/20 rounded-full mix-blend-multiply filter blur-3xl animate-blob animation-delay-2000" />
+        </div>
       </motion.div>
 
       <div className="container mx-auto px-4 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.8, type: "spring", bounce: 0.4 }}
           viewport={{ once: true }}
-          className="max-w-4xl mx-auto text-center mb-20"
+          className="max-w-4xl mx-auto text-center mb-24"
         >
-          <SectionTitle>
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-blue-500">
-              Experiência Profissional
-            </span>
-          </SectionTitle>
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.2, duration: 0.5 }}
+          >
+            <SectionTitle>
+
+                Experiência Profissional
+                <motion.span
+                  className="absolute inset-0 blur-2xl opacity-30"
+                  animate={{
+                    scale: [1, 1.1, 1],
+                    opacity: [0.3, 0.5, 0.3]
+                  }}
+                  transition={{
+                    duration: 4,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }}
+                >
+                  Experiência Profissional
+                </motion.span>
+
+            </SectionTitle>
+          </motion.div>
 
           <AnimatedDivider />
 
-          <p className="text-xl text-gray-600 dark:text-gray-300">
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4, duration: 0.6 }}
+            className="text-xl text-gray-600 dark:text-gray-300 mt-6 leading-relaxed"
+          >
             Minha jornada profissional e conquistas mais relevantes.
-          </p>
+          </motion.p>
         </motion.div>
 
         <motion.div

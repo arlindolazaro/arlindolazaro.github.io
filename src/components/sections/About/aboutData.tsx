@@ -9,16 +9,16 @@ export interface Technology {
 }
 
 export const TECHNOLOGIES: Technology[] = [
-  { name: 'React', icon: <FaReact className="text-blue-500" /> },
-  { name: 'TypeScript', icon: <SiTypescript className="text-blue-600" /> },
-  { name: 'Java', icon: <FaJava className="text-red-500" /> },
-  { name: 'Spring Boot', icon: <SiSpringboot className="text-green-700" /> },
-  { name: 'PHP', icon: <FaPhp className="text-purple-700" /> },
-  { name: 'Node.js', icon: <FaNodeJs className="text-green-600" /> },
-  { name: 'JavaScript', icon: <SiJavascript className="text-yellow-400" /> },
-  { name: 'HTML5', icon: <FaHtml5 className="text-orange-500" /> },
-  { name: 'CSS3', icon: <FaCss3Alt className="text-blue-700" /> },
-  { name: 'MySQL', icon: <SiMysql className="text-blue-500" /> },
-  { name: 'Tailwind CSS', icon: <SiTailwindcss className="text-cyan-500" /> },
-  { name: 'SQL', icon: <FaDatabase className="text-gray-600" /> },
+  { name: 'React', icon: <FaReact /> },
+  { name: 'TypeScript', icon: <SiTypescript /> },
+  { name: 'Java', icon: <FaJava /> },
+  { name: 'Spring Boot', icon: <SiSpringboot /> },
+  { name: 'PHP', icon: <FaPhp /> },
+  { name: 'Node.js', icon: <FaNodeJs /> },
+  { name: 'JavaScript', icon: <SiJavascript /> },
+  { name: 'HTML5', icon: <FaHtml5 /> },
+  { name: 'CSS3', icon: <FaCss3Alt /> },
+  { name: 'MySQL', icon: <SiMysql /> },
+  { name: 'Tailwind CSS', icon: <SiTailwindcss /> },
+  { name: 'SQL', icon: <FaDatabase /> },
 ];

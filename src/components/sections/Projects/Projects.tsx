@@ -24,7 +24,7 @@ const Projects = () => {
           className="text-center mb-20"
         >
           <SectionTitle>
-            Meus <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 to-purple-600">Projectos</span>
+            Meus Projectos
           </SectionTitle>
 
           <AnimatedDivider />

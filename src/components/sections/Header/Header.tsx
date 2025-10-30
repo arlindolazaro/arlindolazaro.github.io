@@ -206,16 +206,7 @@ const Header = () => {
                   </div>
                 </nav>
 
-                {/* Rodapé */}
-                <div className="menu-footer">
-                  <div className="flex items-center justify-between mb-4">
-                    <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Tema</span>
-                    <ThemeToggle />
-                  </div>
-                  <div className="text-center text-xs text-gray-500 dark:text-gray-400">
-                    © {new Date().getFullYear()} Arlindo Cau
-                  </div>
-                </div>
+                
               </div>
             </motion.div>
           </>
