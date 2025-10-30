@@ -3,6 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Content Security Policy em modo report-only para testar primeiro sem bloquear recursos -->
+    <meta
+      http-equiv="Content-Security-Policy-Report-Only"
+      content="default-src 'self' https:; script-src 'self'; connect-src 'self' https://api.github.com; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https:; object-src 'none'; base-uri 'self'; frame-ancestors 'none';"
+    />
     <title>Arlindo Cau - Portfólio</title>
     <link rel="icon" type="image/png" href="/src/assets/images/icon.png" />
     <link rel="apple-touch-icon" href="/src/assets/images/icon.png" />
