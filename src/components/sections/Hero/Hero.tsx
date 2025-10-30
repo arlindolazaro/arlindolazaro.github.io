@@ -63,8 +63,10 @@ export const Hero = () => {
                   }}
                 >
                   <img
-                    src="/images/perfil.jpg"
+                    src="/images/perfil.webp"
                     alt="Arlindo Cau"
+                    loading="lazy"
+                    decoding="async"
                     onError={() => setImgOk(false)}
                     className="w-56 h-56 md:w-64 md:h-64 rounded-full object-cover shadow-2xl ring-4 ring-indigo-400/30 dark:ring-indigo-500/40 transform transition-transform duration-500 group-hover:scale-105"
                   />

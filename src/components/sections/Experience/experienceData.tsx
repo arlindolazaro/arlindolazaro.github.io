@@ -1,4 +1,4 @@
-import ujcLogo from '../../../assets/images/ujc-logo.png';
+import ujcLogo from '../../../assets/images/ujc-logo.webp';
 import unitecLogo from '../../../assets/images/unitec-photo.ico';
 
 export type ExperienceItem = {

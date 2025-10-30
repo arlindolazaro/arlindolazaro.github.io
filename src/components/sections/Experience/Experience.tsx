@@ -5,7 +5,7 @@ import { ExperienceCard } from './ExperienceCard';
 import { staggerContainer } from '../../../lib/animations';
 import { AnimatedDivider } from '../../common/AnimatedDivider';
 import { SectionTitle } from '../../common/SectionTitle';
-import experienceBg from '../../../assets/images/bg-paralax.jpg';
+import experienceBg from '../../../assets/images/bg-paralax.webp';
 
 export const Experience = () => {
   const ref = useRef(null);
@@ -26,6 +26,8 @@ export const Experience = () => {
         <img
           src={experienceBg}
           alt="Background profissional"
+          loading="lazy"
+          decoding="async"
           className="w-full h-full object-cover opacity-15 dark:opacity-10 filter blur-sm"
         />
         <div className="absolute inset-0 bg-gradient-to-br from-gray-50/95 via-white/90 to-gray-100/95 dark:from-gray-900/95 dark:via-gray-900/90 dark:to-gray-800/95 backdrop-blur-sm" />

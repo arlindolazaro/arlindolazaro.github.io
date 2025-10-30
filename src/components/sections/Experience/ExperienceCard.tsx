@@ -19,7 +19,7 @@ export const ExperienceCard = ({ experience }: Props) => (
         {/* Logo */}
         <div className="flex-shrink-0 flex flex-col items-center">
           <div className="w-24 h-24 rounded-full bg-white dark:bg-gray-700 p-3 shadow-md flex items-center justify-center border border-gray-200 dark:border-gray-600">
-            <img src={experience.logo} alt={`${experience.company} logo`} className="w-20 h-20 object-contain" />
+            <img src={experience.logo} alt={`${experience.company} logo`} loading="lazy" decoding="async" className="w-20 h-20 object-contain" />
           </div>
           <a
             href={experience.link}
