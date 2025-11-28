@@ -3,6 +3,7 @@ import Header from '../components/sections/Header/Header';
 import Hero from '../components/sections/Hero/Hero';
 import About from '../components/sections/About/About';
 import Services from '../components/sections/Services/Services';
+import Certificates from '../components/sections/Certificates/Certificates';
 import Projects from '../components/sections/Projects/Projects';
 import Experience from '../components/sections/Experience/Experience';
 import Contact from '../components/sections/Contact/Contact';
@@ -15,6 +16,7 @@ export const Home = () => {
       <Hero />
       <About />
       <Services />
+      <Certificates />
       <Projects />
       <Experience />
       <Contact />

@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaBars, FaTimes, FaChevronRight, FaHome, FaUser, FaConciergeBell, FaProjectDiagram, FaBriefcase, FaEnvelope } from 'react-icons/fa';
+import { FaBars, FaTimes, FaChevronRight, FaHome, FaUser, FaConciergeBell, FaProjectDiagram, FaBriefcase, FaEnvelope, FaAward } from 'react-icons/fa';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCode } from '@fortawesome/free-solid-svg-icons';
 import ThemeToggle from '../../common/ThemeToggle';
@@ -10,6 +10,7 @@ const NAV_ITEMS = [
   { name: 'INÍCIO', path: '#home', icon: <FaHome /> },
   { name: 'SOBRE', path: '#about', icon: <FaUser /> },
   { name: 'SERVIÇOS', path: '#servicos', icon: <FaConciergeBell /> },
+  { name: 'CERTIFICADOS', path: '#certificates', icon: <FaAward /> },
   { name: 'PROJECTOS', path: '#projects', icon: <FaProjectDiagram /> },
   { name: 'EXPERIÊNCIA', path: '#experience', icon: <FaBriefcase /> },
   { name: 'CONTACTO', path: '#contact', icon: <FaEnvelope /> },
