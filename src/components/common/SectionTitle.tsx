@@ -12,7 +12,7 @@ export const SectionTitle = ({ children, className = '' }: SectionTitleProps) =>
     whileInView={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.5 }}
     viewport={{ once: true }}
-    className={`text-4xl md:text-5xl font-bold text-center mb-4 ${className}`}
+    className={`text-4xl md:text-5xl font-bold text-center mb-4 bg-gradient-to-r from-indigo-400 to-indigo-600 bg-clip-text text-transparent ${className}`}
   >
     {children}
   </motion.h2>

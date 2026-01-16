@@ -8,7 +8,7 @@ interface TechBadgeProps {
 export const TechBadge = ({ name, className = '' }: TechBadgeProps) => (
   <motion.span
     whileHover={{ scale: 1.05 }}
-    className={`px-3 py-1 text-sm font-medium bg-gray-100 dark:bg-gray-700 rounded-full ${className}`}
+    className={`px-3 py-1 text-sm font-medium bg-neutral-100 dark:bg-neutral-700 rounded-full ${className}`}
   >
     {name}
   </motion.span>
