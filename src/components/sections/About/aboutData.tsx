@@ -1,7 +1,24 @@
 // aboutData.tsx
-import { FaReact, FaJava, FaPhp, FaNodeJs, FaHtml5, FaCss3Alt, FaDatabase } from 'react-icons/fa';
-import { SiSpringboot, SiTypescript, SiJavascript, SiMysql, SiTailwindcss } from 'react-icons/si';
 import type { ReactNode } from 'react';
+import {
+  FaReact,
+  FaJava,
+  FaPhp,
+  FaNodeJs,
+  FaHtml5,
+  FaCss3Alt,
+  FaDatabase,
+  FaGithub,
+  FaDocker,
+} from 'react-icons/fa';
+import {
+  SiSpringboot,
+  SiTypescript,
+  SiJavascript,
+  SiMysql,
+  SiTailwindcss,
+  SiPostgresql,
+} from 'react-icons/si';
 
 export interface Technology {
   name: string;
@@ -19,6 +36,9 @@ export const TECHNOLOGIES: Technology[] = [
   { name: 'HTML5', icon: <FaHtml5 /> },
   { name: 'CSS3', icon: <FaCss3Alt /> },
   { name: 'MySQL', icon: <SiMysql /> },
+  { name: 'PostgreSQL', icon: <SiPostgresql /> },
   { name: 'Tailwind CSS', icon: <SiTailwindcss /> },
   { name: 'SQL', icon: <FaDatabase /> },
+  { name: 'Git', icon: <FaGithub /> },
+  { name: 'Docker', icon: <FaDocker /> },
 ];

@@ -19,12 +19,12 @@ const TechGrid = ({ technologies }: TechGridProps) => (
         key={index}
         whileHover={{ y: -6, scale: 1.03 }}
         transition={{ type: 'spring', stiffness: 200 }}
-        className="flex flex-col items-center gap-2 p-3 rounded-2xl glass-morph shadow-smooth border border-gray-100 dark:border-gray-800"
+        className="flex flex-col items-center gap-2 p-3 rounded-2xl glass-morph shadow-smooth border border-neutral-100 dark:border-neutral-800"
       >
-        <div className="w-14 h-14 rounded-full flex items-center justify-center text-3xl bg-gradient-to-br from-indigo-500 to-purple-500 text-white shadow-md">
+        <div className="w-14 h-14 rounded-full flex items-center justify-center text-3xl bg-gradient-to-br from-indigo-600 to-indigo-700 text-white shadow-md">
           {tech.icon}
         </div>
-        <span className="text-sm font-medium text-gray-700 dark:text-gray-200">{tech.name}</span>
+        <span className="text-sm font-medium text-neutral-700 dark:text-neutral-200">{tech.name}</span>
       </motion.div>
     ))}
   </motion.div>
