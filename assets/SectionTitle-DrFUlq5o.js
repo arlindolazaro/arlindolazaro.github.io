@@ -1,0 +1,1 @@
+import{j as o,m as e}from"./index-xsArxxkr.js";const r=({children:t,className:i=""})=>o.jsx(e.h2,{initial:{opacity:0,y:-20},whileInView:{opacity:1,y:0},transition:{duration:.5},viewport:{once:!0},className:`text-4xl md:text-5xl font-bold text-center mb-4 bg-gradient-to-r from-indigo-400 to-indigo-600 bg-clip-text text-transparent ${i}`,children:t});export{r as S};
