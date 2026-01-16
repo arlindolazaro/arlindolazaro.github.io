@@ -1,11 +1,24 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaBars, FaTimes, FaChevronRight, FaHome, FaUser, FaConciergeBell, FaProjectDiagram, FaBriefcase, FaEnvelope, FaAward } from 'react-icons/fa';
+import {
+  FaBars,
+  FaTimes,
+  FaChevronRight,
+  FaHome,
+  FaUser,
+  FaConciergeBell,
+  FaProjectDiagram,
+  FaBriefcase,
+  FaEnvelope,
+  FaAward
+} from 'react-icons/fa';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCode } from '@fortawesome/free-solid-svg-icons';
-import ThemeToggle from '../../common/ThemeToggle';
 import { createPortal } from 'react-dom';
 
+/* =======================
+   CONFIGURAÇÃO DE NAV
+======================= */
 const NAV_ITEMS = [
   { name: 'INÍCIO', path: '#home', icon: <FaHome /> },
   { name: 'SOBRE', path: '#about', icon: <FaUser /> },
@@ -17,203 +30,185 @@ const NAV_ITEMS = [
 ];
 
 const Header = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [activeItem, setActiveItem] = useState('#home');
-  const [isScrolled, setIsScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState('#home');
+  const [scrolled, setScrolled] = useState(false);
   const panelRef = useRef<HTMLDivElement>(null);
 
-  // Scroll do header
+  /* =======================
+     SCROLL DO HEADER
+  ======================= */
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 20);
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  // Detecta seção ativa
+  /* =======================
+     DETECTA SECÇÃO ACTIVA
+  ======================= */
   useEffect(() => {
-    const handleScroll = () => {
-      const scrollY = window.scrollY;
-      const windowHeight = window.innerHeight;
-      let current = '#home';
+    const onScroll = () => {
+      const scrollPosition = window.scrollY + window.innerHeight * 0.35;
 
-      NAV_ITEMS.forEach(item => {
-        const el = document.querySelector(item.path);
-        if (el) {
-          const rect = el.getBoundingClientRect();
-          const elTop = rect.top + scrollY;
-          const elHeight = el.clientHeight;
-          if (scrollY >= elTop - windowHeight * 0.3 &&
-              scrollY < elTop + elHeight - windowHeight * 0.3) {
-            current = item.path;
-          }
+      for (const item of NAV_ITEMS) {
+        const section = document.querySelector(item.path);
+        if (!section) continue;
+
+        const top = section.getBoundingClientRect().top + window.scrollY;
+        const height = section.clientHeight;
+
+        if (scrollPosition >= top && scrollPosition < top + height) {
+          setActiveSection(item.path);
+          break;
         }
-      });
-      setActiveItem(current);
+      }
     };
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll();
-    return () => window.removeEventListener('scroll', handleScroll);
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  // Scroll suave com compensação do header
+  /* =======================
+     SCROLL SUAVE COM OFFSET
+  ======================= */
   const handleNavClick = useCallback((path: string) => {
-    setActiveItem(path);
-    setIsMenuOpen(false);
+    setMenuOpen(false);
+    setActiveSection(path);
 
-    setTimeout(() => {
-      const el = document.querySelector(path);
-      const header = document.querySelector('header');
-      if (el && header) {
-        const headerHeight = header.clientHeight;
-        const pos = el.getBoundingClientRect().top + window.pageYOffset - headerHeight + 10;
-        window.scrollTo({
-          top: pos,
-          behavior: 'smooth'
-        });
-      }
-    }, 200);
+    const section = document.querySelector(path);
+    const header = document.querySelector('header');
+
+    if (!section || !header) return;
+
+    const offset = header.clientHeight + 8;
+    const top =
+      section.getBoundingClientRect().top + window.pageYOffset - offset;
+
+    window.scrollTo({ top, behavior: 'smooth' });
   }, []);
 
-  // Fechar menu com ESC ou clique fora
+  /* =======================
+     FECHAR MENU (ESC / CLICK FORA)
+  ======================= */
   useEffect(() => {
-    if (!isMenuOpen) return;
+    if (!menuOpen) return;
 
-    const handleEscape = (e: KeyboardEvent) => e.key === 'Escape' && setIsMenuOpen(false);
-    const handleClickOutside = (e: MouseEvent) => {
+    const esc = (e: KeyboardEvent) => e.key === 'Escape' && setMenuOpen(false);
+    const clickOutside = (e: MouseEvent) => {
       if (panelRef.current && !panelRef.current.contains(e.target as Node)) {
-        setIsMenuOpen(false);
+        setMenuOpen(false);
       }
     };
 
-    document.addEventListener('keydown', handleEscape);
-    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener('keydown', esc);
+    document.addEventListener('mousedown', clickOutside);
     document.body.style.overflow = 'hidden';
 
     return () => {
-      document.removeEventListener('keydown', handleEscape);
-      document.removeEventListener('mousedown', handleClickOutside);
-      document.body.style.overflow = 'unset';
+      document.removeEventListener('keydown', esc);
+      document.removeEventListener('mousedown', clickOutside);
+      document.body.style.overflow = 'auto';
     };
-  }, [isMenuOpen]);
+  }, [menuOpen]);
 
   return (
-    <header className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
-      isScrolled
-        ? 'bg-white/95 dark:bg-gray-900/95 backdrop-blur-md shadow-lg border-b border-gray-200 dark:border-gray-800'
-        : 'bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm'
-    }`} role="banner">
+    <header
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
+        scrolled
+          ? 'bg-black/80 dark:bg-black/80 backdrop-blur-xl border-b border-neutral-800/50 shadow-lg'
+          : 'bg-transparent dark:bg-transparent'
+      }`}
+    >
+      {/* =======================
+          CONTAINER
+      ======================= */}
       <div className="container mx-auto px-6 py-4 flex items-center justify-between">
-        {/* Logo */}
+        {/* LOGO */}
         <motion.a
           href="#home"
-          onClick={(e) => { e.preventDefault(); handleNavClick('#home'); }}
-          className="flex items-center gap-3 text-gray-900 dark:text-gray-100 hover:opacity-80 transition-all duration-200 group"
+          onClick={(e) => {
+            e.preventDefault();
+            handleNavClick('#home');
+          }}
+          className="flex items-center gap-3 group"
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.5 }}
-          aria-label="Ir para o início"
         >
-          <motion.div
-            whileHover={{ scale: 1.1, rotate: 5 }}
-            whileTap={{ scale: 0.95 }}
-            className="flex items-center justify-center w-10 h-10 bg-indigo-600 rounded-lg"
-          >
-            <FontAwesomeIcon icon={faCode} className="text-white" size="lg" />
-          </motion.div>
+          <div className="w-10 h-10 bg-indigo-600 rounded-lg flex items-center justify-center">
+            <FontAwesomeIcon icon={faCode} className="text-white" />
+          </div>
+
           <div className="hidden sm:block">
-            <div className="font-bold text-lg leading-tight group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
+            <div className="font-bold text-lg text-white dark:text-white group-hover:text-indigo-400 transition">
               Arlindo Cau
             </div>
-            <div className="text-xs text-gray-600 dark:text-gray-400 leading-tight">
-              Web Developer
-            </div>
+            <div className="text-xs text-neutral-300 dark:text-neutral-400">Software Developer</div>
           </div>
         </motion.a>
 
-        {/* Menu & Theme */}
-        <div className="flex items-center gap-4">
-          <ThemeToggle />
-          <motion.button
-            onClick={() => setIsMenuOpen(prev => !prev)}
-            aria-label={isMenuOpen ? 'Fechar menu' : 'Abrir menu'}
-            aria-expanded={isMenuOpen}
-            className="p-3 text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-all duration-200 rounded-lg"
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.3 }}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+        {/* CONTROLOS */}
+        <div className="flex items-center gap-3">
+          <button
+            onClick={() => setMenuOpen((v) => !v)}
+            aria-label="Menu"
+            className="p-3 rounded-lg text-white dark:text-white hover:text-indigo-400 dark:hover:text-indigo-400 transition"
           >
-            {isMenuOpen ? <FaTimes size={20} /> : <FaBars size={20} />}
-          </motion.button>
+            {menuOpen ? <FaTimes /> : <FaBars />}
+          </button>
         </div>
       </div>
 
-      {/* Menu Mobile: renderizado via portal para evitar conflitos de stacking context do header */}
-      {typeof document !== 'undefined' && isMenuOpen && createPortal(
-        <AnimatePresence>
-          <>
-            <motion.div
-              className="fixed inset-0 bg-black/80 backdrop-blur-sm z-40"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              aria-hidden="true"
-              onClick={() => setIsMenuOpen(false)}
-            />
+      {/* =======================
+          MENU MOBILE (PORTAL)
+      ======================= */}
+      {typeof document !== 'undefined' &&
+        createPortal(
+          <AnimatePresence>
+            {menuOpen && (
+              <>
+                <motion.div
+                  className="fixed inset-0 bg-black/70 z-40"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  onClick={() => setMenuOpen(false)}
+                />
 
-            <motion.div
-              ref={panelRef}
-              // painel compacto: não ocupa toda a altura/largura, aparece abaixo do header
-              className="fixed top-16 right-4 h-auto w-64 max-w-sm bg-white dark:bg-gray-900 shadow-2xl z-50 overflow-y-auto rounded-2xl border border-gray-100 dark:border-gray-800 max-h-[80vh]"
-              initial={{ x: '100%' }}
-              animate={{ x: 0 }}
-              exit={{ x: '100%' }}
-              transition={{ type: 'tween', duration: 0.4 }}
-              role="dialog"
-              aria-modal="true"
-              aria-label="Menu de navegação"
-            >
-              <div className="flex flex-col h-full">
-          
-
-                {/* Navegação */}
-                <nav className="flex-1 p-4 sm:p-4">
-                  <div className="space-y-1">
-                    {NAV_ITEMS.map((item, index) => (
+                <motion.div
+                  ref={panelRef}
+                  className="fixed top-20 right-4 w-64 bg-black/90 dark:bg-black/90 backdrop-blur-xl border border-neutral-800 rounded-2xl shadow-2xl z-50 p-4 max-h-[80vh] overflow-auto"
+                  initial={{ x: '100%' }}
+                  animate={{ x: 0 }}
+                  exit={{ x: '100%' }}
+                >
+                  <nav className="space-y-1">
+                    {NAV_ITEMS.map((item, i) => (
                       <motion.button
                         key={item.name}
                         onClick={() => handleNavClick(item.path)}
-                        className={`w-full text-left px-3 py-2 rounded-lg transition-colors flex items-center gap-3 text-sm font-medium ${
-                          activeItem === item.path
-                            ? 'bg-indigo-600 text-white shadow'
-                            : 'text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-800'
+                        className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-colors ${
+                          activeSection === item.path
+                            ? 'bg-gradient-to-r from-indigo-600 to-indigo-700 text-white'
+                            : 'text-neutral-300 hover:bg-white/10 dark:hover:bg-white/10'
                         }`}
                         initial={{ opacity: 0, x: 20 }}
                         animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: 0.06 + index * 0.03 }}
+                        transition={{ delay: i * 0.04 }}
                       >
-                        <span className="text-indigo-500 dark:text-indigo-400 text-lg w-6 h-6 flex items-center justify-center">{item.icon}</span>
+                        {item.icon}
                         <span className="flex-1">{item.name}</span>
-                        <FaChevronRight
-                          size={12}
-                          className={`transition-transform duration-200 ${
-                            activeItem === item.path ? 'text-white' : 'text-gray-400'
-                          }`}
-                        />
+                        <FaChevronRight size={12} />
                       </motion.button>
                     ))}
-                  </div>
-                </nav>
-
-                
-              </div>
-            </motion.div>
-          </>
-        </AnimatePresence>,
-        document.body
-      )}
+                  </nav>
+                </motion.div>
+              </>
+            )}
+          </AnimatePresence>,
+          document.body
+        )}
     </header>
   );
 };
