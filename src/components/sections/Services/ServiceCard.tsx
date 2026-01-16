@@ -1,4 +1,3 @@
-// ServiceCard.tsx
 import { motion } from 'framer-motion';
 import type { ServiceType } from './servicesData';
 import { fadeInUp } from '../../../lib/animations';
@@ -10,30 +9,77 @@ interface Props {
 const ServiceCard = ({ service }: Props) => (
   <motion.div
     variants={fadeInUp}
-    whileHover={{ y: -8, scale: 1.02 }}
+    whileHover={{ y: -8, scale: 1.03 }}
     tabIndex={0}
     role="group"
-  className="group bg-white dark:bg-gray-800 p-4 md:p-6 rounded-2xl shadow-md hover:shadow-2xl transition-all duration-300 transform-gpu flex flex-col items-center text-center border border-gray-100 dark:border-gray-700 focus:outline-none focus:ring-4 focus:ring-indigo-100 dark:focus:ring-indigo-700 max-w-full h-auto w-full max-w-md"
+    className="
+      group relative
+      bg-black/70 backdrop-blur-xl
+      rounded-2xl border border-white/10
+      transition-all duration-300 transform-gpu
+      hover:shadow-[0_20px_40px_-12px_rgba(124,58,237,0.35)]
+      focus:outline-none focus:ring-2 focus:ring-indigo-500/50
+
+      /* Responsividade */
+      p-4 sm:p-6
+      flex flex-col items-center text-center
+      h-full
+    "
   >
-    <div className="w-14 md:w-20 h-14 md:h-20 rounded-full flex items-center justify-center mb-3 md:mb-4 shadow-lg bg-gradient-to-br from-indigo-500 to-purple-500 text-white text-xl md:text-2xl">
+    {/* Glow */}
+    <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition pointer-events-none bg-gradient-to-br from-indigo-600/8 via-transparent to-indigo-700/8" />
+
+    {/* Icon */}
+    <div className="
+      relative z-10
+      w-12 h-12 sm:w-16 sm:h-16
+      rounded-xl
+      flex items-center justify-center
+      mb-3 sm:mb-5
+      bg-gradient-to-br from-indigo-600 to-indigo-700
+      text-white
+      shadow-lg
+      text-base sm:text-xl
+    ">
       {service.icon}
     </div>
 
-    <div className="flex-1 w-full flex flex-col items-center text-center">
-      <h3 className="text-base md:text-lg font-semibold text-gray-800 dark:text-white mb-2 md:mb-3">
-        {service.title}
-      </h3>
+    {/* Title */}
+    <h3 className="relative z-10 text-sm sm:text-lg font-semibold text-white mb-2 sm:mb-3">
+      {service.title}
+    </h3>
 
-      <p className="text-gray-600 dark:text-gray-300 text-sm md:text-base mb-4 md:mb-6 leading-normal break-words text-pretty max-w-[90%] mx-auto">
-        {service.description}
-      </p>
-    </div>
+    {/* Description */}
+    <p className="
+      relative z-10
+      text-xs sm:text-sm
+      text-neutral-400
+      leading-relaxed
+      max-w-[95%]
 
+      /* Limite no mobile */
+      line-clamp-3 sm:line-clamp-none
+    ">
+      {service.description}
+    </p>
+
+    {/* CTA */}
     <a
       href="#contact"
-      className="mt-2 md:mt-4 inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-indigo-50 dark:bg-indigo-900/10 text-indigo-600 dark:text-indigo-300 text-sm font-medium hover:shadow-md transition"
+      className="
+        relative z-10
+        mt-3 sm:mt-6
+        px-4 py-2
+        rounded-lg
+        bg-white/5
+        border border-white/10
+        text-xs sm:text-sm
+        text-neutral-200
+        hover:bg-white/10
+        transition-colors duration-300
+      "
     >
-      Saiba Mais
+      Saiba mais
     </a>
   </motion.div>
 );
