@@ -3,51 +3,50 @@ export interface Certificate {
     title: string;
     image: string;
     alt: string;
-    document?: string;
 }
 
 const certificates: Certificate[] = [
     {
         id: 1,
-        title: 'Certificado: Competências Pessoais Aplicadas',
+        title: 'Competências Pessoais Aplicadas',
         image: '/images/Certifcado_1.webp',
         alt: 'Certificado Competências Pessoais Aplicadas',
     },
     {
         id: 2,
-        title: 'Certificado: Ready to Work - Absa',
+        title: 'Ready to Work – Absa',
         image: '/images/Certifcado_2.webp',
-        alt: 'Certificado Ready to Work - Absa',
+        alt: 'Certificado Ready to Work Absa',
     },
     {
         id: 3,
-        title: 'Certificado: Java COMPLETO Programação Orientada a Objetos + Projetos',
+        title: 'Java Completo – Programação Orientada a Objetos',
         image: '/images/Certifcado_3.webp',
-        alt: 'Certificado Java COMPLETO Programação Orientada a Objetos + Projetos',
+        alt: 'Certificado Java Programação Orientada a Objetos',
     },
     {
         id: 4,
-        title: 'Certificado: Sistemas Informáticos, Reparação de Computadores, Programação e Administração de Redes',
+        title: 'Sistemas Informáticos & Redes',
         image: '/images/Certifcado_4.webp',
-        alt: 'Certificado Sistemas Informáticos, Reparação de Computadores, Programação e Administração de Redes',
+        alt: 'Certificado Sistemas Informáticos e Redes',
     },
     {
         id: 5,
-        title: 'Certificado: Fundamentos de Data Science e Inteligência Artificial',
+        title: 'Fundamentos de Data Science & IA',
         image: '/images/Certifcado_5.webp',
-        alt: 'Certificado Fundamentos de Data Science e Inteligência Artificial',
+        alt: 'Certificado Data Science e Inteligência Artificial',
     },
     {
         id: 6,
-        title: 'Certificado: HCIA-Datacom V1.0 Course - Huawei',
+        title: 'HCIA-Datacom V1.0 – Huawei',
         image: '/images/Certificado_6.webp',
-        alt: 'Certificado HCIA-Datacom V1.0 Course - Huawei',
+        alt: 'Certificado Huawei HCIA Datacom',
     },
     {
         id: 7,
-        title: 'Certificado: Desenvolvimento Web Completo - 20 cursos + 20 projetos',
+        title: 'Desenvolvimento Web Completo',
         image: '/images/Certificado_7.webp',
-        alt: 'Certificado Desenvolvimento Web Completo - Udemy',
+        alt: 'Certificado Desenvolvimento Web Completo',
     },
 ];
 

@@ -1,246 +1,207 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { SectionTitle } from '../../common/SectionTitle';
-import { AnimatedDivider } from '../../common/AnimatedDivider';
-
 import certificatesData from './CertificatesInfo';
 import type { Certificate } from './CertificatesInfo';
 import CertificateCard from './CertificatesCard';
+import { AnimatedDivider } from '../../common/AnimatedDivider';
 
-const Certificates: React.FC = () => {
+/* =======================
+   SECTION
+======================= */
+
+const Certificates = () => {
   const [selected, setSelected] = useState<Certificate | null>(null);
 
   return (
-    <motion.section
+    <section
       id="certificates"
-      className="py-20 bg-white dark:bg-gray-800"
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6 }}
+      className="relative py-32 sm:py-40 bg-black overflow-hidden"
     >
-      <div className="container mx-auto px-4">
-        <div className="max-w-3xl mx-auto text-center mb-16">
-          <SectionTitle className="text-gray-900 dark:text-white">Certificados</SectionTitle>
-          <AnimatedDivider />
-          <p className="text-gray-600 dark:text-gray-300 text-lg">
-            Conquistas acadêmicas e certificações profissionais
-          </p>
-        </div>
+      {/* Background */}
+      <div className="absolute inset-0">
+        <div className="absolute inset-0 bg-gradient-to-b from-black via-neutral-950 to-violet-950/15" />
+        <div className="absolute -top-80 -left-80 w-[700px] h-[700px] bg-indigo-500/8 blur-[200px] rounded-full" />
+        <div className="absolute bottom-0 right-0 w-[700px] h-[700px] bg-indigo-600/8 blur-[200px] rounded-full" />
+      </div>
 
-        {/* Desktop Grid */}
+      <div className="relative z-10 container mx-auto px-4 sm:px-6">
+        {/* Header */}
         <motion.div
-          className="hidden md:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.5, staggerChildren: 0.1 }}
-          viewport={{ once: true, amount: 0.2 }}
+          initial={{ opacity: 0, y: 60 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.9 }}
+          viewport={{ once: true }}
+          className="max-w-3xl mx-auto text-center mb-16 sm:mb-24"
         >
+          <h2 className="text-4xl sm:text-5xl font-semibold bg-gradient-to-r from-indigo-400 to-indigo-600 bg-clip-text text-transparent">
+            Certificações
+          </h2>
+          <AnimatedDivider />
+          <p className="mt-4 sm:mt-6 text-lg sm:text-xl text-neutral-300">
+            Formação contínua, especializações técnicas e validações profissionais.
+          </p>
+        </motion.div>
+
+        {/* Desktop / Tablet Grid */}
+        <div className="hidden md:grid grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10">
           {certificatesData.map((cert, idx) => (
             <motion.div
               key={cert.id}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: idx * 0.1 }}
-              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.5, delay: idx * 0.08 }}
+              viewport={{ once: true }}
             >
-              <CertificateCard cert={cert} onSelect={() => setSelected(cert)} />
+              <CertificateCard
+                cert={cert}
+                onSelect={() => setSelected(cert)}
+              />
             </motion.div>
           ))}
-        </motion.div>
+        </div>
 
         {/* Mobile Carousel */}
         <div className="md:hidden">
-          <CertificatesCarousel certificates={certificatesData} onSelect={setSelected} />
+          <MobileCarousel
+            certificates={certificatesData}
+            onSelect={setSelected}
+          />
         </div>
       </div>
 
+      {/* Modal */}
       {selected && (
-        <CertificateModal cert={selected} onClose={() => setSelected(null)} />
+        <motion.div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          onClick={() => setSelected(null)}
+        >
+          <motion.div
+            onClick={(e) => e.stopPropagation()}
+            initial={{ scale: 0.95, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            className="
+              max-w-3xl w-full
+              bg-black/80 backdrop-blur-2xl
+              border border-neutral-800
+              rounded-2xl p-4 sm:p-6
+            "
+          >
+            <div className="flex justify-between items-center mb-4">
+              <h3 className="text-base sm:text-lg text-white">
+                {selected.title}
+              </h3>
+              <button
+                onClick={() => setSelected(null)}
+                className="text-neutral-400 hover:text-white text-xl"
+              >
+                ✕
+              </button>
+            </div>
+
+            <img
+              src={selected.image}
+              alt={selected.alt}
+              className="w-full max-h-[70vh] object-contain rounded-xl"
+            />
+          </motion.div>
+        </motion.div>
       )}
-    </motion.section>
+    </section>
   );
 };
 
-// ...existing code...
+export default Certificates;
 
-// Carousel Component for Mobile
-const CertificatesCarousel: React.FC<{
+/* =======================
+   MOBILE CAROUSEL
+======================= */
+
+const MobileCarousel = ({
+  certificates,
+  onSelect,
+}: {
   certificates: Certificate[];
-  onSelect: (cert: Certificate) => void;
-}> = ({ certificates, onSelect }) => {
-  const carouselRef = useRef<HTMLDivElement | null>(null);
-  const [current, setCurrent] = useState(0);
-  const autoplayRef = useRef<number | null>(null);
-  const pausedRef = useRef(false);
+  onSelect: (c: Certificate) => void;
+}) => {
+  const [index, setIndex] = useState(0);
+  const [paused, setPaused] = useState(false);
 
-  const scrollToIndex = (index: number) => {
-    const el = carouselRef.current;
-    const child = el?.children[index] as HTMLElement | undefined;
-    if (el && child) {
-      const scrollLeft =
-        child.offsetLeft - (el.clientWidth - child.clientWidth) / 2;
-      el.scrollTo({ left: scrollLeft, behavior: 'smooth' });
-      setCurrent(index);
-    }
+  const total = certificates.length;
+
+  const next = () => {
+    setIndex((prev) => (prev + 1) % total);
   };
 
-  // Sync current index on manual scroll
-  useEffect(() => {
-    const el = carouselRef.current;
-    if (!el) return;
-    const onScroll = () => {
-      const center = el.scrollLeft + el.clientWidth / 2;
-      let nearest = 0;
-      let minDist = Infinity;
-      Array.from(el.children).forEach((child, i) => {
-        const c = child as HTMLElement;
-        const childCenter = c.offsetLeft + c.clientWidth / 2;
-        const dist = Math.abs(center - childCenter);
-        if (dist < minDist) {
-          minDist = dist;
-          nearest = i;
-        }
-      });
-      setCurrent(nearest);
-    };
-    el.addEventListener('scroll', onScroll, { passive: true });
-    return () => el.removeEventListener('scroll', onScroll);
-  }, []);
-
-  // Autoplay
-  useEffect(() => {
-    if (autoplayRef.current) clearInterval(autoplayRef.current);
-    autoplayRef.current = window.setInterval(() => {
-      if (pausedRef.current || certificates.length <= 1) return;
-      const next = (current + 1) % certificates.length;
-      scrollToIndex(next);
-    }, 4000);
-    return () => clearInterval(autoplayRef.current!);
-  }, [current, certificates.length]);
-
-  // Pause on hover/focus
-  useEffect(() => {
-    const el = carouselRef.current;
-    if (!el) return;
-    const onEnter = () => (pausedRef.current = true);
-    const onLeave = () => (pausedRef.current = false);
-    el.addEventListener('mouseenter', onEnter);
-    el.addEventListener('mouseleave', onLeave);
-    return () => {
-      el.removeEventListener('mouseenter', onEnter);
-      el.removeEventListener('mouseleave', onLeave);
-    };
-  }, []);
-
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
-    if (e.key === 'ArrowRight') scrollToIndex((current + 1) % certificates.length);
-    if (e.key === 'ArrowLeft')
-      scrollToIndex((current - 1 + certificates.length) % certificates.length);
+  const prev = () => {
+    setIndex((prev) => (prev - 1 + total) % total);
   };
+
+  /* Auto-play */
+  useEffect(() => {
+    if (paused) return;
+
+    const timer = setInterval(next, 4500);
+    return () => clearInterval(timer);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [paused, total]);
 
   return (
-    <div className="relative">
-      <div
-        ref={carouselRef}
-        tabIndex={0}
-        role="region"
-        aria-roledescription="carousel"
-        aria-label="Certificados"
-        onKeyDown={handleKeyDown}
-        className="flex gap-4 overflow-x-auto no-scrollbar snap-x snap-mandatory touch-pan-x pb-6 scroll-smooth"
-        style={{ scrollSnapType: 'x mandatory', WebkitOverflowScrolling: 'touch' }}
-      >
-        {certificates.map((cert, idx) => (
-          <div
-            key={cert.id}
-            className="snap-center min-w-[85%] flex-shrink-0"
-            tabIndex={0}
-            onFocus={() => scrollToIndex(idx)}
-          >
-            <div
-              onClick={() => {
-                scrollToIndex(idx);
-                onSelect(cert);
-              }}
-            >
-              <CertificateCard cert={cert} onSelect={() => onSelect(cert)} />
+    <div className="relative space-y-6">
+      {/* Carousel */}
+      <div className="overflow-hidden">
+        <motion.div
+          className="flex"
+          drag="x"
+          dragConstraints={{ left: 0, right: 0 }}
+          dragElastic={0.15}
+          onDragStart={() => setPaused(true)}
+          onDragEnd={(_, info) => {
+            if (info.offset.x < -80) next();
+            if (info.offset.x > 80) prev();
+            setPaused(false);
+          }}
+          animate={{ x: `-${index * 100}%` }}
+          transition={{ type: 'spring', stiffness: 260, damping: 28 }}
+        >
+          {certificates.map((cert) => (
+            <div key={cert.id} className="min-w-full px-3">
+              <CertificateCard
+                cert={cert}
+                onSelect={() => onSelect(cert)}
+              />
             </div>
-          </div>
-        ))}
+          ))}
+        </motion.div>
       </div>
 
-      {/* Live region para acessibilidade */}
-      <div className="sr-only" aria-live="polite">
-        Slide {current + 1} de {certificates.length}: {certificates[current]?.title}
-      </div>
-
-      {/* Indicadores */}
-      <div className="flex items-center gap-2 justify-center mt-4">
-        {certificates.map((_, idx) => (
-          <button
-            key={idx}
-            onClick={() => scrollToIndex(idx)}
-            className={`transition-all duration-300 rounded-full ${
-              current === idx
-                ? 'w-3 h-3 bg-blue-600'
-                : 'w-2 h-2 bg-gray-400 dark:bg-gray-600'
+      {/* Indicators */}
+      <div className="flex justify-center gap-2">
+        {certificates.map((_, i) => (
+          <motion.button
+            key={i}
+            onClick={() => {
+              setPaused(true);
+              setIndex(i);
+            }}
+            animate={{
+              width: i === index ? 28 : 8,
+              opacity: i === index ? 1 : 0.4,
+            }}
+            className={`h-2 rounded-full ${
+              i === index
+                ? 'bg-gradient-to-r from-indigo-500 to-indigo-600'
+                : 'bg-white/30'
             }`}
-            aria-label={`Ir para certificado ${idx + 1}`}
           />
         ))}
+      </div>
+
+      {/* Counter */}
+      <div className="text-center text-xs text-neutral-400">
+        {index + 1} / {total}
       </div>
     </div>
   );
 };
-
-// Modal Component (sem link de documento)
-const CertificateModal: React.FC<{
-  cert: Certificate;
-  onClose: () => void;
-}> = ({ cert, onClose }) => (
-  <motion.div
-    className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4"
-    initial={{ opacity: 0 }}
-    animate={{ opacity: 1 }}
-    exit={{ opacity: 0 }}
-    onClick={onClose}
-  >
-    <motion.div
-      className="bg-white dark:bg-gray-800 rounded-xl shadow-2xl max-w-2xl w-full p-6"
-      initial={{ opacity: 0, scale: 0.95 }}
-      animate={{ opacity: 1, scale: 1 }}
-      exit={{ opacity: 0, scale: 0.95 }}
-      onClick={(e) => e.stopPropagation()}
-    >
-      <div className="flex justify-between items-start mb-4">
-        <h3 className="text-xl font-bold text-gray-900 dark:text-white">{cert.title}</h3>
-        <button
-          onClick={onClose}
-          aria-label="Fechar modal"
-          className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 text-2xl"
-        >
-          ✕
-        </button>
-      </div>
-      <motion.img
-        src={cert.image}
-        alt={cert.alt}
-        loading="lazy"
-        className="w-full h-auto rounded-lg object-contain max-h-[60vh]"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.2 }}
-      />
-      <div className="mt-4 flex justify-end">
-        <button
-          onClick={onClose}
-          className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
-        >
-          Fechar
-        </button>
-      </div>
-    </motion.div>
-  </motion.div>
-);
-
-export default Certificates;
