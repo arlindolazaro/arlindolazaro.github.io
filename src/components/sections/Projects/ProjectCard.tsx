@@ -1,90 +1,90 @@
-// ProjectCard.tsx
 import { motion } from 'framer-motion';
-import { fadeInUp } from '../../../lib/animations';
-import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
+import { FaGithub, FaExternalLinkAlt, FaStar } from 'react-icons/fa';
 import type { Project } from './projectData';
 
 interface ProjectCardProps {
   project: Project;
 }
 
-export const ProjectCard = ({ project }: ProjectCardProps) => (
-  <motion.div
-    variants={fadeInUp}
-    whileHover={{ y: -10, scale: 1.02 }}
-    className="group relative"
-  >
-    <div className={`absolute inset-0 ${project.bgColor} rounded-2xl opacity-0 group-hover:opacity-10 transition-opacity duration-300`} />
+export const ProjectCard = ({ project }: ProjectCardProps) => {
+  return (
+    <motion.article
+      whileHover={{ y: -6 }}
+      transition={{ type: 'spring', stiffness: 200, damping: 20 }}
+      className={`relative group rounded-2xl bg-neutral-900 dark:bg-neutral-900 transition-colors overflow-hidden ${
+        project.featured
+          ? 'border-2 border-indigo-500/60 dark:border-indigo-500/60'
+          : 'border border-white/10 dark:border-white/10 hover:border-indigo-500/40 dark:hover:border-indigo-500/40'
+      }`}
+    >
+      {/* Glow */}
+      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+        <div className="absolute -inset-1 bg-gradient-to-br from-indigo-600/15 to-indigo-700/10 blur-xl" />
+      </div>
 
-  <div className={`relative h-full bg-white dark:bg-gray-800 rounded-2xl border ${project.accentColor} border-opacity-10 dark:border-opacity-20 overflow-hidden transition-all duration-300 group-hover:border-opacity-30 group-hover:shadow-xl hover:shadow-${project.accentColor.split('-')[1]}/20 backdrop-blur-sm backdrop-filter`}>
-      <div className="p-8 flex flex-col h-full">
-        <div className="flex items-start mb-6">
-          <div className={`flex items-center justify-center w-16 h-16 rounded-2xl ${project.accentColor.replace('border', 'bg')} bg-opacity-15 mr-5 transform rotate-3 transition-transform group-hover:rotate-6 shadow-lg`}>
+      {/* Featured Badge */}
+      {project.featured && (
+        <div className="absolute top-4 right-4 z-10 flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gradient-to-r from-indigo-600 to-indigo-700 text-white text-xs font-semibold shadow-lg">
+          <FaStar className="w-3 h-3" />
+          <span>Destaque</span>
+        </div>
+      )}
+
+      <div className="relative p-5 sm:p-7 flex flex-col h-full">
+        {/* Header */}
+        <div className="flex items-start sm:items-center gap-3 sm:gap-4 mb-4">
+          <div className="w-10 sm:w-12 h-10 sm:h-12 flex items-center justify-center rounded-xl bg-indigo-500/10 dark:bg-indigo-500/10 text-indigo-400 dark:text-indigo-400 text-lg sm:text-xl flex-shrink-0">
             {project.stack[0].icon}
           </div>
-          <div className="flex-1">
-            <h3 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-gray-300">
-              {project.title}
-            </h3>
-            <div className="flex flex-wrap gap-2 mt-3">
-              {project.stack.slice(0, 2).map((tech, i) => (
-                <span
-                  key={i}
-                  className={`text-xs font-semibold px-3 py-1.5 ${tech.color} bg-opacity-15 dark:bg-opacity-25 rounded-full shadow-sm backdrop-blur-sm transform transition-transform hover:scale-105`}
-                >
-                  {tech.name}
-                </span>
-              ))}
-            </div>
-          </div>
+          <h3 className="text-base sm:text-xl font-semibold text-neutral-100 dark:text-neutral-100">
+            {project.title}
+          </h3>
         </div>
 
-        <p className="text-gray-600 dark:text-gray-300 mb-8 flex-grow leading-relaxed">
+        {/* Description */}
+        <p className="text-xs sm:text-sm text-neutral-400 dark:text-neutral-400 leading-relaxed mb-4 sm:mb-6">
           {project.description}
         </p>
 
-        <div className="flex flex-wrap gap-3 mb-8">
+        {/* Stack */}
+        <div className="flex flex-wrap gap-2 mb-4 sm:mb-6">
           {project.stack.map((tech, i) => (
-            <motion.div
+            <span
               key={i}
-              whileHover={{ scale: 1.05, y: -2 }}
-              whileTap={{ scale: 0.95 }}
-              className={`flex items-center gap-2.5 px-4 py-2.5 ${tech.color} bg-opacity-10 dark:bg-opacity-15 rounded-2xl shadow-sm hover:shadow-md transition-shadow duration-300 border border-gray-100 dark:border-gray-700`}
+              className="text-xs px-2 sm:px-3 py-1 rounded-full bg-white/5 dark:bg-white/5 text-neutral-300 dark:text-neutral-300 border border-white/10 dark:border-white/10"
             >
-              <span className="text-lg">{tech.icon}</span>
-              <span className="text-sm font-medium">{tech.name}</span>
-            </motion.div>
+              {tech.name}
+            </span>
           ))}
         </div>
 
-        <div className="flex gap-4 mt-auto">
-          <motion.a
+        {/* Actions */}
+        <div className="mt-auto flex gap-2 sm:gap-3">
+          <a
             href={project.githubUrl}
             target="_blank"
             rel="noopener noreferrer"
-            whileHover={{ scale: 1.02, y: -1 }}
-            whileTap={{ scale: 0.98 }}
-            className={`flex-1 flex items-center justify-center px-6 py-3.5 bg-gradient-to-r from-gray-900 to-gray-800 text-white rounded-xl hover:shadow-lg hover:from-gray-800 hover:to-gray-700 transition-all duration-300`}
+            className="flex-1 inline-flex items-center justify-center gap-2 px-3 sm:px-4 py-2 sm:py-2.5 rounded-xl bg-white/5 dark:bg-white/5 hover:bg-white/10 dark:hover:bg-white/10 text-neutral-200 dark:text-neutral-200 text-xs sm:text-sm font-medium transition-colors duration-300"
           >
-            <FaGithub className="mr-2.5 text-lg" />
-            <span className="font-semibold">Código</span>
-          </motion.a>
+            <FaGithub />
+            <span className="hidden sm:inline">Código</span>
+            <span className="sm:hidden">Git</span>
+          </a>
 
           {project.demoUrl && (
-            <motion.a
+            <a
               href={project.demoUrl}
               target="_blank"
               rel="noopener noreferrer"
-              whileHover={{ scale: 1.02, y: -1 }}
-              whileTap={{ scale: 0.98 }}
-              className={`flex-1 flex items-center justify-center px-6 py-3.5 bg-gradient-to-r from-white to-gray-50 dark:from-gray-700 dark:to-gray-800 border border-gray-200 dark:border-gray-600 text-gray-800 dark:text-white rounded-xl hover:shadow-lg dark:hover:shadow-gray-800/30 transition-all duration-300`}
+              className="flex-1 inline-flex items-center justify-center gap-2 px-3 sm:px-4 py-2 sm:py-2.5 rounded-xl bg-gradient-to-r from-indigo-600 to-indigo-700 text-white text-xs sm:text-sm font-medium hover:brightness-110 dark:hover:brightness-110 transition-all duration-300"
             >
-              <FaExternalLinkAlt className="mr-2.5 text-lg" />
-              <span className="font-semibold">Demo</span>
-            </motion.a>
+              <FaExternalLinkAlt />
+              <span className="hidden sm:inline">Demo</span>
+              <span className="sm:hidden">Ver</span>
+            </a>
           )}
         </div>
       </div>
-    </div>
-  </motion.div>
-);
+    </motion.article>
+  );
+};
