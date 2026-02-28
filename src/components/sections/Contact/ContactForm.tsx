@@ -23,11 +23,41 @@ const ContactForm = () => {
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSending(true);
-    await new Promise(r => setTimeout(r, 1500));
-    setSuccess(true);
-    setData({ name: '', email: '', message: '' });
-    setSending(false);
-    setTimeout(() => setSuccess(false), 3000);
+
+    try {
+      const response = await fetch(
+        'https://formsubmit.co/ajax/arlindolazaro202@gmail.com',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            name: data.name,
+            email: data.email,
+            message: data.message,
+          }),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+
+      const result = await response.json();
+      if (result.success === 'true' || result.success === true) {
+        setSuccess(true);
+        setData({ name: '', email: '', message: '' });
+      } else {
+        console.warn('Form submission returned unexpected result', result);
+      }
+    } catch (err) {
+      console.error('Error submitting contact form', err);
+      // you could set an error state and show an alert here
+    } finally {
+      setSending(false);
+      setTimeout(() => setSuccess(false), 3000);
+    }
   };
 
   return (
