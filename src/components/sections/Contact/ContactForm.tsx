@@ -15,16 +15,36 @@ const SuccessPopup = () => (
   </motion.div>
 );
 
+const ErrorPopup = ({ message }: { message: string }) => (
+  <motion.div
+    initial={{ opacity: 0, y: -10 }}
+    animate={{ opacity: 1, y: 0 }}
+    exit={{ opacity: 0, y: -10 }}
+    className="absolute top-4 right-4 bg-black/90 border border-red-500/30
+               rounded-xl px-5 py-4 flex items-center gap-3 shadow-lg"
+  >
+    <span className="text-sm text-red-400">{message}</span>
+  </motion.div>
+);
+
 const ContactForm = () => {
-  const [data, setData] = useState({ name: '', email: '', message: '' });
+  const [data, setData] = useState({ name: '', email: '', message: '', honey: '' });
   const [sending, setSending] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSending(true);
 
     try {
+      // if honeypot field is filled, abort early (probable bot)
+      if (data.honey) {
+        console.warn('Honeypot triggered, not submitting form');
+        setSending(false);
+        return;
+      }
+
       const response = await fetch(
         'https://formsubmit.co/ajax/arlindolazaro202@gmail.com',
         {
@@ -36,6 +56,7 @@ const ContactForm = () => {
             name: data.name,
             email: data.email,
             message: data.message,
+            _honey: data.honey,
           }),
         }
       );
@@ -47,16 +68,19 @@ const ContactForm = () => {
       const result = await response.json();
       if (result.success === 'true' || result.success === true) {
         setSuccess(true);
-        setData({ name: '', email: '', message: '' });
+        setData({ name: '', email: '', message: '', honey: '' });
       } else {
-        console.warn('Form submission returned unexpected result', result);
+        throw new Error('unexpected result: ' + JSON.stringify(result));
       }
-    } catch (err) {
+    } catch (err: any) {
       console.error('Error submitting contact form', err);
-      // you could set an error state and show an alert here
+      setError('Ocorreu um erro ao enviar. Tente novamente mais tarde.');
     } finally {
       setSending(false);
-      setTimeout(() => setSuccess(false), 3000);
+      setTimeout(() => {
+        setSuccess(false);
+        setError(null);
+      }, 3000);
     }
   };
 
@@ -67,7 +91,10 @@ const ContactForm = () => {
       viewport={{ once: true }}
       className="relative"
     >
-      <AnimatePresence>{success && <SuccessPopup />}</AnimatePresence>
+      <AnimatePresence>
+        {success && <SuccessPopup />}
+        {error && <ErrorPopup message={error} />}
+      </AnimatePresence>
 
       <form
         onSubmit={submit}
@@ -87,6 +114,16 @@ const ContactForm = () => {
                        focus:outline-none focus:ring-2 focus:ring-indigo-500/50 dark:focus:ring-indigo-500/50 transition-all duration-300"
           />
         ))}
+        {/* honeypot field to trap bots */}
+        <input
+          type="text"
+          name="_honey"
+          autoComplete="off"
+          tabIndex={-1}
+          value={data.honey}
+          onChange={e => setData({ ...data, honey: e.target.value })}
+          className="hidden"
+        />
 
         <textarea
           rows={5}
