@@ -16,7 +16,7 @@ export const education: EducationItem[] = [
   {
     degree: 'Licenciatura em Engenharia em Tecnologias e Sistemas de Informação',
     institution: 'Universidade Joaquim Chissano',
-    period: 'Em andamento',
+    period: '2026',
     location: 'Maputo, Moçambique',
     logo: ujcLogo,
     description:
@@ -28,7 +28,7 @@ export const education: EducationItem[] = [
       'Databases',
       'UML Modeling',
     ],
-    status: 'in-progress',
+    status: 'completed',
   },
   {
     degree: 'Sistemas Informáticos & Programação Web',
