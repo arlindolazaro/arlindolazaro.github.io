@@ -2,9 +2,6 @@ import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { SKILLS } from '../../../data/skillsData';
 
-// Espera-se que cada skill tenha um campo `category`, ex:
-// { icon: '...', name: 'TypeScript', level: 'expert', category: 'Programming Languages' }
-
 const ORDER = [
   'Programming Languages',
   'Web Development',
@@ -20,7 +17,6 @@ function groupByCategory<T extends { category: string }>(items: T[]) {
     if (!map.has(key)) map.set(key, []);
     map.get(key)!.push(item);
   }
-  // categorias conhecidas primeiro, na ordem definida; o resto depois, pela ordem de aparição
   const known = ORDER.filter((c) => map.has(c));
   const rest = [...map.keys()].filter((c) => !ORDER.includes(c));
   return [...known, ...rest].map((category) => ({
@@ -40,7 +36,7 @@ export const Skills = () => {
   const groups = groupByCategory(SKILLS);
 
   return (
-    <section id="skills" className="py-24 bg-black">
+    <section id="skills" className="py-24 bg-[var(--black)]">
       <div className="container mx-auto px-6">
         <motion.p
           className="text-[var(--lime)] text-xs font-mono tracking-[0.3em] uppercase mb-4"
@@ -52,7 +48,7 @@ export const Skills = () => {
         </motion.p>
 
         <motion.h2
-          className="text-4xl sm:text-6xl font-black text-white mb-4"
+          className="text-4xl sm:text-6xl font-black text-[var(--text)] mb-4"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -71,9 +67,9 @@ export const Skills = () => {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
               >
-                <h3 className="text-2xl sm:text-3xl font-black text-white">
+                <h3 className="text-2xl sm:text-3xl font-black text-[var(--text)]">
                   {category.split(' ').slice(0, -1).join(' ')}{' '}
-                  <span className="font-light text-white/60">
+                  <span className="font-light text-[var(--muted)]">
                     {category.split(' ').slice(-1)}
                   </span>
                 </h3>
@@ -94,13 +90,12 @@ export const Skills = () => {
                     <span className="text-2xl text-[var(--lime)] group-hover:scale-110 transition-transform duration-200">
                       {skill.icon}
                     </span>
-                    <span className="text-xs text-white/70 text-center leading-tight">
+                    <span className="text-xs text-[var(--muted)] text-center leading-tight">
                       {skill.name}
                     </span>
                     <span
-                      className={`text-[9px] uppercase tracking-wider font-semibold ${
-                        levelColor[skill.level] ?? levelColor.intermediate
-                      }`}
+                      className={`text-[9px] uppercase tracking-wider font-semibold ${levelColor[skill.level] ?? levelColor.intermediate
+                        }`}
                     >
                       {skill.level}
                     </span>

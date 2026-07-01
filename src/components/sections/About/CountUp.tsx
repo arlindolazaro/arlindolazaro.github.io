@@ -1,4 +1,3 @@
-// CountUp.tsx
 import { useEffect, useState } from 'react';
 
 interface CountUpProps {
@@ -13,7 +12,6 @@ const CountUp = ({ end, duration = 1500, suffix = '' }: CountUpProps) => {
   useEffect(() => {
     let start = 0;
     const increment = end / (duration / 16);
-
     const counter = setInterval(() => {
       start += increment;
       if (start >= end) {
@@ -23,7 +21,6 @@ const CountUp = ({ end, duration = 1500, suffix = '' }: CountUpProps) => {
         setCount(Math.floor(start));
       }
     }, 16);
-
     return () => clearInterval(counter);
   }, [end, duration]);
 

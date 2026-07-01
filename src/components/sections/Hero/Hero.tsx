@@ -31,7 +31,7 @@ const ScrollHint = ({ className = '' }: { className?: string }) => {
       <motion.div
         animate={{ y: [0, 8, 0] }}
         transition={{ duration: 1.5, repeat: Infinity }}
-        className="w-5 h-8 border border-white/20 group-hover:border-[var(--lime)]/50 rounded-full flex items-start justify-center pt-1 transition-colors"
+        className="w-5 h-8 border border-[var(--border)] group-hover:border-[var(--lime)]/50 rounded-full flex items-start justify-center pt-1 transition-colors"
       >
         <div className="w-1 h-2 bg-[var(--lime)] rounded-full" />
       </motion.div>
@@ -52,24 +52,21 @@ export const Hero = () => {
   return (
     <section
       id="home"
-      className="relative min-h-screen flex items-center bg-black overflow-hidden pb-16 sm:pb-0"
+      className="relative min-h-screen flex items-center bg-[var(--black)] overflow-hidden pb-16 sm:pb-0"
     >
-      {/* Grid pattern */}
       <div
         className="absolute inset-0 opacity-[0.03]"
         style={{
           backgroundImage:
-            'linear-gradient(white 1px, transparent 1px), linear-gradient(90deg, white 1px, transparent 1px)',
+            'linear-gradient(var(--text) 1px, transparent 1px), linear-gradient(90deg, var(--text) 1px, transparent 1px)',
           backgroundSize: '60px 60px',
         }}
       />
 
-      {/* Lime glow blob */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[var(--lime)]/10 rounded-full blur-[120px] pointer-events-none" />
 
       <div className="container mx-auto px-6 pt-24 pb-16 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center min-h-[80vh]">
-          {/* LEFT — TEXT */}
           <motion.div
             className="flex flex-col justify-center order-2 lg:order-1"
             initial={{ opacity: 0, x: -40 }}
@@ -91,7 +88,7 @@ export const Hero = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3, duration: 0.7 }}
             >
-              <span className="text-white block">Arlindo</span>
+              <span className="text-[var(--text)] block">Arlindo</span>
               <span
                 className="block"
                 style={{ WebkitTextStroke: '2px var(--lime)', color: 'transparent' }}
@@ -118,13 +115,11 @@ export const Hero = () => {
               <HeroButtons isMounted={isMounted} />
             </motion.div>
 
-            {/* Scroll hint — no mobile fica no fluxo normal, logo abaixo dos botões */}
             <div className="sm:hidden mt-10 flex justify-center">
               <ScrollHint />
             </div>
           </motion.div>
 
-          {/* RIGHT — PHOTO */}
           <motion.div
             className="flex justify-center items-center order-1 lg:order-2"
             initial={{ opacity: 0, scale: 0.9 }}
@@ -132,7 +127,6 @@ export const Hero = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
           >
             <div className="relative">
-              {/* Lime accent behind photo */}
               <div className="absolute -bottom-4 -right-4 w-full h-full bg-[var(--lime)] rounded-2xl" />
 
               {imgOk ? (
@@ -148,7 +142,6 @@ export const Hero = () => {
                 </div>
               )}
 
-              {/* Floating badge */}
               <motion.div
                 animate={{ y: [-6, 6, -6] }}
                 transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
@@ -160,7 +153,7 @@ export const Hero = () => {
               <motion.div
                 animate={{ y: [6, -6, 6] }}
                 transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-                className="absolute -right-6 bottom-12 z-20 bg-white text-black px-4 py-2 rounded-full text-xs font-bold shadow-lg"
+                className="absolute -right-6 bottom-12 z-20 bg-[var(--text)] text-[var(--black)] px-4 py-2 rounded-full text-xs font-bold shadow-lg"
               >
                 Full-Stack
               </motion.div>
@@ -168,7 +161,6 @@ export const Hero = () => {
           </motion.div>
         </div>
 
-        {/* Scroll hint — a partir do sm volta a ser o indicador flutuante absoluto */}
         <ScrollHint className="hidden sm:flex absolute bottom-8 left-1/2 -translate-x-1/2" />
       </div>
     </section>

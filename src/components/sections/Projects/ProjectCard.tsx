@@ -13,11 +13,10 @@ export const ProjectCard = ({ project, large }: Props) => {
     <motion.article
       whileHover={{ y: -4 }}
       transition={{ type: 'spring', stiffness: 200, damping: 20 }}
-      className={`group relative bg-black border border-[var(--border)] rounded-2xl overflow-hidden
+      className={`group relative bg-[var(--surface)] border border-[var(--border)] rounded-2xl overflow-hidden
                   hover:border-[var(--lime)]/40 transition-colors duration-300
                   ${large ? 'lg:grid lg:grid-cols-2' : 'flex flex-col h-full'}`}
     >
-      {/* Preview */}
       {hasImage ? (
         <div className={`relative overflow-hidden ${large ? 'aspect-video lg:aspect-auto' : 'aspect-video'}`}>
           <img
@@ -26,6 +25,7 @@ export const ProjectCard = ({ project, large }: Props) => {
             loading="lazy"
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
           />
+          {/* Overlay escuro intencional para legibilidade dos badges sobre a imagem, em ambos os temas */}
           <div className={`absolute inset-0 bg-gradient-to-t from-black via-black/10 to-transparent ${large ? 'lg:bg-gradient-to-r lg:from-black/60 lg:via-transparent lg:to-transparent' : ''}`} />
 
           {project.featured && (
@@ -56,12 +56,11 @@ export const ProjectCard = ({ project, large }: Props) => {
       )}
       {large && !hasImage && <div className="hidden lg:block w-1 bg-[var(--lime)]" />}
 
-      {/* Content */}
       <div className={`p-6 sm:p-8 flex flex-col ${large ? 'justify-center' : 'flex-1'}`}>
         {!hasImage && (
           <div className="flex gap-2 mb-4">
             {project.stack.slice(0, 4).map((tech, i) => (
-              <span key={i} className="w-8 h-8 rounded-lg bg-[var(--surface)] border border-[var(--border)] flex items-center justify-center text-[var(--lime)] text-sm">
+              <span key={i} className="w-8 h-8 rounded-lg bg-[var(--black)] border border-[var(--border)] flex items-center justify-center text-[var(--lime)] text-sm">
                 {tech.icon}
               </span>
             ))}
@@ -69,7 +68,7 @@ export const ProjectCard = ({ project, large }: Props) => {
         )}
 
         <div className="flex items-start justify-between gap-2 mb-3">
-          <h3 className={`font-black text-white ${large ? 'text-2xl sm:text-3xl' : 'text-lg'}`}>
+          <h3 className={`font-black text-[var(--text)] ${large ? 'text-2xl sm:text-3xl' : 'text-lg'}`}>
             {t(project.titleKey)}
           </h3>
           {project.featured && !hasImage && (
@@ -85,20 +84,28 @@ export const ProjectCard = ({ project, large }: Props) => {
 
         <div className="flex flex-wrap gap-2 mb-6">
           {project.stack.map((tech, i) => (
-            <span key={i} className="text-xs px-2 py-1 rounded-md bg-[var(--surface)] text-white/50 border border-[var(--border)]">
+            <span key={i} className="text-xs px-2 py-1 rounded-md bg-[var(--black)] text-[var(--muted)] border border-[var(--border)]">
               {tech.name}
             </span>
           ))}
         </div>
 
         <div className="flex gap-3 mt-auto">
-          <a href={project.githubUrl} target="_blank" rel="noopener noreferrer"
-            className="flex-1 inline-flex items-center justify-center gap-2 py-2.5 rounded-xl border border-[var(--border)] text-white/60 hover:text-white hover:border-white/30 text-xs font-medium transition-colors">
+          <a
+            href={project.githubUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex-1 inline-flex items-center justify-center gap-2 py-2.5 rounded-xl border border-[var(--border)] text-[var(--muted)] hover:text-[var(--text)] hover:border-[var(--lime)]/40 text-xs font-medium transition-colors"
+          >
             <FaGithub /> {t('projects.code')}
           </a>
           {project.demoUrl && (
-            <a href={project.demoUrl} target="_blank" rel="noopener noreferrer"
-              className="flex-1 inline-flex items-center justify-center gap-2 py-2.5 rounded-xl bg-[var(--lime)] text-black text-xs font-bold hover:bg-white transition-colors">
+            <a
+              href={project.demoUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex-1 inline-flex items-center justify-center gap-2 py-2.5 rounded-xl bg-[var(--lime)] text-black text-xs font-bold hover:brightness-110 transition-colors"
+            >
               <FaExternalLinkAlt /> Demo
             </a>
           )}

@@ -59,7 +59,7 @@ const MobileServicesCarousel = ({ services }: Props) => {
       scrollToIndex((current + 1) % services.length);
     }, 3800);
     return () => clearInterval(id);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+     
   }, [current, services.length, isPaused]);
 
   return (
@@ -100,7 +100,7 @@ const MobileServicesCarousel = ({ services }: Props) => {
               setIsPaused(true);
               scrollToIndex(idx);
             }}
-            className={`h-1.5 rounded-full transition-all duration-300 ${current === idx ? 'w-6 bg-[var(--lime)]' : 'w-1.5 bg-white/20'
+            className={`h-1.5 rounded-full transition-all duration-300 ${current === idx ? 'w-6 bg-[var(--lime)]' : 'w-1.5 bg-[var(--border)]'
               }`}
           />
         ))}

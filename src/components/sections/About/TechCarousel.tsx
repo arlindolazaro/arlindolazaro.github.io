@@ -7,7 +7,7 @@ const TechCarousel = ({ technologies }: { technologies: Technology[] }) => (
       {[...technologies, ...technologies].map((tech, i) => (
         <div
           key={i}
-          className="flex items-center gap-2 px-4 py-2 rounded-full border border-[var(--border)] bg-[var(--surface)] text-sm text-white/70 whitespace-nowrap"
+          className="flex items-center gap-2 px-4 py-2 rounded-full border border-[var(--border)] bg-[var(--surface)] text-sm text-[var(--muted)] whitespace-nowrap"
         >
           <span className="text-[var(--lime)]">{tech.icon}</span>
           {tech.name}

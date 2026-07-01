@@ -8,7 +8,7 @@ const Services = () => {
   const { t } = useTranslation();
 
   return (
-    <section id="servicos" className="py-24 bg-black overflow-hidden">
+    <section id="servicos" className="py-24 bg-[var(--black)] overflow-hidden">
       <div className="container mx-auto px-6">
         <motion.p
           className="text-[var(--lime)] text-xs font-mono tracking-[0.3em] uppercase mb-4"
@@ -21,7 +21,7 @@ const Services = () => {
 
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-16">
           <motion.h2
-            className="text-4xl sm:text-6xl font-black text-white"
+            className="text-4xl sm:text-6xl font-black text-[var(--text)]"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}

@@ -7,13 +7,12 @@ const Contact = () => {
   const { t } = useTranslation();
 
   return (
-    <section id="contact" className="relative py-24 bg-black overflow-hidden">
-      {/* Grid pattern — consistente com Hero e Footer */}
+    <section id="contact" className="relative py-24 bg-[var(--black)] overflow-hidden">
       <div
         className="absolute inset-0 opacity-[0.03] pointer-events-none"
         style={{
           backgroundImage:
-            'linear-gradient(white 1px, transparent 1px), linear-gradient(90deg, white 1px, transparent 1px)',
+            'linear-gradient(var(--text) 1px, transparent 1px), linear-gradient(90deg, var(--text) 1px, transparent 1px)',
           backgroundSize: '60px 60px',
         }}
       />
@@ -30,7 +29,7 @@ const Contact = () => {
         </motion.p>
 
         <motion.h2
-          className="text-4xl sm:text-6xl font-black text-white mb-4"
+          className="text-4xl sm:text-6xl font-black text-[var(--text)] mb-4"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}

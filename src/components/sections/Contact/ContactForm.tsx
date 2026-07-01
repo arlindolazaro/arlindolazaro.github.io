@@ -8,11 +8,11 @@ const SuccessPopup = ({ message }: { message: string }) => (
     initial={{ opacity: 0, y: -10 }}
     animate={{ opacity: 1, y: 0 }}
     exit={{ opacity: 0, y: -10 }}
-    className="absolute top-4 right-4 bg-black/90 border border-[var(--lime)]/30
+    className="absolute top-4 right-4 bg-[var(--surface)] border border-[var(--lime)]/30
                rounded-xl px-5 py-4 flex items-center gap-3 shadow-lg z-10"
   >
     <FaCheck className="text-[var(--lime)]" />
-    <span className="text-sm text-neutral-200">{message}</span>
+    <span className="text-sm text-[var(--text)]">{message}</span>
   </motion.div>
 );
 
@@ -21,14 +21,13 @@ const ErrorPopup = ({ message }: { message: string }) => (
     initial={{ opacity: 0, y: -10 }}
     animate={{ opacity: 1, y: 0 }}
     exit={{ opacity: 0, y: -10 }}
-    className="absolute top-4 right-4 bg-black/90 border border-red-500/30
+    className="absolute top-4 right-4 bg-[var(--surface)] border border-red-500/30
                rounded-xl px-5 py-4 flex items-center gap-3 shadow-lg z-10"
   >
     <span className="text-sm text-red-400">{message}</span>
   </motion.div>
 );
 
-/** Input com label flutuante — sobe e fica verde quando focado ou preenchido */
 const FloatingInput = ({
   id,
   type,
@@ -55,15 +54,15 @@ const FloatingInput = ({
         onFocus={() => setFocused(true)}
         onBlur={() => setFocused(false)}
         required
-        className="peer w-full bg-black/40 border border-white/10 rounded-xl
-                   px-5 pt-6 pb-2 text-neutral-200
+        className="peer w-full bg-[var(--black)]/40 border border-[var(--border)] rounded-xl
+                   px-5 pt-6 pb-2 text-[var(--text)]
                    focus:outline-none focus:border-[var(--lime)]/50 focus:ring-2 focus:ring-[var(--lime)]/15
                    transition-all duration-300"
       />
       <label
         htmlFor={id}
         className={`absolute left-5 transition-all duration-200 pointer-events-none
-          ${active ? 'top-2 text-[10px] tracking-wide uppercase text-[var(--lime)]' : 'top-1/2 -translate-y-1/2 text-sm text-neutral-500'}
+          ${active ? 'top-2 text-[10px] tracking-wide uppercase text-[var(--lime)]' : 'top-1/2 -translate-y-1/2 text-sm text-[var(--muted)]'}
         `}
       >
         {label}
@@ -135,7 +134,7 @@ const ContactForm = () => {
 
       <form
         onSubmit={submit}
-        className="bg-black/70 border border-white/10 rounded-2xl p-6 sm:p-8 space-y-4 sm:space-y-6 transition-all duration-300"
+        className="bg-[var(--surface)] border border-[var(--border)] rounded-2xl p-6 sm:p-8 space-y-4 sm:space-y-6 transition-all duration-300"
       >
         <div className="grid sm:grid-cols-2 gap-4 sm:gap-6">
           <FloatingInput
@@ -154,7 +153,6 @@ const ContactForm = () => {
           />
         </div>
 
-        {/* Honeypot — mantido fora de vista mas acessível a bots */}
         <input
           type="text"
           name="_honey"
@@ -175,20 +173,20 @@ const ContactForm = () => {
             onFocus={() => setMsgFocused(true)}
             onBlur={() => setMsgFocused(false)}
             required
-            className="peer w-full bg-black/40 border border-white/10 rounded-xl
-                       px-5 pt-6 pb-6 text-neutral-200 resize-none
+            className="peer w-full bg-[var(--black)]/40 border border-[var(--border)] rounded-xl
+                       px-5 pt-6 pb-6 text-[var(--text)] resize-none
                        focus:outline-none focus:border-[var(--lime)]/50 focus:ring-2 focus:ring-[var(--lime)]/15
                        transition-all duration-300"
           />
           <label
             htmlFor={`${uid}-message`}
             className={`absolute left-5 transition-all duration-200 pointer-events-none
-              ${msgActive ? 'top-2 text-[10px] tracking-wide uppercase text-[var(--lime)]' : 'top-6 text-sm text-neutral-500'}
+              ${msgActive ? 'top-2 text-[10px] tracking-wide uppercase text-[var(--lime)]' : 'top-6 text-sm text-[var(--muted)]'}
             `}
           >
             {t('contact.messagePlaceholder')}
           </label>
-          <span className="absolute bottom-2 right-4 text-[10px] font-mono text-neutral-600">
+          <span className="absolute bottom-2 right-4 text-[10px] font-mono text-[var(--muted)]">
             {data.message.length}/{MAX_MESSAGE}
           </span>
         </div>

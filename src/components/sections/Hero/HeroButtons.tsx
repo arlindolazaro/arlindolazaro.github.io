@@ -64,7 +64,7 @@ export const HeroButtons = ({ isMounted }: { isMounted: boolean }) => {
       <MagneticWrap>
         <a
           href="#contact"
-          className="group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-full bg-[var(--lime)] px-7 py-4 text-sm font-bold uppercase tracking-wider text-black transition-colors duration-200 hover:bg-white w-full sm:w-auto"
+          className="group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-full bg-[var(--lime)] px-7 py-4 text-sm font-bold uppercase tracking-wider text-black hover:brightness-110 transition-all duration-200 w-full sm:w-auto"
         >
           <span
             aria-hidden
@@ -82,7 +82,7 @@ export const HeroButtons = ({ isMounted }: { isMounted: boolean }) => {
           type="button"
           onClick={handleDownload}
           disabled={isDownloading}
-          className="group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-full border border-white/20 px-7 py-4 text-sm font-bold uppercase tracking-wider text-white transition-colors duration-200 hover:border-[var(--lime)] hover:text-[var(--lime)] disabled:opacity-50 w-full sm:w-auto"
+          className="group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-full border border-[var(--border)] px-7 py-4 text-sm font-bold uppercase tracking-wider text-[var(--text)] transition-colors duration-200 hover:border-[var(--lime)] hover:text-[var(--lime)] disabled:opacity-50 w-full sm:w-auto"
         >
           <span
             aria-hidden

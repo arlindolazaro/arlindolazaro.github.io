@@ -8,10 +8,8 @@ const About = () => {
   const { t } = useTranslation();
 
   return (
-    <section id="about" className="py-24 bg-black overflow-hidden">
+    <section id="about" className="py-24 bg-[var(--black)] overflow-hidden">
       <div className="container mx-auto px-6">
-
-        {/* Section label */}
         <motion.p
           className="text-[var(--lime)] text-xs font-mono tracking-[0.3em] uppercase mb-4"
           initial={{ opacity: 0 }}
@@ -21,10 +19,8 @@ const About = () => {
           01 — {t('about.title')}
         </motion.p>
 
-        {/* Bento Grid */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-4 auto-rows-auto">
-
-          {/* BIG TEXT — spans 8 cols */}
+          {/* BIG TEXT */}
           <motion.div
             className="md:col-span-8 bg-[var(--surface)] border border-[var(--border)] rounded-3xl p-8 sm:p-12"
             initial={{ opacity: 0, y: 30 }}
@@ -32,7 +28,7 @@ const About = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="text-3xl sm:text-5xl font-black leading-tight mb-6">
+            <h2 className="text-3xl sm:text-5xl font-black leading-tight mb-6 text-[var(--text)]">
               {t('about.paragraph1').split(' ').slice(0, 6).join(' ')}{' '}
               <span className="accent-italic">{t('about.paragraph1').split(' ').slice(6, 10).join(' ')}</span>
               {' '}{t('about.paragraph1').split(' ').slice(10).join(' ')}
@@ -42,7 +38,7 @@ const About = () => {
             </p>
           </motion.div>
 
-          {/* STATS — 4 cols */}
+          {/* STATS */}
           <div className="md:col-span-4 flex flex-col gap-4">
             {[
               { value: 3, label: t('about.statsExperience') },
@@ -65,7 +61,7 @@ const About = () => {
             ))}
           </div>
 
-          {/* DELIVER CARD */}
+          {/* DELIVER CARD — mantém-se lime sólido em ambos os temas, funciona como acento */}
           <motion.div
             className="md:col-span-5 bg-[var(--lime)] rounded-3xl p-8"
             initial={{ opacity: 0, y: 30 }}
@@ -93,7 +89,7 @@ const About = () => {
             transition={{ delay: 0.3 }}
           >
             <p className="text-[var(--muted)] text-xs tracking-widest uppercase mb-4">Localização</p>
-            <p className="text-4xl sm:text-5xl font-black text-white leading-none">
+            <p className="text-4xl sm:text-5xl font-black text-[var(--text)] leading-none">
               Maputo,<br />
               <span className="accent-italic">Moçambique</span>
             </p>
@@ -101,7 +97,6 @@ const About = () => {
           </motion.div>
         </div>
 
-        {/* Tech Carousel */}
         <TechCarousel technologies={TECHNOLOGIES} />
       </div>
     </section>

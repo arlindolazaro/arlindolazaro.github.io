@@ -11,13 +11,21 @@ const Projects = () => {
   return (
     <section id="projects" className="py-24 bg-[var(--surface)]">
       <div className="container mx-auto px-6">
-        <motion.p className="text-[var(--lime)] text-xs font-mono tracking-[0.3em] uppercase mb-4"
-          initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>
+        <motion.p
+          className="text-[var(--lime)] text-xs font-mono tracking-[0.3em] uppercase mb-4"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+        >
           06 — {t('projects.title')}
         </motion.p>
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-16">
-          <motion.h2 className="text-4xl sm:text-6xl font-black text-white"
-            initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+          <motion.h2
+            className="text-4xl sm:text-6xl font-black text-[var(--text)]"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
             {t('projects.title').slice(0, 3)}{' '}
             <span className="accent-italic">{t('projects.title').slice(3)}</span>
           </motion.h2>

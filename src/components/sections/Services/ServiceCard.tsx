@@ -55,19 +55,17 @@ const ServiceCard = ({ service, index }: Props) => {
       transition={{ type: 'spring', stiffness: 300, damping: 25 }}
       className="group relative bg-[var(--surface)] border border-[var(--border)] rounded-2xl p-6 sm:p-8 flex flex-col hover:border-[var(--lime)]/40 transition-colors duration-300 h-full overflow-hidden [transform-style:preserve-3d]"
     >
-      {/* Spotlight que segue o rato */}
       <motion.div
         aria-hidden
         className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
         style={{ background: spotlightBg }}
       />
 
-      {/* Linha de brilho subtil no topo, ativa no hover */}
       <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[var(--lime)]/0 to-transparent group-hover:via-[var(--lime)]/60 transition-all duration-500" />
 
       {typeof index === 'number' && (
         <span
-          className="absolute top-4 right-5 text-[10px] font-mono text-white/10 group-hover:text-[var(--lime)]/30 transition-colors select-none"
+          className="absolute top-4 right-5 text-[10px] font-mono text-[var(--muted)]/40 group-hover:text-[var(--lime)]/40 transition-colors select-none"
           style={{ transform: 'translateZ(24px)' }}
         >
           0{index + 1}
@@ -82,7 +80,7 @@ const ServiceCard = ({ service, index }: Props) => {
       </div>
 
       <h3
-        className="text-white font-bold text-lg mb-3"
+        className="text-[var(--text)] font-bold text-lg mb-3"
         style={{ transform: 'translateZ(24px)' }}
       >
         {t(service.titleKey)}
@@ -95,6 +93,7 @@ const ServiceCard = ({ service, index }: Props) => {
         {t(service.descriptionKey)}
       </p>
 
+
       <a
         href="#contact"
         className="mt-6 inline-flex items-center gap-1 text-[var(--lime)] text-xs font-semibold uppercase tracking-wider hover:gap-2 transition-all w-fit"
@@ -102,7 +101,7 @@ const ServiceCard = ({ service, index }: Props) => {
       >
         {t('services.learnMore')} →
       </a>
-    </motion.div>
+    </motion.div >
   );
 };
 

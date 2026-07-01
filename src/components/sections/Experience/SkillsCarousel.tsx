@@ -26,35 +26,38 @@ const SkillsCarousel = () => {
               className="
                 absolute w-48 h-48
                 rounded-2xl
-                bg-black/70 backdrop-blur-2xl
-                border border-neutral-800
+                bg-[var(--surface)] backdrop-blur-2xl
+                border border-[var(--border)]
                 flex flex-col items-center justify-center gap-3
               "
               style={{
                 boxShadow: isActive
-                  ? '0 0 45px rgba(34,211,238,0.45)'
-                  : '0 0 25px rgba(0,0,0,0.6)',
+                  ? '0 0 45px rgba(168,224,99,0.35)'
+                  : '0 0 25px rgba(0,0,0,0.25)',
               }}
             >
-              <span className="text-3xl text-white">{skill.icon}</span>
-              <span className="text-sm text-neutral-300">{skill.name}</span>
-              <span className="text-[10px] uppercase tracking-widest text-cyan-300">
+              <span className="text-3xl text-[var(--text)]">{skill.icon}</span>
+              <span className="text-sm text-[var(--muted)]">{skill.name}</span>
+              <span className="text-[10px] uppercase tracking-widest text-[var(--lime)]">
                 {skill.level}
               </span>
             </motion.div>
           );
         })}
       </div>
+
       <div className="absolute bottom-6 flex gap-4">
         <button
+          type="button"
           onClick={() => setIndex((i) => Math.max(i - 1, 0))}
-          className="px-4 py-2 text-xs border border-neutral-700 rounded-full text-neutral-300 hover:border-cyan-400"
+          className="px-4 py-2 text-xs border border-[var(--border)] rounded-full text-[var(--muted)] hover:border-[var(--lime)] hover:text-[var(--lime)] transition-colors"
         >
           {t('skills.prev')}
         </button>
         <button
+          type="button"
           onClick={() => setIndex((i) => Math.min(i + 1, SKILLS.length - 1))}
-          className="px-4 py-2 text-xs border border-neutral-700 rounded-full text-neutral-300 hover:border-cyan-400"
+          className="px-4 py-2 text-xs border border-[var(--border)] rounded-full text-[var(--muted)] hover:border-[var(--lime)] hover:text-[var(--lime)] transition-colors"
         >
           {t('skills.next')}
         </button>
