@@ -7,6 +7,7 @@ export const NAV_ITEMS: NavItem[] = [
   { key: 'nav.certificates', path: '#certificates' },
   { key: 'nav.projects', path: '#projects' },
   { key: 'nav.experience', path: '#experience' },
+  { key: 'nav.education', path: '#education' },
   { key: 'nav.contact', path: '#contact' },
 ];
 

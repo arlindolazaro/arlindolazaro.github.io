@@ -1,13 +1,4 @@
 {
-    "nav": {
-        "home": "Início",
-        "about": "Sobre",
-        "services": "Serviços",
-        "certificates": "Certificados",
-        "projects": "Projectos",
-        "experience": "Experiência",
-        "contact": "Contacto"
-    },
     "hero": {
         "greeting": "Olá, eu sou",
         "role": "Desenvolvedor Web",
@@ -38,6 +29,16 @@
         "statusCompleted": "CONCLUÍDO",
         "statusInProgress": "EM PROGRESSO",
         "statusOngoing": "CONTÍNUO"
+    },
+    "nav": {
+        "home": "Início",
+        "about": "Sobre",
+        "services": "Serviços",
+        "certificates": "Certificados",
+        "projects": "Projectos",
+        "experience": "Experiência",
+        "education": "Educação",
+        "contact": "Contacto"
     },
     "skills": {
         "title": "Skills & Expertise",

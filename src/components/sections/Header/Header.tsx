@@ -71,16 +71,13 @@ const Header = () => {
     >
       <div className="container mx-auto px-6 py-4 flex items-center justify-between">
         <button type="button" onClick={() => handleNav('#home')} className="flex items-center gap-2 group">
-          <div className="w-8 h-8 bg-[var(--lime)] rounded-md flex items-center justify-center overflow-hidden">
+          <div className="flex h-10 w-10 items-center justify-center overflow-hidden rounded-full border border-[var(--border)] bg-[var(--black)]/80 p-1 shadow-sm">
             <img
               src="/logo.png"
               alt="Logo Arlindo Cau"
-              className="w-5 h-5 object-contain"
+              className="h-full w-full rounded-full object-cover"
             />
           </div>
-          <span className="hidden sm:block text-[var(--text)] font-semibold text-sm group-hover:text-[var(--lime)] transition-colors">
-            Arlindo Cau
-          </span>
         </button>
 
         <div className="flex items-center gap-3">
@@ -123,7 +120,7 @@ const Header = () => {
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: i * 0.06 }}
-                      className={`text-4xl sm:text-6xl font-bold uppercase tracking-tight transition-colors duration-200 ${current === item.path
+                      className={`text-3xl sm:text-5xl font-bold uppercase tracking-tight transition-colors duration-200 ${current === item.path
                         ? 'text-[var(--lime)]'
                         : 'text-[var(--muted)] hover:text-[var(--text)]'
                         }`}

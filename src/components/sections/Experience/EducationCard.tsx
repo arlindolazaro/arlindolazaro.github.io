@@ -77,10 +77,9 @@ const EducationCard = ({
           className={`relative mt-4 w-14 h-14 rounded-full flex items-center justify-center
             border-2 overflow-hidden bg-[var(--card)] z-10 shrink-0 shadow-lg
             transition-all duration-300
-            ${
-              open
-                ? 'border-[var(--lime)] shadow-[0_0_20px_rgba(168,224,99,0.25)]'
-                : 'border-[var(--border)] group-hover:border-[var(--lime)]/60'
+            ${open
+              ? 'border-[var(--lime)] shadow-[0_0_20px_rgba(168,224,99,0.25)]'
+              : 'border-[var(--border)] group-hover:border-[var(--lime)]/60'
             }`}
         >
           <img
@@ -106,12 +105,14 @@ const EducationCard = ({
       <div className={`pb-12 ${isLast ? 'pb-0' : ''}`}>
         {/* Mobile */}
         <div className="sm:hidden flex items-center gap-2 mb-3 mt-1">
-          <div className="w-10 h-10 rounded-full border-2 border-[var(--lime)] bg-[var(--card)] overflow-hidden flex-shrink-0">
-            <img
-              src={education.logo}
-              alt={education.institution}
-              className="w-full h-full object-cover"
-            />
+          <div className="w-10 h-10 rounded-full border-2 border-[var(--lime)] bg-[var(--card)] overflow-hidden flex-shrink-0 p-1">
+            <div className="w-full h-full rounded-full bg-[var(--surface)] overflow-hidden">
+              <img
+                src={education.logo}
+                alt={education.institution}
+                className="w-full h-full object-contain"
+              />
+            </div>
           </div>
 
           <span className="text-[var(--lime)] font-black text-lg">
@@ -124,10 +125,9 @@ const EducationCard = ({
           onClick={() => setOpen((o) => !o)}
           aria-expanded={open}
           className={`w-full text-left rounded-2xl border transition-all duration-300 p-5 sm:p-6
-            ${
-              open
-                ? 'bg-[var(--surface)] border-[var(--lime)]/30 shadow-[0_0_30px_rgba(168,224,99,0.07)]'
-                : 'bg-[var(--surface)] border-[var(--border)] hover:border-[var(--lime)]/20'
+            ${open
+              ? 'bg-[var(--surface)] border-[var(--lime)]/30 shadow-[0_0_30px_rgba(168,224,99,0.07)]'
+              : 'bg-[var(--surface)] border-[var(--border)] hover:border-[var(--lime)]/20'
             }`}
         >
           <div className="flex items-start justify-between gap-4">
@@ -153,10 +153,9 @@ const EducationCard = ({
 
                 <span
                   className={`px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider border
-                    ${
-                      isActive
-                        ? 'bg-[var(--lime)]/10 text-[var(--lime)] border-[var(--lime)]/30'
-                        : 'bg-[var(--card)] text-[var(--muted)] border-[var(--border)]'
+                    ${isActive
+                      ? 'bg-[var(--lime)]/10 text-[var(--lime)] border-[var(--lime)]/30'
+                      : 'bg-[var(--card)] text-[var(--muted)] border-[var(--border)]'
                     }`}
                 >
                   {statusLabel[education.status]}
@@ -168,10 +167,9 @@ const EducationCard = ({
               animate={{ rotate: open ? 180 : 0 }}
               transition={{ duration: 0.25 }}
               className={`w-8 h-8 rounded-full border flex items-center justify-center shrink-0 mt-1 transition-colors duration-300
-                ${
-                  open
-                    ? 'border-[var(--lime)] text-[var(--lime)] bg-[var(--lime)]/10'
-                    : 'border-[var(--border)] text-[var(--muted)]'
+                ${open
+                  ? 'border-[var(--lime)] text-[var(--lime)] bg-[var(--lime)]/10'
+                  : 'border-[var(--border)] text-[var(--muted)]'
                 }`}
             >
               <FaChevronDown className="text-xs" />

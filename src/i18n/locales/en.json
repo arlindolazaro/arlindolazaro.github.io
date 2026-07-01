@@ -1,13 +1,4 @@
 {
-    "nav": {
-        "home": "Home",
-        "about": "About",
-        "services": "Services",
-        "certificates": "Certificates",
-        "projects": "Projects",
-        "experience": "Experience",
-        "contact": "Contact"
-    },
     "hero": {
         "greeting": "Hi, I'm",
         "role": "Web Developer",
@@ -38,6 +29,16 @@
         "statusCompleted": "COMPLETED",
         "statusInProgress": "IN PROGRESS",
         "statusOngoing": "ONGOING"
+    },
+    "nav": {
+        "home": "Home",
+        "about": "About",
+        "services": "Services",
+        "certificates": "Certificates",
+        "projects": "Projects",
+        "experience": "Experience",
+        "education": "Education",
+        "contact": "Contact"
     },
     "skills": {
         "title": "Skills & Expertise",
