@@ -65,14 +65,18 @@ const Header = () => {
   return (
     <header
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${scrolled
-          ? 'bg-[var(--black)]/90 backdrop-blur-xl border-b border-[var(--border)]'
-          : 'bg-transparent'
+        ? 'bg-[var(--black)]/90 backdrop-blur-xl border-b border-[var(--border)]'
+        : 'bg-transparent'
         }`}
     >
       <div className="container mx-auto px-6 py-4 flex items-center justify-between">
         <button type="button" onClick={() => handleNav('#home')} className="flex items-center gap-2 group">
-          <div className="w-8 h-8 bg-[var(--lime)] rounded-md flex items-center justify-center">
-            <span className="text-black font-bold text-sm">AC</span>
+          <div className="w-8 h-8 bg-[var(--lime)] rounded-md flex items-center justify-center overflow-hidden">
+            <img
+              src="/logo.png"
+              alt="Logo Arlindo Cau"
+              className="w-5 h-5 object-contain"
+            />
           </div>
           <span className="hidden sm:block text-[var(--text)] font-semibold text-sm group-hover:text-[var(--lime)] transition-colors">
             Arlindo Cau
@@ -89,8 +93,8 @@ const Header = () => {
             onClick={() => setMenuOpen((v) => !v)}
             aria-expanded={menuOpen}
             className={`px-5 py-2 rounded-full text-sm font-semibold tracking-widest uppercase transition-all duration-200 ${menuOpen
-                ? 'bg-[var(--lime)] text-black'
-                : 'bg-[var(--border)] text-[var(--text)] hover:bg-[var(--lime)] hover:text-black'
+              ? 'bg-[var(--lime)] text-black'
+              : 'bg-[var(--border)] text-[var(--text)] hover:bg-[var(--lime)] hover:text-black'
               }`}
           >
             {menuOpen ? 'FECHAR' : 'MENU'}
@@ -120,8 +124,8 @@ const Header = () => {
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: i * 0.06 }}
                       className={`text-4xl sm:text-6xl font-bold uppercase tracking-tight transition-colors duration-200 ${current === item.path
-                          ? 'text-[var(--lime)]'
-                          : 'text-[var(--muted)] hover:text-[var(--text)]'
+                        ? 'text-[var(--lime)]'
+                        : 'text-[var(--muted)] hover:text-[var(--text)]'
                         }`}
                     >
                       {t(item.key)}
