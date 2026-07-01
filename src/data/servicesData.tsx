@@ -1,4 +1,4 @@
-import { FaCode, FaCogs, FaPaintBrush, FaLightbulb } from 'react-icons/fa';
+import { FaCode, FaCogs, FaPaintBrush, FaLightbulb, FaMobileAlt, FaServer } from 'react-icons/fa';
 import type { ReactNode } from 'react';
 
 export type ServiceType = {
@@ -30,5 +30,15 @@ export const services: ServiceType[] = [
     titleKey: 'services.items.consulting.title',
     descriptionKey: 'services.items.consulting.description',
     icon: <FaLightbulb className={iconClass} />,
+  },
+  {
+    titleKey: 'services.items.mobile.title',
+    descriptionKey: 'services.items.mobile.description',
+    icon: <FaMobileAlt className={iconClass} />,
+  },
+  {
+    titleKey: 'services.items.devops.title',
+    descriptionKey: 'services.items.devops.description',
+    icon: <FaServer className={iconClass} />,
   },
 ];

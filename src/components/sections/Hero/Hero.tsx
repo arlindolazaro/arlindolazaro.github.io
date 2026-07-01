@@ -3,28 +3,72 @@ import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { HeroButtons } from './HeroButtons';
 
+const ScrollHint = ({ className = '' }: { className?: string }) => {
+  const { t } = useTranslation();
+
+  const handleClick = () => {
+    const next = document.querySelector('#about');
+    if (!next) return;
+    const header = document.querySelector('header');
+    const offset = header ? header.clientHeight + 8 : 0;
+    const top = next.getBoundingClientRect().top + window.pageYOffset - offset;
+    window.scrollTo({ top, behavior: 'smooth' });
+  };
+
+  return (
+    <motion.button
+      type="button"
+      onClick={handleClick}
+      aria-label={t('hero.scrollMore')}
+      className={`flex flex-col items-center gap-2 group cursor-pointer ${className}`}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ delay: 1.2 }}
+    >
+      <span className="text-[var(--muted)] group-hover:text-[var(--lime)] text-xs tracking-widest uppercase transition-colors">
+        {t('hero.scrollMore')}
+      </span>
+      <motion.div
+        animate={{ y: [0, 8, 0] }}
+        transition={{ duration: 1.5, repeat: Infinity }}
+        className="w-5 h-8 border border-white/20 group-hover:border-[var(--lime)]/50 rounded-full flex items-start justify-center pt-1 transition-colors"
+      >
+        <div className="w-1 h-2 bg-[var(--lime)] rounded-full" />
+      </motion.div>
+    </motion.button>
+  );
+};
+
 export const Hero = () => {
   const { t } = useTranslation();
   const [isMounted, setIsMounted] = useState(false);
   const [imgOk, setImgOk] = useState(true);
 
-  useEffect(() => { setIsMounted(true); return () => setIsMounted(false); }, []);
+  useEffect(() => {
+    setIsMounted(true);
+    return () => setIsMounted(false);
+  }, []);
 
   return (
-    <section id="home" className="relative min-h-screen flex items-center bg-black overflow-hidden">
-
+    <section
+      id="home"
+      className="relative min-h-screen flex items-center bg-black overflow-hidden pb-16 sm:pb-0"
+    >
       {/* Grid pattern */}
-      <div className="absolute inset-0 opacity-[0.03]" style={{
-        backgroundImage: 'linear-gradient(white 1px, transparent 1px), linear-gradient(90deg, white 1px, transparent 1px)',
-        backgroundSize: '60px 60px',
-      }} />
+      <div
+        className="absolute inset-0 opacity-[0.03]"
+        style={{
+          backgroundImage:
+            'linear-gradient(white 1px, transparent 1px), linear-gradient(90deg, white 1px, transparent 1px)',
+          backgroundSize: '60px 60px',
+        }}
+      />
 
       {/* Lime glow blob */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[var(--lime)]/10 rounded-full blur-[120px] pointer-events-none" />
 
       <div className="container mx-auto px-6 pt-24 pb-16 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center min-h-[80vh]">
-
           {/* LEFT — TEXT */}
           <motion.div
             className="flex flex-col justify-center order-2 lg:order-1"
@@ -48,7 +92,10 @@ export const Hero = () => {
               transition={{ delay: 0.3, duration: 0.7 }}
             >
               <span className="text-white block">Arlindo</span>
-              <span className="block" style={{ WebkitTextStroke: '2px var(--lime)', color: 'transparent' }}>
+              <span
+                className="block"
+                style={{ WebkitTextStroke: '2px var(--lime)', color: 'transparent' }}
+              >
                 Cau
               </span>
             </motion.h1>
@@ -60,9 +107,7 @@ export const Hero = () => {
               transition={{ delay: 0.5 }}
             >
               {t('hero.role')} —{' '}
-              <span className="accent-italic text-[var(--lime)]">
-                Full-Stack
-              </span>
+              <span className="accent-italic text-[var(--lime)]">Full-Stack</span>
             </motion.p>
 
             <motion.div
@@ -72,6 +117,11 @@ export const Hero = () => {
             >
               <HeroButtons isMounted={isMounted} />
             </motion.div>
+
+            {/* Scroll hint — no mobile fica no fluxo normal, logo abaixo dos botões */}
+            <div className="sm:hidden mt-10 flex justify-center">
+              <ScrollHint />
+            </div>
           </motion.div>
 
           {/* RIGHT — PHOTO */}
@@ -118,22 +168,8 @@ export const Hero = () => {
           </motion.div>
         </div>
 
-        {/* Scroll hint */}
-        <motion.div
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.2 }}
-        >
-          <span className="text-[var(--muted)] text-xs tracking-widest uppercase">{t('hero.scrollMore')}</span>
-          <motion.div
-            animate={{ y: [0, 8, 0] }}
-            transition={{ duration: 1.5, repeat: Infinity }}
-            className="w-5 h-8 border border-white/20 rounded-full flex items-start justify-center pt-1"
-          >
-            <div className="w-1 h-2 bg-[var(--lime)] rounded-full" />
-          </motion.div>
-        </motion.div>
+        {/* Scroll hint — a partir do sm volta a ser o indicador flutuante absoluto */}
+        <ScrollHint className="hidden sm:flex absolute bottom-8 left-1/2 -translate-x-1/2" />
       </div>
     </section>
   );

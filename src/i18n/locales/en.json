@@ -105,6 +105,14 @@
             "consulting": {
                 "title": "Technical Consulting",
                 "description": "Strategic support in technical decisions, architecture and product evolution."
+            },
+            "mobile": {
+                "title": "Mobile-First Development",
+                "description": "Interfaces designed to work perfectly on any device, from smartphones to large screens."
+            },
+            "devops": {
+                "title": "DevOps & Deployment",
+                "description": "CI/CD pipelines, cloud infrastructure and automated deployments for reliable delivery."
             }
         }
     },

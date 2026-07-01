@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import { FaLinkedin, FaGithub } from 'react-icons/fa';
 
 const SocialLinks = () => (
-  <div className="flex gap-4 sm:gap-6">
+  <div className="flex gap-3">
     {[
       { href: 'https://www.linkedin.com/in/arlindo-lázaro-974932267/', icon: <FaLinkedin />, label: 'LinkedIn' },
       { href: 'https://github.com/arlindolazaro', icon: <FaGithub />, label: 'GitHub' },
@@ -15,7 +15,7 @@ const SocialLinks = () => (
         whileHover={{ y: -4, scale: 1.05 }}
         className="w-10 sm:w-11 h-10 sm:h-11 flex items-center justify-center rounded-xl
                    bg-white/5 border border-white/10
-                   text-neutral-300 hover:text-white hover:bg-indigo-500/20
+                   text-neutral-300 hover:text-black hover:bg-[var(--lime)] hover:border-[var(--lime)]
                    transition-all duration-300 text-lg sm:text-xl"
         aria-label={item.label}
       >

@@ -105,6 +105,14 @@
             "consulting": {
                 "title": "Consultoria Técnica",
                 "description": "Apoio estratégico em decisões técnicas, arquitetura e evolução de produto."
+            },
+            "mobile": {
+                "title": "Desenvolvimento Mobile-First",
+                "description": "Interfaces pensadas para funcionar perfeitamente em qualquer dispositivo, de smartphones a ecrãs grandes."
+            },
+            "devops": {
+                "title": "DevOps & Deployment",
+                "description": "Pipelines CI/CD, infraestrutura cloud e deployments automatizados para entregas confiáveis."
             }
         }
     },

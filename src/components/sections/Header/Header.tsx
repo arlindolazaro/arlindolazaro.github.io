@@ -12,6 +12,7 @@ const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const panelRef = useRef<HTMLDivElement>(null);
+  const toggleBtnRef = useRef<HTMLButtonElement>(null);
   const paths = NAV_ITEMS.map(i => i.path);
   const activeSection = useScrollSpy({ paths });
   const [manualActive, setManualActive] = useState<string | null>(null);
@@ -36,25 +37,38 @@ const Header = () => {
 
   useEffect(() => {
     if (!menuOpen) return;
+
     const esc = (e: KeyboardEvent) => e.key === 'Escape' && setMenuOpen(false);
+
     const out = (e: MouseEvent) => {
-      if (panelRef.current && !panelRef.current.contains(e.target as Node)) setMenuOpen(false);
+      const target = e.target as Node;
+      if (
+        panelRef.current &&
+        !panelRef.current.contains(target) &&
+        toggleBtnRef.current &&
+        !toggleBtnRef.current.contains(target)
+      ) {
+        setMenuOpen(false);
+      }
     };
+
     document.addEventListener('keydown', esc);
-    document.addEventListener('mousedown', out);
+    document.addEventListener('click', out);
     document.body.style.overflow = 'hidden';
     return () => {
       document.removeEventListener('keydown', esc);
-      document.removeEventListener('mousedown', out);
+      document.removeEventListener('click', out);
       document.body.style.overflow = '';
     };
   }, [menuOpen]);
 
   return (
-    <header className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${scrolled ? 'bg-black/90 backdrop-blur-xl border-b border-white/5' : 'bg-transparent'
-      }`}>
+    <header
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
+        scrolled ? 'bg-black/90 backdrop-blur-xl border-b border-white/5' : 'bg-transparent'
+      }`}
+    >
       <div className="container mx-auto px-6 py-4 flex items-center justify-between">
-
         {/* LOGO */}
         <button onClick={() => handleNav('#home')} className="flex items-center gap-2 group">
           <div className="w-8 h-8 bg-[var(--lime)] rounded-md flex items-center justify-center">
@@ -72,11 +86,15 @@ const Header = () => {
 
           {/* MENU PILL */}
           <button
-            onClick={() => setMenuOpen(v => !v)}
-            className={`px-5 py-2 rounded-full text-sm font-semibold tracking-widest uppercase transition-all duration-200 ${menuOpen
+            ref={toggleBtnRef}
+            type="button"
+            onClick={() => setMenuOpen((v) => !v)}
+            aria-expanded={menuOpen}
+            className={`px-5 py-2 rounded-full text-sm font-semibold tracking-widest uppercase transition-all duration-200 ${
+              menuOpen
                 ? 'bg-[var(--lime)] text-black'
                 : 'bg-white/10 text-white hover:bg-[var(--lime)] hover:text-black'
-              }`}
+            }`}
           >
             {menuOpen ? 'FECHAR' : 'MENU'}
           </button>
@@ -84,39 +102,39 @@ const Header = () => {
       </div>
 
       {/* FULL-SCREEN MENU */}
-      {typeof document !== 'undefined' && createPortal(
-        <AnimatePresence>
-          {menuOpen && (
-            <motion.div
-              ref={panelRef}
-              className="fixed inset-0 z-40 bg-black flex flex-col items-center justify-center"
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.3 }}
-            >
-              <nav className="flex flex-col items-center gap-6">
-                {NAV_ITEMS.map((item, i) => (
-                  <motion.button
-                    key={item.key}
-                    onClick={() => handleNav(item.path)}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: i * 0.06 }}
-                    className={`text-4xl sm:text-6xl font-bold uppercase tracking-tight transition-colors duration-200 ${current === item.path
-                        ? 'text-[var(--lime)]'
-                        : 'text-white/40 hover:text-white'
+      {typeof document !== 'undefined' &&
+        createPortal(
+          <AnimatePresence>
+            {menuOpen && (
+              <motion.div
+                ref={panelRef}
+                className="fixed inset-0 z-40 bg-black flex flex-col items-center justify-center"
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.3 }}
+              >
+                <nav className="flex flex-col items-center gap-6">
+                  {NAV_ITEMS.map((item, i) => (
+                    <motion.button
+                      key={item.key}
+                      onClick={() => handleNav(item.path)}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: i * 0.06 }}
+                      className={`text-4xl sm:text-6xl font-bold uppercase tracking-tight transition-colors duration-200 ${
+                        current === item.path ? 'text-[var(--lime)]' : 'text-white/40 hover:text-white'
                       }`}
-                  >
-                    {t(item.key)}
-                  </motion.button>
-                ))}
-              </nav>
-            </motion.div>
-          )}
-        </AnimatePresence>,
-        document.body
-      )}
+                    >
+                      {t(item.key)}
+                    </motion.button>
+                  ))}
+                </nav>
+              </motion.div>
+            )}
+          </AnimatePresence>,
+          document.body
+        )}
     </header>
   );
 };
