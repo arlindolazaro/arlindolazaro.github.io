@@ -10,17 +10,16 @@ interface ThemeContextType {
 }
 
 const STORAGE_KEY = 'arlindo_theme';
-
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 const getInitialTheme = (): Theme => {
-    if (typeof window === 'undefined') return 'light';
+    if (typeof window === 'undefined') return 'dark';
     try {
         const stored = localStorage.getItem(STORAGE_KEY);
         if (stored === 'dark' || stored === 'light') return stored;
         return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
     } catch {
-        return 'light';
+        return 'dark';
     }
 };
 

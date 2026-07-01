@@ -52,6 +52,10 @@
         "code": "Code",
         "git": "Git",
         "items": {
+            "examSimulator": {
+                "title": "DriveTest — Driving Exam Simulator",
+                "description": "Interactive platform to prepare for the driving theory exam, featuring real practice questions, instant feedback and candidate progress tracking."
+            },
             "secureMessaging": {
                 "title": "🔐 SecureMessaging",
                 "description": "Fullstack application for secure messaging with hybrid encryption (RSA + AES), JWT authentication and X.509 certificate validation."
@@ -65,8 +69,8 @@
                 "description": "E-commerce platform with cart, checkout and admin dashboard."
             },
             "taskManager": {
-                "title": "TaskManager",
-                "description": "Task management with JWT authentication, multi-user support and modern frontend."
+                "title": "TaskFlow",
+                "description": "Event and task management with JWT authentication, multi-user support and modern frontend."
             }
         }
     },

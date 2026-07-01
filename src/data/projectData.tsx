@@ -1,5 +1,5 @@
 import { FaJava, FaReact } from 'react-icons/fa';
-import { SiSpringboot, SiTailwindcss, SiMysql, SiPostgresql } from 'react-icons/si';
+import { SiSpringboot, SiTailwindcss, SiMysql, SiPostgresql, SiTypescript } from 'react-icons/si';
 import type { ReactElement } from 'react';
 
 export interface Technology {
@@ -15,9 +15,23 @@ export interface Project {
   githubUrl: string;
   demoUrl?: string;
   featured?: boolean;
+  image?: string;
 }
 
 export const projects: Project[] = [
+  {
+    titleKey: 'projects.items.examSimulator.title',
+    descriptionKey: 'projects.items.examSimulator.description',
+    stack: [
+      { name: 'React', icon: <FaReact />, color: 'text-blue-400' },
+      { name: 'TypeScript', icon: <SiTypescript />, color: 'text-blue-300' },
+      { name: 'Tailwind CSS', icon: <SiTailwindcss />, color: 'text-cyan-400' },
+    ],
+    githubUrl: 'https://github.com/arlindolazaro/simulador-exame-conducao',
+    demoUrl: 'https://simulador-exame-conducao.vercel.app/',
+    featured: true,
+    image: '/images/simulador.webp',
+  },
   {
     titleKey: 'projects.items.secureMessaging.title',
     descriptionKey: 'projects.items.secureMessaging.description',
@@ -30,7 +44,7 @@ export const projects: Project[] = [
     ],
     githubUrl: 'https://github.com/arlindolazaro/secure-messaging-api.git',
     demoUrl: 'https://github.com/arlindolazaro/secure-messaging-web.git',
-    featured: true,
+    image: '/images/secure.webp',
   },
   {
     titleKey: 'projects.items.newsSystem.title',
@@ -65,5 +79,6 @@ export const projects: Project[] = [
       { name: 'Tailwind CSS', icon: <SiTailwindcss />, color: 'text-cyan-400' },
     ],
     githubUrl: 'https://github.com/arlindolazaro/EventHub-Frontend.git',
+    image: '/images/taskmanager.webp',
   },
 ];

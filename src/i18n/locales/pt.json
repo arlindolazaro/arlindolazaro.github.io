@@ -52,6 +52,10 @@
         "code": "Código",
         "git": "Git",
         "items": {
+            "examSimulator": {
+                "title": "DriveTest — Simulador de Exame de Condução",
+                "description": "Plataforma interativa para preparação ao exame de código, com perguntas reais, correção instantânea e acompanhamento de progresso do candidato."
+            },
             "secureMessaging": {
                 "title": "🔐 SecureMessaging",
                 "description": "Aplicação fullstack para mensagens seguras com criptografia híbrida (RSA + AES), autenticação JWT e validação de certificados X.509."
@@ -65,8 +69,8 @@
                 "description": "Plataforma e-commerce com carrinho, checkout e painel administrativo."
             },
             "taskManager": {
-                "title": "TaskManager",
-                "description": "Gestão de tarefas com autenticação JWT, multiutilizador e frontend moderno."
+                "title": "TaskFlow",
+                "description": "Gestão de eventos e tarefas com autenticação JWT, multiutilizador e frontend moderno."
             }
         }
     },

@@ -11,6 +11,16 @@
   --muted: #888888;
 }
 
+/* Tema claro — sobrepõe as variáveis quando .dark NÃO está no <html> */
+html:not(.dark) {
+  --black: #fafafa;
+  --surface: #ffffff;
+  --border: #e5e5e5;
+  --text: #0a0a0a;
+  --muted: #6b6b6b;
+  color-scheme: light;
+}
+
 *,
 *::before,
 *::after {
@@ -30,6 +40,7 @@ body {
   color: var(--text);
   font-family: 'Inter', sans-serif;
   line-height: 1.6;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 section[id] {
@@ -55,7 +66,6 @@ button {
   scrollbar-width: none;
 }
 
-/* Italic serif accent — usado nos títulos */
 .accent-italic {
   font-family: Georgia, serif;
   font-style: italic;
