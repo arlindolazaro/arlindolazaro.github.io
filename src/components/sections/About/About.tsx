@@ -1,113 +1,111 @@
-// About.tsx
 import { motion } from 'framer-motion';
-import { AnimatedDivider } from '../../common/AnimatedDivider';
-import { SectionTitle } from '../../common/SectionTitle';
-import { TECHNOLOGIES } from './aboutData';
-import TechCarousel from './TechCarousel';
+import { useTranslation } from 'react-i18next';
 import CountUp from '../../common/CountUp';
+import TechCarousel from './TechCarousel';
+import { TECHNOLOGIES } from '../../../data/aboutData';
 
 const About = () => {
+  const { t } = useTranslation();
+
   return (
-    <section
-      id="about"
-      className="
-        relative
-        py-20 sm:py-28
-        bg-black dark:bg-black
-        text-white dark:text-white
-        scroll-mt-22
-        overflow-hidden
-        transition-all duration-300
-      "
-    >
-      {/* Gradiente elegante: transição suave de Hero para próxima section */}
-      <div className="absolute inset-0 bg-gradient-to-b from-violet-950/25 via-black to-neutral-950/30 pointer-events-none" />
+    <section id="about" className="py-24 bg-black overflow-hidden">
+      <div className="container mx-auto px-6">
 
-      <div className="relative container mx-auto px-4 sm:px-6 md:px-12 flex flex-col items-center">
-        <SectionTitle>
-          Sobre Mim
-        </SectionTitle>
-
-        <AnimatedDivider />
-
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+        {/* Section label */}
+        <motion.p
+          className="text-[var(--lime)] text-xs font-mono tracking-[0.3em] uppercase mb-4"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          className="text-center max-w-4xl"
         >
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12 items-center">
-            {/* Texto */}
-            <div className="text-center md:text-left">
-              <p className="text-neutral-200 text-base sm:text-lg leading-relaxed mb-3 sm:mb-4">
-              Sou um Desenvolvedor Web com mais de 3 anos de experiência no
-              desenvolvimento de soluções completas, desde APIs robustas até
-              interfaces modernas e responsivas.
-              </p>
+          01 — {t('about.title')}
+        </motion.p>
 
-              <p className="text-neutral-200 text-base sm:text-lg leading-relaxed mb-6 sm:mb-8">
-              Trabalho com PHP, TypeScript, Java, Spring Boot e React.
-              Actualmente, aprofundo conhecimentos em Cibersegurança e
-              Machine Learning.
-              </p>
+        {/* Bento Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-4 auto-rows-auto">
 
-              <div className="flex gap-2 sm:gap-4 flex-wrap justify-center md:justify-start">
-              <StatCard label="Anos de Experiência" value={3} />
-              <StatCard label="Projectos Entregues" value={15} />
-              <StatCard label="Clientes" value={8} />
-              </div>
-            </div>
+          {/* BIG TEXT — spans 8 cols */}
+          <motion.div
+            className="md:col-span-8 bg-[var(--surface)] border border-[var(--border)] rounded-3xl p-8 sm:p-12"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <h2 className="text-3xl sm:text-5xl font-black leading-tight mb-6">
+              {t('about.paragraph1').split(' ').slice(0, 6).join(' ')}{' '}
+              <span className="accent-italic">{t('about.paragraph1').split(' ').slice(6, 10).join(' ')}</span>
+              {' '}{t('about.paragraph1').split(' ').slice(10).join(' ')}
+            </h2>
+            <p className="text-[var(--muted)] text-base leading-relaxed">
+              {t('about.paragraph2')}
+            </p>
+          </motion.div>
 
-            {/* Card lateral */}
-            <div className="flex items-center justify-center">
-              <div className="
-                w-full max-w-md
-                p-5 sm:p-6
-                rounded-2xl
-                bg-white/5 dark:bg-white/5
-                backdrop-blur
-                border border-white/10 dark:border-white/10
-                shadow-2xl
-                transition-all duration-300
-              ">
-                <h4 className="text-base sm:text-lg font-semibold text-white mb-3">
-                  O que eu entrego
-                </h4>
-                <ul className="text-neutral-300 space-y-2 text-sm sm:text-base">
-                  <li>• Aplicações web escaláveis e seguras</li>
-                  <li>• APIs bem documentadas e testadas</li>
-                  <li>• Interfaces focadas em usabilidade e performance</li>
-                </ul>
-              </div>
-            </div>
+          {/* STATS — 4 cols */}
+          <div className="md:col-span-4 flex flex-col gap-4">
+            {[
+              { value: 3, label: t('about.statsExperience') },
+              { value: 15, label: t('about.statsProjects') },
+              { value: 8, label: t('about.statsClients') },
+            ].map((s, i) => (
+              <motion.div
+                key={i}
+                className="flex-1 bg-[var(--surface)] border border-[var(--border)] rounded-3xl p-6 flex flex-col justify-center"
+                initial={{ opacity: 0, x: 30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+              >
+                <div className="text-4xl font-black text-[var(--lime)]">
+                  <CountUp end={s.value} suffix="+" />
+                </div>
+                <div className="text-[var(--muted)] text-sm mt-1">{s.label}</div>
+              </motion.div>
+            ))}
           </div>
-        </motion.div>
 
-        {/* Tecnologias */}
+          {/* DELIVER CARD */}
+          <motion.div
+            className="md:col-span-5 bg-[var(--lime)] rounded-3xl p-8"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+          >
+            <h3 className="text-black font-black text-xl mb-4">{t('about.deliverTitle')}</h3>
+            <ul className="space-y-3">
+              {[t('about.deliver1'), t('about.deliver2'), t('about.deliver3')].map((item, i) => (
+                <li key={i} className="flex items-start gap-2 text-black/80 text-sm">
+                  <span className="mt-1 w-1.5 h-1.5 rounded-full bg-black flex-shrink-0" />
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+
+          {/* LOCATION CARD */}
+          <motion.div
+            className="md:col-span-7 bg-[var(--surface)] border border-[var(--border)] rounded-3xl p-8 flex flex-col justify-between"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.3 }}
+          >
+            <p className="text-[var(--muted)] text-xs tracking-widest uppercase mb-4">Localização</p>
+            <p className="text-4xl sm:text-5xl font-black text-white leading-none">
+              Maputo,<br />
+              <span className="accent-italic">Moçambique</span>
+            </p>
+            <p className="text-[var(--muted)] text-sm mt-4">Disponível para trabalho remoto global</p>
+          </motion.div>
+        </div>
+
+        {/* Tech Carousel */}
         <TechCarousel technologies={TECHNOLOGIES} />
       </div>
     </section>
   );
 };
-
-const StatCard = ({ label, value }: { label: string; value: number }) => (
-  <div
-    className="
-      px-3 sm:px-5 py-3 sm:py-4
-      rounded-xl
-      bg-white/5 dark:bg-white/5
-      border border-white/10 dark:border-white/10
-      text-center
-      backdrop-blur
-      transition-all duration-300 text-xs sm:text-sm
-    "
-  >
-    <div className="text-xl sm:text-2xl font-bold text-indigo-400">
-      <CountUp end={value} suffix="+" />
-    </div>
-    <div className="text-xs sm:text-sm text-neutral-400">{label}</div>
-  </div>
-);
 
 export default About;

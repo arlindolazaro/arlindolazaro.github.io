@@ -1,76 +1,39 @@
-import { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { education } from './educationData';
-import { SectionTitle } from '../../common/SectionTitle';
+import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
+import { education } from '../../../data/educationData';
 import EducationCard from './EducationCard';
-import { AnimatedDivider } from '../../common/AnimatedDivider';
 
 const Education = () => {
-  const ref = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ['start start', 'end start'],
-  });
-
-  const y = useTransform(scrollYProgress, [0, 1], ['0%', '10%']);
+  const { t } = useTranslation();
 
   return (
-    <section
-      id="education"
-      ref={ref}
-      className="relative py-28 sm:py-40 overflow-hidden bg-gradient-to-b from-black via-neutral-950 to-black"
-    >
-      {/* Background */}
-      <motion.div style={{ y }} className="absolute inset-0">
-        <div className="absolute inset-0 bg-gradient-to-b from-black via-neutral-950 to-violet-950/10" />
-        <div className="absolute -top-60 -left-60 w-[700px] h-[700px] bg-indigo-500/8 rounded-full blur-[160px]" />
-        <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-indigo-600/8 rounded-full blur-[160px]" />
-        <div
-          className="absolute inset-0 opacity-[0.04]"
-          style={{
-            backgroundImage:
-              'linear-gradient(to right, white 1px, transparent 1px), linear-gradient(to bottom, white 1px, transparent 1px)',
-            backgroundSize: '80px 80px',
-          }}
-        />
-      </motion.div>
-
-      <div className="relative z-10 container mx-auto px-4">
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 60 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9 }}
-          viewport={{ once: true }}
-          className="max-w-4xl mx-auto text-center mb-20 sm:mb-32"
+    <section id="education" className="py-24 bg-[var(--surface)]">
+      <div className="container mx-auto px-6">
+        <motion.p
+          className="text-[var(--lime)] text-xs font-mono tracking-[0.3em] uppercase mb-4"
+          initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
         >
-          <SectionTitle>
-            Educação & Formação
-          </SectionTitle>
-          <AnimatedDivider />
-          <p className="mt-8 sm:mt-10 text-base sm:text-xl text-neutral-300 leading-relaxed">
-            Base técnica sólida para construir soluções modernas,
-            escaláveis e orientadas ao futuro.
-          </p>
-        </motion.div>
+          04 — {t('education.title')}
+        </motion.p>
+        <motion.h2
+          className="text-4xl sm:text-6xl font-black text-white mb-16"
+          initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+        >
+          {t('education.title').split(' ')[0]}{' '}
+          <span className="accent-italic">{t('education.title').split(' ').slice(1).join(' ')}</span>
+        </motion.h2>
 
-        {/* Cards */}
-        <div className="max-w-5xl mx-auto space-y-16 sm:space-y-20">
-          {education.map((edu, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, scale: 0.96 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{
-                duration: 0.7,
-                delay: index * 0.12,
-                ease: 'easeOut',
-              }}
-              viewport={{ once: true, amount: 0.3 }}
-            >
-              <EducationCard education={edu} />
-            </motion.div>
-          ))}
+        <div className="relative">
+          <div className="flex flex-col gap-12">
+            {education.map((edu, i) => (
+              <EducationCard
+                key={i}
+                education={edu}
+                index={i}
+                isLast={i === education.length - 1}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </section>

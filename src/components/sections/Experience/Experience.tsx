@@ -1,67 +1,38 @@
-import { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { experiences } from './experienceData';
+import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
+import { experiences } from '../../../data/experienceData';
 import { ExperienceCard } from './ExperienceCard';
-import { staggerContainer } from '../../../lib/animations';
-import { AnimatedDivider } from '../../common/AnimatedDivider';
-import { SectionTitle } from '../../common/SectionTitle';
 
 export const Experience = () => {
-  const ref = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ['start start', 'end start'],
-  });
-
-  const yBg = useTransform(scrollYProgress, [0, 1], ['0%', '20%']);
+  const { t } = useTranslation();
 
   return (
-    <section
-      id="experience"
-      className="relative py-32 bg-black dark:bg-black overflow-hidden"
-      ref={ref}
-    >
-      {/* Background elegante: transição de violet para neutral */}
-      <motion.div
-        style={{ y: yBg }}
-        className="absolute inset-0 bg-gradient-to-b 
-        from-violet-950/20 via-black to-neutral-950
-        dark:from-violet-950/20 dark:via-black dark:to-neutral-950"
-      />
-
-      <div className="container mx-auto px-4 relative z-10">
-        {/* Cabeçalho */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
-          viewport={{ once: true }}
-          className="max-w-4xl mx-auto text-center mb-24"
+    <section id="experience" className="py-24 bg-black">
+      <div className="container mx-auto px-6">
+        <motion.p
+          className="text-[var(--lime)] text-xs font-mono tracking-[0.3em] uppercase mb-4"
+          initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
         >
-          <SectionTitle>
-            Experiência Profissional
-          </SectionTitle>
-
-          <AnimatedDivider />
-
-          <p className="text-lg text-neutral-300 mt-6 leading-relaxed">
-            Experiência prática em desenvolvimento de sistemas,
-            alinhada às necessidades reais do negócio.
-          </p>
-        </motion.div>
-
-        {/* Cards */}
-        <motion.div
-          className="max-w-5xl mx-auto grid gap-12"
-          variants={staggerContainer}
-          initial="initial"
-          whileInView="whileInView"
-          viewport={{ once: true, amount: 0.2 }}
+          03 — {t('experience.title')}
+        </motion.p>
+        <motion.h2
+          className="text-4xl sm:text-6xl font-black text-white mb-4"
+          initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
         >
-          {experiences.map((experience, index) => (
-            <ExperienceCard key={index} experience={experience} />
-          ))}
-        </motion.div>
+          {t('experience.title').split(' ')[0]}{' '}
+          <span className="accent-italic">{t('experience.title').split(' ').slice(1).join(' ')}</span>
+        </motion.h2>
+        <p className="text-[var(--muted)] mb-16 max-w-xl">{t('experience.subtitle')}</p>
+
+        {/* Timeline */}
+        <div className="relative">
+          <div className="absolute left-4 sm:left-8 top-0 bottom-0 w-px bg-[var(--border)]" />
+          <div className="space-y-12">
+            {experiences.map((exp, i) => (
+              <ExperienceCard key={i} experience={exp} index={i} />
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   );

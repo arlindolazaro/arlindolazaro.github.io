@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { SKILLS } from './skillsData';
+import { useTranslation } from 'react-i18next';
+import { SKILLS } from '../../../data/skillsData';
 
 const SkillsCarousel = () => {
+  const { t } = useTranslation();
   const [index, setIndex] = useState(0);
 
   return (
@@ -11,7 +13,6 @@ const SkillsCarousel = () => {
         {SKILLS.map((skill, i) => {
           const offset = i - index;
           const isActive = offset === 0;
-
           return (
             <motion.div
               key={i}
@@ -44,20 +45,18 @@ const SkillsCarousel = () => {
           );
         })}
       </div>
-
-      {/* Controls */}
       <div className="absolute bottom-6 flex gap-4">
         <button
           onClick={() => setIndex((i) => Math.max(i - 1, 0))}
           className="px-4 py-2 text-xs border border-neutral-700 rounded-full text-neutral-300 hover:border-cyan-400"
         >
-          Prev
+          {t('skills.prev')}
         </button>
         <button
           onClick={() => setIndex((i) => Math.min(i + 1, SKILLS.length - 1))}
           className="px-4 py-2 text-xs border border-neutral-700 rounded-full text-neutral-300 hover:border-cyan-400"
         >
-          Next
+          {t('skills.next')}
         </button>
       </div>
     </div>

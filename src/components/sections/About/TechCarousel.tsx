@@ -1,57 +1,20 @@
-// TechCarousel.tsx
-import { motion } from 'framer-motion';
-import type { Technology } from './aboutData';
+import type { Technology } from '../../../data/aboutData';
 
-interface TechCarouselProps {
-  technologies: Technology[];
-}
-
-const TechCarousel = ({ technologies }: TechCarouselProps) => {
-  return (
-    <div className="mt-24 w-full overflow-hidden">
-      <motion.div
-        className="flex gap-6"
-        animate={{ x: ['0%', '-50%'] }}
-        transition={{
-          repeat: Infinity,
-          repeatType: 'loop',
-          duration: 30,
-          ease: 'linear',
-        }}
-      >
-        {[...technologies, ...technologies].map((tech, index) => (
-          <div
-            key={index}
-            className="
-              min-w-[140px]
-              flex flex-col items-center gap-3
-              p-4
-              rounded-2xl
-              bg-white/5
-              border border-white/10
-              backdrop-blur
-              shadow-lg
-            "
-          >
-            <div className="
-              w-14 h-14
-              flex items-center justify-center
-              rounded-full
-              text-3xl
-              bg-gradient-to-br from-indigo-600 to-indigo-700
-              text-white
-            ">
-              {tech.icon}
-            </div>
-
-            <span className="text-sm font-medium text-neutral-300">
-              {tech.name}
-            </span>
-          </div>
-        ))}
-      </motion.div>
+const TechCarousel = ({ technologies }: { technologies: Technology[] }) => (
+  <div className="mt-16 overflow-hidden">
+    <p className="text-[var(--muted)] text-xs tracking-widest uppercase mb-6">Tech Stack</p>
+    <div className="flex gap-4 animate-marquee" style={{ width: 'max-content' }}>
+      {[...technologies, ...technologies].map((tech, i) => (
+        <div
+          key={i}
+          className="flex items-center gap-2 px-4 py-2 rounded-full border border-[var(--border)] bg-[var(--surface)] text-sm text-white/70 whitespace-nowrap"
+        >
+          <span className="text-[var(--lime)]">{tech.icon}</span>
+          {tech.name}
+        </div>
+      ))}
     </div>
-  );
-};
+  </div>
+);
 
 export default TechCarousel;

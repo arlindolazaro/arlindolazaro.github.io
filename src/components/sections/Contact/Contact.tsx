@@ -1,33 +1,30 @@
-import { AnimatedDivider } from '../../common/AnimatedDivider';
-import { SectionTitle } from '../../common/SectionTitle';
+import { useTranslation } from 'react-i18next';
+import { motion } from 'framer-motion';
 import ContactForm from './ContactForm';
-import ContactInfo from './ContactInfo';
+import ContactInfo from '../../../data/ContactData';
 
-const Contact = () => (
-  <section
-    id="contact"
-    className="relative py-24 bg-black overflow-hidden"
-  >
-    {/* Gradiente elegante para seção final antes do footer */}
-    <div className="absolute inset-0 bg-gradient-to-b from-violet-950/20 via-black to-neutral-950 pointer-events-none" />
-
-    <div className="relative container mx-auto px-4">
-      <div className="max-w-3xl mx-auto text-center mb-20">
-        <SectionTitle>
-          Vamos Conversar
-        </SectionTitle>
-        <AnimatedDivider />
-        <p className="mt-6 text-neutral-300 text-lg">
-          Pronto para transformar ideias em soluções digitais sólidas.
-        </p>
+const Contact = () => {
+  const { t } = useTranslation();
+  return (
+    <section id="contact" className="py-24 bg-black">
+      <div className="container mx-auto px-6">
+        <motion.p className="text-[var(--lime)] text-xs font-mono tracking-[0.3em] uppercase mb-4"
+          initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>
+          08 — {t('contact.title')}
+        </motion.p>
+        <motion.h2 className="text-4xl sm:text-6xl font-black text-white mb-4"
+          initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+          {t('contact.title').split(' ')[0]}{' '}
+          <span className="accent-italic">{t('contact.title').split(' ').slice(1).join(' ')}</span>
+        </motion.h2>
+        <p className="text-[var(--muted)] mb-16 max-w-xl">{t('contact.subtitle')}</p>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <ContactInfo />
+          <ContactForm />
+        </div>
       </div>
-
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
-        <ContactInfo />
-        <ContactForm />
-      </div>
-    </div>
-  </section>
-);
+    </section>
+  );
+};
 
 export default Contact;

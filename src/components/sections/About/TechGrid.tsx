@@ -1,6 +1,6 @@
 // TechGrid.tsx
 import { motion } from 'framer-motion';
-import type { Technology } from './aboutData';
+import type { Technology } from '../../../data/aboutData';
 
 interface TechGridProps {
   technologies: Technology[];

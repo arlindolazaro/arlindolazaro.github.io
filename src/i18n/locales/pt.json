@@ -1,0 +1,129 @@
+{
+    "nav": {
+        "home": "Início",
+        "about": "Sobre",
+        "services": "Serviços",
+        "certificates": "Certificados",
+        "projects": "Projectos",
+        "experience": "Experiência",
+        "contact": "Contacto"
+    },
+    "hero": {
+        "greeting": "Olá, eu sou",
+        "role": "Desenvolvedor Web",
+        "scrollMore": "Saiba mais",
+        "contactMe": "Fale comigo",
+        "downloadCV": "Descarregar CV"
+    },
+    "about": {
+        "title": "Sobre Mim",
+        "paragraph1": "Sou um Desenvolvedor Web com mais de 3 anos de experiência no desenvolvimento de soluções completas, desde APIs robustas até interfaces modernas e responsivas.",
+        "paragraph2": "Trabalho com PHP, TypeScript, Java, Spring Boot e React. Actualmente, aprofundo conhecimentos em Cibersegurança e Machine Learning.",
+        "statsExperience": "Anos de Experiência",
+        "statsProjects": "Projectos Entregues",
+        "statsClients": "Clientes",
+        "deliverTitle": "O que eu entrego",
+        "deliver1": "Aplicações web escaláveis e seguras",
+        "deliver2": "APIs bem documentadas e testadas",
+        "deliver3": "Interfaces focadas em usabilidade e performance"
+    },
+    "experience": {
+        "title": "Experiência Profissional",
+        "subtitle": "Experiência prática em desenvolvimento de sistemas, alinhada às necessidades reais do negócio.",
+        "tixaCategory": "Transporte & Logística"
+    },
+    "education": {
+        "title": "Educação & Formação",
+        "subtitle": "Base técnica sólida para construir soluções modernas, escaláveis e orientadas ao futuro.",
+        "statusCompleted": "CONCLUÍDO",
+        "statusInProgress": "EM PROGRESSO",
+        "statusOngoing": "CONTÍNUO"
+    },
+    "skills": {
+        "title": "Skills & Expertise",
+        "subtitle": "Tecnologias aplicadas em sistemas modernos, seguros e escaláveis.",
+        "prev": "Anterior",
+        "next": "Seguinte"
+    },
+    "projects": {
+        "title": "Projectos",
+        "subtitle": "Projectos focados em arquitetura sólida, segurança e experiência moderna.",
+        "featured": "Destaque",
+        "code": "Código",
+        "git": "Git",
+        "items": {
+            "secureMessaging": {
+                "title": "🔐 SecureMessaging",
+                "description": "Aplicação fullstack para mensagens seguras com criptografia híbrida (RSA + AES), autenticação JWT e validação de certificados X.509."
+            },
+            "newsSystem": {
+                "title": "Sistema de Notícias",
+                "description": "API RESTful com autenticação JWT, Swagger e testes automatizados usando Spring Boot."
+            },
+            "ecommerce": {
+                "title": "E-commerce Premium",
+                "description": "Plataforma e-commerce com carrinho, checkout e painel administrativo."
+            },
+            "taskManager": {
+                "title": "TaskManager",
+                "description": "Gestão de tarefas com autenticação JWT, multiutilizador e frontend moderno."
+            }
+        }
+    },
+    "certificates": {
+        "title": "Certificações",
+        "subtitle": "Formação contínua, especializações técnicas e validações profissionais.",
+        "counter": "de",
+        "view": "Ver",
+        "items": {
+            "cert1": "Competências Pessoais Aplicadas",
+            "cert2": "Ready to Work – Absa",
+            "cert3": "Java Completo – Programação Orientada a Objetos",
+            "cert4": "Sistemas Informáticos & Redes",
+            "cert5": "Fundamentos de Data Science & IA",
+            "cert6": "HCIA-Datacom V1.0 – Huawei",
+            "cert7": "Desenvolvimento Web Completo"
+        }
+    },
+    "services": {
+        "title": "Serviços Profissionais",
+        "subtitle": "Soluções técnicas modernas, escaláveis e orientadas a resultados.",
+        "learnMore": "Saiba mais",
+        "items": {
+            "fullstack": {
+                "title": "Desenvolvimento Full-Stack",
+                "description": "Aplicações web completas com foco em performance, escalabilidade e boas práticas modernas."
+            },
+            "api": {
+                "title": "APIs & Back-end",
+                "description": "APIs REST robustas, seguras e escaláveis com arquiteturas bem definidas."
+            },
+            "uiux": {
+                "title": "UI / UX Engineering",
+                "description": "Interfaces modernas, acessíveis e altamente responsivas com foco na experiência."
+            },
+            "consulting": {
+                "title": "Consultoria Técnica",
+                "description": "Apoio estratégico em decisões técnicas, arquitetura e evolução de produto."
+            }
+        }
+    },
+    "contact": {
+        "title": "Vamos Conversar",
+        "subtitle": "Pronto para transformar ideias em soluções digitais sólidas.",
+        "location": "Localização",
+        "locationValue": "Matola, Maputo · Moçambique",
+        "email": "Email",
+        "phone": "Telefone",
+        "namePlaceholder": "Seu nome",
+        "emailPlaceholder": "Seu email",
+        "messagePlaceholder": "Sua mensagem",
+        "send": "ENVIAR MENSAGEM",
+        "sending": "ENVIANDO…",
+        "successMsg": "Mensagem enviada com sucesso",
+        "errorMsg": "Ocorreu um erro ao enviar. Tente novamente mais tarde."
+    },
+    "footer": {
+        "rights": "Todos os direitos reservados"
+    }
+}

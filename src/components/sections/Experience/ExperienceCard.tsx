@@ -1,86 +1,57 @@
 import { motion } from 'framer-motion';
-import { fadeInUp } from '../../../lib/animations';
-import type { ExperienceItem } from './experienceData';
+import { useTranslation } from 'react-i18next';
+import type { ExperienceItem } from '../../../data/experienceData';
 
-interface Props {
-  experience: ExperienceItem;
-}
+interface Props { experience: ExperienceItem; index: number; }
 
-export const ExperienceCard = ({ experience }: Props) => (
-  <motion.div
-    variants={fadeInUp}
-    className="relative"
-  >
-    <div className="relative bg-neutral-900/60 dark:bg-neutral-900/80 backdrop-blur-md border border-neutral-700 dark:border-neutral-700 rounded-2xl p-8 transition-all duration-300 hover:bg-neutral-900/80 dark:hover:bg-neutral-800/80 hover:border-neutral-600 dark:hover:border-neutral-600 shadow-lg dark:shadow-2xl">
-      <div className="flex flex-col lg:flex-row gap-8">
+export const ExperienceCard = ({ experience, index }: Props) => {
+  const { i18n } = useTranslation();
+  const lang = i18n.language === 'en' ? 'en' : 'pt';
 
-        {/* Logo TT */}
-        <div className="flex-shrink-0 flex flex-col items-center">
-          <div className="w-24 h-24 rounded-full bg-gradient-to-br from-indigo-600 to-indigo-700 border border-neutral-300 dark:border-neutral-600 flex items-center justify-center shadow-lg">
-            <span className="text-3xl font-bold tracking-widest text-white">
-              TT
-            </span>
-          </div>
-
-          <span className="mt-4 text-xs uppercase tracking-wider text-neutral-400 dark:text-neutral-500">
-            Transporte & Logística
-          </span>
-        </div>
-
-        {/* Conteúdo */}
-        <div className="flex-1">
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
-            <div>
-              <h3 className="text-2xl font-semibold text-white dark:text-white">
-                {experience.position}
-              </h3>
-              <p className="text-lg text-neutral-300 dark:text-neutral-400">
-                {experience.company}
-              </p>
-            </div>
-
-            <div className="text-right">
-              <span className="block text-sm font-medium text-neutral-200 dark:text-neutral-300">
-                {experience.period}
-              </span>
-              <span className="block text-sm text-neutral-400 dark:text-neutral-500 mt-1">
-                {experience.location}
-              </span>
-            </div>
-          </div>
-
-          {/* Tech stack */}
-          <div className="flex flex-wrap gap-2 mb-6">
-            {experience.techStack.map((tech, i) => (
-              <span
-                key={i}
-                className="px-3 py-1 text-xs font-medium rounded-full 
-                bg-indigo-500/20 text-indigo-300 
-                dark:bg-indigo-500/20 dark:text-indigo-300 
-                border border-indigo-500/40 dark:border-indigo-500/40"
-              >
-                {tech}
-              </span>
-            ))}
-          </div>
-
-          {/* Responsabilidades */}
-          <ul className="space-y-3">
-            {experience.responsibilities.map((item, i) => (
-              <motion.li
-                key={i}
-                whileHover={{ x: 6 }}
-                className="flex items-start gap-3 text-neutral-300 dark:text-neutral-400"
-              >
-                <span className="mt-2 w-1.5 h-1.5 rounded-full bg-indigo-500 dark:bg-indigo-400" />
-                <span className="leading-relaxed">{item}</span>
-              </motion.li>
-            ))}
-          </ul>
-        </div>
+  return (
+    <motion.div
+      className="relative pl-16 sm:pl-24"
+      initial={{ opacity: 0, x: -20 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      viewport={{ once: true }}
+      transition={{ delay: index * 0.1 }}
+    >
+      {/* Timeline dot */}
+      <div className="absolute left-0 sm:left-4 top-1 w-8 h-8 rounded-full bg-[var(--lime)] flex items-center justify-center">
+        <div className="w-3 h-3 rounded-full bg-black" />
       </div>
-    </div>
-  </motion.div>
-);
+
+      <div className="bg-[var(--surface)] border border-[var(--border)] rounded-2xl p-6 sm:p-8 hover:border-[var(--lime)]/30 transition-colors duration-300">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
+          <div>
+            <h3 className="text-white font-bold text-lg">{experience.position[lang]}</h3>
+            <p className="text-[var(--lime)] text-sm">{experience.company}</p>
+          </div>
+          <div className="text-right">
+            <span className="text-[var(--muted)] text-sm block">{experience.period}</span>
+            <span className="text-[var(--muted)] text-xs">{experience.location[lang]}</span>
+          </div>
+        </div>
+
+        <div className="flex flex-wrap gap-2 mb-4">
+          {experience.techStack.map((tech, i) => (
+            <span key={i} className="px-2 py-1 text-xs rounded-md bg-[var(--lime)]/10 text-[var(--lime)] border border-[var(--lime)]/20">
+              {tech}
+            </span>
+          ))}
+        </div>
+
+        <ul className="space-y-2">
+          {experience.responsibilities[lang].map((item, i) => (
+            <li key={i} className="flex items-start gap-2 text-[var(--muted)] text-sm">
+              <span className="mt-2 w-1 h-1 rounded-full bg-[var(--lime)] flex-shrink-0" />
+              {item}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </motion.div>
+  );
+};
 
 export default ExperienceCard;

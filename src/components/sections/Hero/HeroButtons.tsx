@@ -1,75 +1,56 @@
-// HeroButtons.tsx
-import { motion } from 'framer-motion';
-import { FaDownload } from 'react-icons/fa';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useLanguageContext } from '../../../context/LanguageContext';
+import { FaDownload, FaArrowRight } from 'react-icons/fa';
 
 export const HeroButtons = ({ isMounted }: { isMounted: boolean }) => {
+  const { t } = useTranslation();
+  const { language } = useLanguageContext();
   const [isDownloading, setIsDownloading] = useState(false);
 
-  const handleDownloadCV = () => {
+  const handleDownload = () => {
     if (!isMounted || isDownloading) return;
+
     setIsDownloading(true);
 
-    try {
-      const link = document.createElement('a');
-      link.href = '/documents/Arlindo_Lazaro_CV.pdf';
-      link.download = 'Arlindo_Lazaro_CV.pdf';
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    } finally {
-      setTimeout(() => setIsDownloading(false), 1000);
-    }
+    const file =
+      language === 'en'
+        ? 'Arlindo_Lazaro_CV_EN.pdf'
+        : 'Arlindo_Lazaro_CV.pdf';
+
+    const a = document.createElement('a');
+    a.href = `/documents/${file}`;
+    a.download = file;
+
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+
+    setTimeout(() => setIsDownloading(false), 1000);
   };
 
   return (
-    <div className="flex flex-col sm:flex-row gap-6 w-full">
-      {/* CONTACTO */}
-      <motion.a
+    <div className="flex flex-wrap gap-4">
+      <a
         href="#contact"
-        className="
-          relative px-8 py-4 rounded-2xl
-          bg-gradient-to-r from-indigo-600 to-indigo-700
-          text-white font-semibold text-sm tracking-wider
-          shadow-lg
-        "
-        whileHover={{ scale: 1.03 }}
-        whileTap={{ scale: 0.97 }}
+        className="group inline-flex items-center gap-2 rounded-full bg-[var(--lime)] px-7 py-4 text-sm font-bold uppercase tracking-wider text-black transition-colors duration-200 hover:bg-white"
       >
-        CONTACTAR-ME
-      </motion.a>
+        {t('hero.contactMe')}
+        <FaArrowRight className="transition-transform group-hover:translate-x-1" />
+      </a>
 
-      {/* DOWNLOAD CV */}
-      <motion.button
-        onClick={handleDownloadCV}
+      <button
+        onClick={handleDownload}
         disabled={isDownloading}
-        className="
-          relative px-8 py-4 rounded-2xl
-          bg-white/5 border border-white/10
-          backdrop-blur
-          font-semibold text-sm
-          text-indigo-400
-          flex items-center justify-center gap-3
-        "
-        whileHover={{ scale: 1.03 }}
-        whileTap={{ scale: 0.97 }}
+        className="inline-flex items-center gap-2 rounded-full border border-white/20 px-7 py-4 text-sm font-bold uppercase tracking-wider text-white transition-colors duration-200 hover:border-[var(--lime)] hover:text-[var(--lime)] disabled:opacity-50"
       >
-        {isDownloading ? (
-          <>
-            <motion.div
-              className="w-4 h-4 border-2 border-indigo-400 border-t-transparent rounded-full"
-              animate={{ rotate: 360 }}
-              transition={{ repeat: Infinity, duration: 1, ease: 'linear' }}
-            />
-            BAIXANDO...
-          </>
-        ) : (
-          <>
-            <FaDownload />
-            BAIXAR CV
-          </>
-        )}
-      </motion.button>
+        <FaDownload />
+        {isDownloading
+          ? t('hero.downloading')
+          : t('hero.downloadCV')}
+      </button>
     </div>
   );
 };
+
+export default HeroButtons;

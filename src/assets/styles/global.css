@@ -1,13 +1,16 @@
-/* ===============================
-   Tailwind Base
-=============================== */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* -------------------------------
-   Reset e base
--------------------------------- */
+:root {
+  --lime: #a8e063;
+  --black: #0a0a0a;
+  --surface: #111111;
+  --border: #1f1f1f;
+  --text: #ffffff;
+  --muted: #888888;
+}
+
 *,
 *::before,
 *::after {
@@ -19,297 +22,84 @@
 html {
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color-scheme: light dark;
+  color-scheme: dark;
 }
 
 body {
-  @apply bg-neutral-50 text-neutral-900 dark:bg-neutral-900 dark:text-neutral-100 font-sans;
+  background: var(--black);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
   line-height: 1.6;
-  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Cabeçalhos */
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  @apply font-bold leading-tight;
+section[id] {
+  scroll-margin-top: 5rem;
 }
 
-/* Links e botões */
 a,
 button {
-  @apply transition-all duration-300;
   -webkit-tap-highlight-color: transparent;
 }
 
-/* Foco visível para acessibilidade */
 :focus-visible {
-  outline: 3px solid rgba(99, 102, 241, 0.8);
-  border-radius: 6px;
+  outline: 2px solid var(--lime);
+  border-radius: 4px;
 }
 
-/* ===============================
-   Efeitos 3D e Animações
-=============================== */
-.perspective-1000 {
-  perspective: 1000px;
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Italic serif accent — usado nos títulos */
+.accent-italic {
+  font-family: Georgia, serif;
+  font-style: italic;
+  color: var(--lime);
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 30s linear infinite;
 }
 
 @keyframes blob {
-  0% {
-    transform: translate(0, 0) scale(1);
-  }
-  33% {
-    transform: translate(30px, -50px) scale(1.1);
-  }
-  66% {
-    transform: translate(-20px, 20px) scale(0.9);
-  }
+
+  0%,
   100% {
     transform: translate(0, 0) scale(1);
+  }
+
+  33% {
+    transform: translate(20px, -30px) scale(1.05);
+  }
+
+  66% {
+    transform: translate(-15px, 15px) scale(0.95);
   }
 }
 
 .animate-blob {
-  animation: blob 7s infinite;
+  animation: blob 8s infinite ease-in-out;
 }
 
-.animation-delay-2000 {
+.delay-2000 {
   animation-delay: 2s;
 }
 
-.animation-delay-4000 {
+.delay-4000 {
   animation-delay: 4s;
-}
-
-@keyframes float {
-  0% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-20px);
-  }
-  100% {
-    transform: translateY(0px);
-  }
-}
-
-.animate-float {
-  animation: float 6s ease-in-out infinite;
-}
-
-/* Glassmorphism melhorado */
-.glass-morph {
-  @apply backdrop-blur-lg bg-white/10 dark:bg-black/10 border border-white/20 dark:border-white/10 transition-all duration-300;
-}
-
-/* Sombras 3D com transição suave no dark mode */
-.shadow-3d {
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1), 0 6px 6px rgba(0, 0, 0, 0.1),
-    0 0 100px rgba(78, 13, 218, 0.1);
-  transition: box-shadow 0.3s ease;
-}
-
-.dark .shadow-3d {
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2), 0 6px 6px rgba(0, 0, 0, 0.2),
-    0 0 100px rgba(99, 102, 241, 0.15);
-}
-
-/* Gradientes animados */
-.gradient-animate {
-  background-size: 200% 200%;
-  animation: gradientMove 8s ease infinite;
-}
-
-@keyframes gradientMove {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
-/* Gradiente horizontal (para botões e elementos decorativos) */
-@keyframes gradient-x {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
-.animate-gradient-x {
-  background-size: 200% 100%;
-  animation: gradient-x 3s linear infinite;
-}
-
-/* ===============================
-   Header Fix e Menu
-=============================== */
-header {
-  @apply fixed top-0 left-0 w-full z-50 transition-all duration-300;
-}
-
-/* Menu overlay */
-.menu-overlay {
-  @apply fixed inset-0 bg-black/80 backdrop-blur-sm z-40;
-}
-
-/* Painel do menu */
-.menu-panel {
-  @apply fixed top-0 right-0 h-full w-80 max-w-full bg-white dark:bg-neutral-900 shadow-2xl z-50 overflow-y-auto;
-}
-
-/* Links do menu */
-.menu-item {
-  @apply w-full text-left px-4 py-4 rounded-xl uppercase tracking-wider text-sm font-semibold flex items-center justify-between transition-all duration-200;
-}
-
-.menu-item.active {
-  @apply text-white bg-indigo-600 dark:bg-indigo-500 shadow-lg border-l-4 border-indigo-300;
-}
-
-.menu-item:not(.active):hover {
-  @apply text-indigo-600 dark:text-indigo-400 bg-neutral-50 dark:bg-neutral-800 border-l-4 border-transparent;
-}
-
-/* Rodapé menu */
-.menu-footer {
-  @apply p-6 border-t border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-800/50 text-center;
-}
-
-/* ===============================
-   Animações simples
-=============================== */
-@keyframes slideInRight {
-  from {
-    transform: translateX(100%);
-    opacity: 0;
-  }
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
-
-@keyframes slideOutRight {
-  from {
-    transform: translateX(0);
-    opacity: 1;
-  }
-  to {
-    transform: translateX(100%);
-    opacity: 0;
-  }
-}
-
-/* ===============================
-   Scroll Margin (ajuste principal)
-=============================== */
-section[id] {
-  scroll-margin-top: 6.5rem; /* evita corte do conteúdo com header fixo */
-}
-
-/* ===============================
-   Dark Mode & Sistema de Cores
-=============================== */
-body.dark {
-  @apply bg-neutral-900 text-neutral-100;
-}
-
-/* Efeitos de Glassmorphism */
-.glass-effect {
-  @apply backdrop-filter backdrop-blur-lg bg-opacity-30 dark:bg-opacity-20 border border-neutral-200/20 dark:border-neutral-700/30 transition-all duration-300;
-}
-
-/* Sistema de Sombras Refinado com transição */
-.shadow-smooth {
-  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.1),
-    0 2px 10px -3px rgba(0, 0, 0, 0.05);
-  transition: box-shadow 0.3s ease;
-}
-
-.dark .shadow-smooth {
-  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.3),
-    0 2px 10px -3px rgba(0, 0, 0, 0.2);
-}
-
-/* Efeitos de Gradiente */
-.gradient-text {
-  @apply bg-clip-text text-transparent bg-gradient-to-r;
-}
-
-.gradient-border {
-  border-image: linear-gradient(
-      to right,
-      rgba(99, 102, 241, 0.5),
-      rgba(168, 85, 247, 0.5)
-    )
-    1;
-}
-
-/* utilitário para truncamento multi-line quando o plugin line-clamp não está disponível */
-.line-clamp-3-custom {
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-/* Efeitos de Hover Modernos */
-.hover-lift {
-  @apply transition-all duration-300 ease-out;
-  &:hover {
-    transform: translateY(-2px);
-    @apply shadow-lg;
-  }
-}
-
-/* Transições Suaves */
-.transition-custom {
-  @apply transition-all duration-300 ease-in-out;
-}
-
-/* Botões Modernos */
-.btn-modern {
-  @apply px-6 py-3 rounded-xl font-medium transition-all duration-300
-         hover:shadow-lg hover:transform hover:-translate-y-0.5
-         active:transform active:translate-y-0 active:shadow-md;
-}
-
-/* ===============================
-   Responsividade
-=============================== */
-@media (max-width: 640px) {
-  .header-logo-text {
-    @apply hidden;
-  }
-
-  section[id] {
-    scroll-margin-top: 7rem; /* ligeiro ajuste para telas pequenas */
-  }
-}
-
-/* ===============================
-   Utilitários extras
-   - esconder scrollbar das listas/carrosséis em mobile quando desejado
-=============================== */
-.no-scrollbar::-webkit-scrollbar {
-  display: none;
-}
-.no-scrollbar {
-  -ms-overflow-style: none; /* IE e Edge */
-  scrollbar-width: none; /* Firefox */
 }

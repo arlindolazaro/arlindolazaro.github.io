@@ -1,55 +1,59 @@
 import { motion } from 'framer-motion';
-import type { Certificate } from './CertificatesInfo';
+import { useTranslation } from 'react-i18next';
+import { FaExpand } from 'react-icons/fa';
+import type { Certificate } from '../../../data/CertificatesData';
 
 const CertificateCard = ({
   cert,
+  index,
   onSelect,
 }: {
   cert: Certificate;
+  index: number;
   onSelect: () => void;
 }) => {
+  const { t } = useTranslation();
+
   return (
     <motion.div
       onClick={onSelect}
-      whileHover={{ y: -8 }}
-      transition={{ type: 'spring', stiffness: 140 }}
-      className="
-        relative group cursor-pointer
-        rounded-2xl overflow-hidden
-        bg-black/60 dark:bg-black/60 backdrop-blur-2xl
-        border border-neutral-800 dark:border-neutral-800
-        hover:border-indigo-400/40 dark:hover:border-indigo-400/40
-        shadow-[0_0_30px_rgba(0,0,0,0.8)]
-        transition-all duration-300
-      "
+      whileHover={{ y: -6 }}
+      transition={{ type: 'spring', stiffness: 260, damping: 20 }}
+      className="group relative cursor-pointer bg-black border border-[var(--border)] rounded-xl overflow-hidden
+                 hover:border-[var(--lime)]/50 transition-colors duration-300
+                 hover:shadow-[0_0_30px_rgba(163,230,53,0.15)]"
     >
-      {/* Glow */}
-      <div className="
-        absolute inset-0 opacity-0 group-hover:opacity-100
-        transition duration-700
-        bg-gradient-to-br from-indigo-500/15 via-transparent to-indigo-600/15
-        blur-xl
-      " />
+      {/* Número */}
+      <span className="absolute top-2 left-2 z-10 text-[9px] font-mono text-[var(--lime)]/80 bg-black/70 border border-[var(--lime)]/20 rounded-full px-2 py-0.5">
+        {String(index + 1).padStart(2, '0')}
+      </span>
 
-      {/* Image */}
-      <div className="relative h-48 sm:h-[220px] flex items-center justify-center bg-neutral-950 dark:bg-neutral-950">
+      <div className="h-40 sm:h-48 bg-[var(--surface)] flex items-center justify-center overflow-hidden">
         <img
           src={cert.image}
-          alt={cert.alt}
+          alt={t(cert.titleKey)}
           loading="lazy"
-          className="
-            max-h-[140px] sm:max-h-[180px] object-contain
-            transition-transform duration-500
-            group-hover:scale-105
-          "
+          className="max-h-[80%] object-contain group-hover:scale-110 transition-transform duration-500 ease-out"
         />
+
+        {/* Overlay no hover */}
+        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors duration-300 flex items-center justify-center">
+          <span
+            className="opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0
+                       transition-all duration-300 flex items-center gap-2
+                       bg-[var(--lime)] text-black text-[11px] font-semibold uppercase tracking-wide
+                       px-3 py-1.5 rounded-full"
+          >
+            <FaExpand className="text-[10px]" />
+            {t('certificates.view')}
+          </span>
+        </div>
       </div>
 
-      {/* Title */}
-      <div className="relative p-3 sm:p-4 text-center">
-        <h4 className="text-xs sm:text-sm font-medium text-neutral-200 dark:text-neutral-200 leading-snug transition-colors duration-300">
-          {cert.title}
-        </h4>
+      <div className="p-3 border-t border-[var(--border)] group-hover:border-[var(--lime)]/20 transition-colors duration-300">
+        <p className="text-xs text-white/70 group-hover:text-white/90 leading-snug line-clamp-2 transition-colors duration-300">
+          {t(cert.titleKey)}
+        </p>
       </div>
     </motion.div>
   );

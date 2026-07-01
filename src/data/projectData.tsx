@@ -1,10 +1,5 @@
 import { FaJava, FaReact } from 'react-icons/fa';
-import {
-  SiSpringboot,
-  SiTailwindcss,
-  SiMysql,
-  SiPostgresql,
-} from 'react-icons/si';
+import { SiSpringboot, SiTailwindcss, SiMysql, SiPostgresql } from 'react-icons/si';
 import type { ReactElement } from 'react';
 
 export interface Technology {
@@ -14,8 +9,8 @@ export interface Technology {
 }
 
 export interface Project {
-  title: string;
-  description: string;
+  titleKey: string;
+  descriptionKey: string;
   stack: Technology[];
   githubUrl: string;
   demoUrl?: string;
@@ -24,9 +19,8 @@ export interface Project {
 
 export const projects: Project[] = [
   {
-    title: '🔐 SecureMessaging',
-    description:
-      'Aplicação fullstack para mensagens seguras com criptografia híbrida (RSA + AES), autenticação JWT e validação de certificados X.509.',
+    titleKey: 'projects.items.secureMessaging.title',
+    descriptionKey: 'projects.items.secureMessaging.description',
     stack: [
       { name: 'Java', icon: <FaJava />, color: 'text-red-400' },
       { name: 'Spring Boot', icon: <SiSpringboot />, color: 'text-green-400' },
@@ -39,21 +33,18 @@ export const projects: Project[] = [
     featured: true,
   },
   {
-    title: 'Sistema de Notícias',
-    description:
-      'API RESTful com autenticação JWT, Swagger e testes automatizados usando Spring Boot.',
+    titleKey: 'projects.items.newsSystem.title',
+    descriptionKey: 'projects.items.newsSystem.description',
     stack: [
       { name: 'Java', icon: <FaJava />, color: 'text-red-400' },
       { name: 'Spring Boot', icon: <SiSpringboot />, color: 'text-green-400' },
       { name: 'MySQL', icon: <SiMysql />, color: 'text-blue-400' },
     ],
-    githubUrl:
-      'https://github.com/arlindolazaro/backend-site-noticias-spring.git',
+    githubUrl: 'https://github.com/arlindolazaro/backend-site-noticias-spring.git',
   },
   {
-    title: 'E-commerce Premium',
-    description:
-      'Plataforma e-commerce com carrinho, checkout e painel administrativo.',
+    titleKey: 'projects.items.ecommerce.title',
+    descriptionKey: 'projects.items.ecommerce.description',
     stack: [
       { name: 'React', icon: <FaReact />, color: 'text-blue-400' },
       { name: 'Java', icon: <FaJava />, color: 'text-red-400' },
@@ -61,15 +52,12 @@ export const projects: Project[] = [
       { name: 'PostgreSQL', icon: <SiPostgresql />, color: 'text-indigo-400' },
       { name: 'Tailwind CSS', icon: <SiTailwindcss />, color: 'text-cyan-400' },
     ],
-    githubUrl:
-      'https://github.com/arlindolazaro/electronics-store-api.git',
-    demoUrl:
-      'https://github.com/arlindolazaro/electronics-store-web.git',
+    githubUrl: 'https://github.com/arlindolazaro/electronics-store-api.git',
+    demoUrl: 'https://github.com/arlindolazaro/electronics-store-web.git',
   },
   {
-    title: 'TaskManager',
-    description:
-      'Gestão de tarefas com autenticação JWT, multiutilizador e frontend moderno.',
+    titleKey: 'projects.items.taskManager.title',
+    descriptionKey: 'projects.items.taskManager.description',
     stack: [
       { name: 'React', icon: <FaReact />, color: 'text-blue-400' },
       { name: 'Java', icon: <FaJava />, color: 'text-red-400' },

@@ -1,86 +1,65 @@
 import { motion } from 'framer-motion';
-import { FaGithub, FaExternalLinkAlt, FaStar } from 'react-icons/fa';
-import type { Project } from './projectData';
+import { useTranslation } from 'react-i18next';
+import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
+import type { Project } from '../../../data/projectData';
 
-interface ProjectCardProps {
-  project: Project;
-}
+interface Props { project: Project; large?: boolean; }
 
-export const ProjectCard = ({ project }: ProjectCardProps) => {
+export const ProjectCard = ({ project, large }: Props) => {
+  const { t } = useTranslation();
+
   return (
     <motion.article
-      whileHover={{ y: -6 }}
+      whileHover={{ y: -4 }}
       transition={{ type: 'spring', stiffness: 200, damping: 20 }}
-      className={`relative group rounded-2xl bg-neutral-900 dark:bg-neutral-900 transition-colors overflow-hidden ${
-        project.featured
-          ? 'border-2 border-indigo-500/60 dark:border-indigo-500/60'
-          : 'border border-white/10 dark:border-white/10 hover:border-indigo-500/40 dark:hover:border-indigo-500/40'
-      }`}
+      className={`group bg-black border border-[var(--border)] rounded-2xl overflow-hidden hover:border-[var(--lime)]/30 transition-colors duration-300 ${large ? 'md:flex' : ''}`}
     >
-      {/* Glow */}
-      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-        <div className="absolute -inset-1 bg-gradient-to-br from-indigo-600/15 to-indigo-700/10 blur-xl" />
-      </div>
+      {/* Accent top bar */}
+      <div className={`h-1 w-full bg-[var(--lime)] ${large ? 'md:hidden' : ''}`} />
+      {large && <div className="hidden md:block w-1 bg-[var(--lime)]" />}
 
-      {/* Featured Badge */}
-      {project.featured && (
-        <div className="absolute top-4 right-4 z-10 flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gradient-to-r from-indigo-600 to-indigo-700 text-white text-xs font-semibold shadow-lg">
-          <FaStar className="w-3 h-3" />
-          <span>Destaque</span>
+      <div className={`p-6 sm:p-8 flex flex-col ${large ? 'flex-1' : 'h-full'}`}>
+        {/* Stack icons */}
+        <div className="flex gap-2 mb-4">
+          {project.stack.slice(0, 4).map((tech, i) => (
+            <span key={i} className="w-8 h-8 rounded-lg bg-[var(--surface)] border border-[var(--border)] flex items-center justify-center text-[var(--lime)] text-sm">
+              {tech.icon}
+            </span>
+          ))}
         </div>
-      )}
 
-      <div className="relative p-5 sm:p-7 flex flex-col h-full">
-        {/* Header */}
-        <div className="flex items-start sm:items-center gap-3 sm:gap-4 mb-4">
-          <div className="w-10 sm:w-12 h-10 sm:h-12 flex items-center justify-center rounded-xl bg-indigo-500/10 dark:bg-indigo-500/10 text-indigo-400 dark:text-indigo-400 text-lg sm:text-xl flex-shrink-0">
-            {project.stack[0].icon}
-          </div>
-          <h3 className="text-base sm:text-xl font-semibold text-neutral-100 dark:text-neutral-100">
-            {project.title}
+        <div className="flex items-start justify-between gap-2 mb-3">
+          <h3 className={`font-black text-white ${large ? 'text-2xl sm:text-3xl' : 'text-lg'}`}>
+            {t(project.titleKey)}
           </h3>
+          {project.featured && (
+            <span className="px-2 py-1 text-[10px] font-bold uppercase tracking-wider bg-[var(--lime)] text-black rounded-full whitespace-nowrap">
+              {t('projects.featured')}
+            </span>
+          )}
         </div>
 
-        {/* Description */}
-        <p className="text-xs sm:text-sm text-neutral-400 dark:text-neutral-400 leading-relaxed mb-4 sm:mb-6">
-          {project.description}
+        <p className="text-[var(--muted)] text-sm leading-relaxed mb-6 flex-1">
+          {t(project.descriptionKey)}
         </p>
 
-        {/* Stack */}
-        <div className="flex flex-wrap gap-2 mb-4 sm:mb-6">
+        <div className="flex flex-wrap gap-2 mb-6">
           {project.stack.map((tech, i) => (
-            <span
-              key={i}
-              className="text-xs px-2 sm:px-3 py-1 rounded-full bg-white/5 dark:bg-white/5 text-neutral-300 dark:text-neutral-300 border border-white/10 dark:border-white/10"
-            >
+            <span key={i} className="text-xs px-2 py-1 rounded-md bg-[var(--surface)] text-white/50 border border-[var(--border)]">
               {tech.name}
             </span>
           ))}
         </div>
 
-        {/* Actions */}
-        <div className="mt-auto flex gap-2 sm:gap-3">
-          <a
-            href={project.githubUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex-1 inline-flex items-center justify-center gap-2 px-3 sm:px-4 py-2 sm:py-2.5 rounded-xl bg-white/5 dark:bg-white/5 hover:bg-white/10 dark:hover:bg-white/10 text-neutral-200 dark:text-neutral-200 text-xs sm:text-sm font-medium transition-colors duration-300"
-          >
-            <FaGithub />
-            <span className="hidden sm:inline">Código</span>
-            <span className="sm:hidden">Git</span>
+        <div className="flex gap-3 mt-auto">
+          <a href={project.githubUrl} target="_blank" rel="noopener noreferrer"
+            className="flex-1 inline-flex items-center justify-center gap-2 py-2.5 rounded-xl border border-[var(--border)] text-white/60 hover:text-white hover:border-white/30 text-xs font-medium transition-colors">
+            <FaGithub /> {t('projects.code')}
           </a>
-
           {project.demoUrl && (
-            <a
-              href={project.demoUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex-1 inline-flex items-center justify-center gap-2 px-3 sm:px-4 py-2 sm:py-2.5 rounded-xl bg-gradient-to-r from-indigo-600 to-indigo-700 text-white text-xs sm:text-sm font-medium hover:brightness-110 dark:hover:brightness-110 transition-all duration-300"
-            >
-              <FaExternalLinkAlt />
-              <span className="hidden sm:inline">Demo</span>
-              <span className="sm:hidden">Ver</span>
+            <a href={project.demoUrl} target="_blank" rel="noopener noreferrer"
+              className="flex-1 inline-flex items-center justify-center gap-2 py-2.5 rounded-xl bg-[var(--lime)] text-black text-xs font-bold hover:bg-white transition-colors">
+              <FaExternalLinkAlt /> Demo
             </a>
           )}
         </div>
@@ -88,3 +67,5 @@ export const ProjectCard = ({ project }: ProjectCardProps) => {
     </motion.article>
   );
 };
+
+export default ProjectCard;

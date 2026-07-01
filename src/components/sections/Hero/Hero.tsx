@@ -1,158 +1,138 @@
-// Hero.tsx
 import { motion } from 'framer-motion';
-import { FaChevronDown } from 'react-icons/fa';
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { HeroButtons } from './HeroButtons';
-import {
-  fadeInUp,
-  staggerContainer,
-  fadeIn,
-  heroImage,
-  heroTitle,
-} from '../../../lib/animations';
 
 export const Hero = () => {
+  const { t } = useTranslation();
   const [isMounted, setIsMounted] = useState(false);
   const [imgOk, setImgOk] = useState(true);
 
-  useEffect(() => {
-    setIsMounted(true);
-    return () => setIsMounted(false);
-  }, []);
-
-  const scrollToNextSection = () => {
-    document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' });
-  };
+  useEffect(() => { setIsMounted(true); return () => setIsMounted(false); }, []);
 
   return (
-    <section
-      id="home"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black"
-    >
-      {/* Fundo com gradiente violet/indigo premium */}
-      <div className="absolute inset-0 bg-gradient-to-br from-violet-950/30 via-black via-black to-indigo-950/20 pointer-events-none" />
+    <section id="home" className="relative min-h-screen flex items-center bg-black overflow-hidden">
 
-      {/* Blobs decorativos */}
-      <div className="absolute inset-0 opacity-20">
-        <div className="absolute w-96 h-96 -top-48 -left-48 bg-indigo-600/40 rounded-full blur-3xl" />
-        <div className="absolute w-96 h-96 -bottom-48 -right-48 bg-indigo-700/30 rounded-full blur-3xl" />
-      </div>
+      {/* Grid pattern */}
+      <div className="absolute inset-0 opacity-[0.03]" style={{
+        backgroundImage: 'linear-gradient(white 1px, transparent 1px), linear-gradient(90deg, white 1px, transparent 1px)',
+        backgroundSize: '60px 60px',
+      }} />
 
-      <div className="container mx-auto min-h-[calc(100vh-5rem)] py-16 sm:py-28 px-4 sm:px-6 relative z-10">
-        <motion.div
-          className="grid grid-cols-1 md:grid-cols-12 gap-8 sm:gap-12 items-center"
-          variants={staggerContainer}
-          initial="initial"
-          whileInView="whileInView"
-          viewport={{ once: true, amount: 0.2 }}
-        >
-          {/* IMAGEM */}
+      {/* Lime glow blob */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[var(--lime)]/10 rounded-full blur-[120px] pointer-events-none" />
+
+      <div className="container mx-auto px-6 pt-24 pb-16 relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center min-h-[80vh]">
+
+          {/* LEFT — TEXT */}
           <motion.div
-            variants={heroImage}
-            whileHover="hover"
-            className="md:col-span-5 flex justify-center"
-          >
-            <div className="relative group">
-              {imgOk ? (
-                <motion.div
-                  animate={{
-                    rotateY: [0, 6, 0, -6, 0],
-                    rotateX: [0, 6, 0, -6, 0],
-                  }}
-                  transition={{
-                    duration: 6,
-                    repeat: Infinity,
-                    ease: 'easeInOut',
-                  }}
-                >
-                  <img
-                    src="/images/perfil.webp"
-                    alt="Arlindo Cau"
-                    loading="lazy"
-                    onError={() => setImgOk(false)}
-                    className="
-                      w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64
-                      rounded-full object-cover
-                      shadow-2xl
-                      ring-4 ring-indigo-500/30
-                      transition-transform duration-500
-                      group-hover:scale-105
-                    "
-                  />
-                  <div className="absolute inset-0 rounded-full bg-indigo-500/15 blur-2xl -z-10" />
-                </motion.div>
-              ) : (
-                <div className="w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 rounded-full bg-gradient-to-br from-indigo-600 to-indigo-700 flex items-center justify-center text-white text-3xl sm:text-4xl font-bold shadow-2xl">
-                  AC
-                </div>
-              )}
-            </div>
-          </motion.div>
-
-          {/* TEXTO */}
-          <motion.div
-            variants={fadeInUp}
-            className="md:col-span-7 flex flex-col items-center md:items-start text-center md:text-left"
+            className="flex flex-col justify-center order-2 lg:order-1"
+            initial={{ opacity: 0, x: -40 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, ease: 'easeOut' }}
           >
             <motion.p
-              variants={heroTitle}
-              className="text-sm font-mono tracking-widest text-indigo-400 mb-2"
+              className="text-[var(--lime)] text-xs font-mono tracking-[0.3em] uppercase mb-6"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.2 }}
             >
-              OLÁ, EU SOU
+              {t('hero.greeting')}
             </motion.p>
 
             <motion.h1
-              variants={heroTitle}
-              className="text-3xl sm:text-4xl md:text-6xl font-bold mb-3 sm:mb-4"
+              className="text-5xl sm:text-7xl lg:text-8xl font-black leading-none mb-4"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3, duration: 0.7 }}
             >
-              <span className="text-white">Arlindo</span>{' '}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-indigo-600">
+              <span className="text-white block">Arlindo</span>
+              <span className="block" style={{ WebkitTextStroke: '2px var(--lime)', color: 'transparent' }}>
                 Cau
               </span>
             </motion.h1>
 
-            <motion.h2
-              variants={heroTitle}
-              className="text-lg sm:text-xl md:text-3xl font-semibold mb-6 sm:mb-8 text-neutral-300"
+            <motion.p
+              className="text-[var(--muted)] text-lg sm:text-xl font-light mb-10 max-w-md"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.5 }}
             >
-              Software Developer
-            </motion.h2>
+              {t('hero.role')} —{' '}
+              <span className="accent-italic text-[var(--lime)]">
+                Full-Stack
+              </span>
+            </motion.p>
 
             <motion.div
-              variants={fadeIn}
-              className="flex flex-wrap gap-6 items-center justify-center md:justify-start w-full"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.6 }}
             >
               <HeroButtons isMounted={isMounted} />
             </motion.div>
           </motion.div>
-        </motion.div>
 
-        {/* SCROLL CTA */}
-        <motion.div
-          className="hidden sm:block absolute left-1/2 -translate-x-1/2 bottom-8 z-20"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1 }}
-        >
-          <motion.button
-            onClick={scrollToNextSection}
-            className="flex flex-col items-center group"
-            whileHover={{ scale: 1.05, y: -4 }}
+          {/* RIGHT — PHOTO */}
+          <motion.div
+            className="flex justify-center items-center order-1 lg:order-2"
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <span className="text-sm font-semibold text-indigo-400 mb-3 tracking-wider">
-              SAIBA MAIS
-            </span>
-            <div
-              className="
-                w-14 h-14 rounded-full
-                bg-white/5 border border-white/10
-                backdrop-blur
-                flex items-center justify-center
-              "
-            >
-              <FaChevronDown className="text-lg text-indigo-400 animate-bounce" />
+            <div className="relative">
+              {/* Lime accent behind photo */}
+              <div className="absolute -bottom-4 -right-4 w-full h-full bg-[var(--lime)] rounded-2xl" />
+
+              {imgOk ? (
+                <img
+                  src="/images/perfil.webp"
+                  alt="Arlindo Cau"
+                  onError={() => setImgOk(false)}
+                  className="relative z-10 w-64 h-80 sm:w-80 sm:h-96 object-cover rounded-2xl grayscale"
+                />
+              ) : (
+                <div className="relative z-10 w-64 h-80 sm:w-80 sm:h-96 rounded-2xl bg-[var(--surface)] flex items-center justify-center">
+                  <span className="text-6xl font-black text-[var(--lime)]">AC</span>
+                </div>
+              )}
+
+              {/* Floating badge */}
+              <motion.div
+                animate={{ y: [-6, 6, -6] }}
+                transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+                className="absolute -left-6 top-8 z-20 bg-[var(--lime)] text-black px-4 py-2 rounded-full text-xs font-bold shadow-lg"
+              >
+                3+ Anos
+              </motion.div>
+
+              <motion.div
+                animate={{ y: [6, -6, 6] }}
+                transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+                className="absolute -right-6 bottom-12 z-20 bg-white text-black px-4 py-2 rounded-full text-xs font-bold shadow-lg"
+              >
+                Full-Stack
+              </motion.div>
             </div>
-          </motion.button>
+          </motion.div>
+        </div>
+
+        {/* Scroll hint */}
+        <motion.div
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.2 }}
+        >
+          <span className="text-[var(--muted)] text-xs tracking-widest uppercase">{t('hero.scrollMore')}</span>
+          <motion.div
+            animate={{ y: [0, 8, 0] }}
+            transition={{ duration: 1.5, repeat: Infinity }}
+            className="w-5 h-8 border border-white/20 rounded-full flex items-start justify-center pt-1"
+          >
+            <div className="w-1 h-2 bg-[var(--lime)] rounded-full" />
+          </motion.div>
         </motion.div>
       </div>
     </section>

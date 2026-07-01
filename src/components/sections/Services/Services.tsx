@@ -1,55 +1,34 @@
 import { motion } from 'framer-motion';
-import { staggerContainer } from '../../../lib/animations';
-import { SectionTitle } from '../../common/SectionTitle';
-import { AnimatedDivider } from '../../common/AnimatedDivider';
-import { services } from './servicesData';
+import { useTranslation } from 'react-i18next';
+import { services } from '../../../data/servicesData';
 import ServiceCard from './ServiceCard';
 import MobileServicesCarousel from './MobileServicesCarousel';
 
 const Services = () => {
+  const { t } = useTranslation();
   return (
-    <motion.section
-      id="servicos"
-      className="relative py-24 bg-black overflow-hidden"
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.6 }}
-    >
-      {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-neutral-950 via-black to-indigo-950/20" />
-
-      <div className="relative container mx-auto px-4">
-        {/* Header */}
-        <div className="max-w-3xl mx-auto text-center mb-16 sm:mb-20">
-          <SectionTitle>
-            Serviços Profissionais
-          </SectionTitle>
-          <AnimatedDivider />
-          <p className="text-neutral-300 text-base sm:text-lg mt-6">
-            Soluções técnicas modernas, escaláveis e orientadas a resultados.
-          </p>
+    <section id="servicos" className="py-24 bg-black">
+      <div className="container mx-auto px-6">
+        <motion.p className="text-[var(--lime)] text-xs font-mono tracking-[0.3em] uppercase mb-4"
+          initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>
+          02 — {t('services.title')}
+        </motion.p>
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-16">
+          <motion.h2 className="text-4xl sm:text-6xl font-black text-white"
+            initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+            {t('services.title').split(' ')[0]}{' '}
+            <span className="accent-italic">{t('services.title').split(' ').slice(1).join(' ')}</span>
+          </motion.h2>
+          <p className="text-[var(--muted)] max-w-xs text-sm">{t('services.subtitle')}</p>
         </div>
-
-        {/* Desktop / Tablet Grid */}
-        <motion.div
-          className="hidden md:grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10"
-          variants={staggerContainer}
-          initial="initial"
-          whileInView="whileInView"
-          viewport={{ once: true }}
-        >
-          {services.map((service) => (
-            <ServiceCard key={service.title} service={service} />
-          ))}
-        </motion.div>
-
-        {/* Mobile Carousel */}
+        <div className="hidden md:grid grid-cols-2 lg:grid-cols-4 gap-4">
+          {services.map((s, i) => <ServiceCard key={i} service={s} />)}
+        </div>
         <div className="md:hidden">
           <MobileServicesCarousel services={services} />
         </div>
       </div>
-    </motion.section>
+    </section>
   );
 };
 

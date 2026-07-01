@@ -1,48 +1,38 @@
 import { motion } from 'framer-motion';
-import { projects } from './projectData';
+import { useTranslation } from 'react-i18next';
+import { projects } from '../../../data/projectData';
 import { ProjectCard } from './ProjectCard';
-import {AnimatedDivider} from '../../common/AnimatedDivider';
-import { SectionTitle } from '../../common/SectionTitle';
 
 const Projects = () => {
+  const { t } = useTranslation();
   const featured = projects.find(p => p.featured);
   const rest = projects.filter(p => !p.featured);
 
   return (
-    <section
-      id="projects"
-      className="relative py-28 bg-black text-white overflow-hidden"
-    >
-      {/* Gradiente premium: neutral com destaque indigo */}
-      <div className="absolute inset-0 bg-gradient-to-b from-neutral-950 via-black to-indigo-950/25 pointer-events-none" />
-      <div className="max-w-7xl mx-auto px-6 relative z-10">
-        {/* Header */}
-        <div className="text-center mb-20">
-          <SectionTitle>Projectos</SectionTitle>
-          <AnimatedDivider />
-          <p className="mt-6 text-neutral-300 max-w-2xl mx-auto">
-            Projectos focados em arquitetura sólida, segurança e experiência moderna.
-          </p>
+    <section id="projects" className="py-24 bg-[var(--surface)]">
+      <div className="container mx-auto px-6">
+        <motion.p className="text-[var(--lime)] text-xs font-mono tracking-[0.3em] uppercase mb-4"
+          initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>
+          06 — {t('projects.title')}
+        </motion.p>
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-16">
+          <motion.h2 className="text-4xl sm:text-6xl font-black text-white"
+            initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+            {t('projects.title').slice(0, 3)}{' '}
+            <span className="accent-italic">{t('projects.title').slice(3)}</span>
+          </motion.h2>
+          <p className="text-[var(--muted)] max-w-xs text-sm">{t('projects.subtitle')}</p>
         </div>
 
-        {/* Featured */}
         {featured && (
-          <div className="mb-20">
-            <ProjectCard project={featured} />
+          <div className="mb-6">
+            <ProjectCard project={featured} large />
           </div>
         )}
 
-        {/* Grid */}
-        <motion.div
-          className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-        >
-          {rest.map((project, i) => (
-            <ProjectCard key={i} project={project} />
-          ))}
-        </motion.div>
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {rest.map((p, i) => <ProjectCard key={i} project={p} />)}
+        </div>
       </div>
     </section>
   );

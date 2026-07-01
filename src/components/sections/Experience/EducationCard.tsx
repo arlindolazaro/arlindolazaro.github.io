@@ -1,147 +1,126 @@
-import { motion } from 'framer-motion';
-import type { EducationItem } from './educationData';
-import { FaCalendarAlt, FaMapMarkerAlt } from 'react-icons/fa';
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
+import { FaChevronDown } from 'react-icons/fa';
+import type { EducationItem } from '../../../data/educationData';
 
-interface Props {
+const EducationCard = ({
+  education,
+  index,
+  isLast,
+}: {
   education: EducationItem;
-}
+  index: number;
+  isLast: boolean;
+}) => {
+  const { t, i18n } = useTranslation();
+  const lang = i18n.language === 'en' ? 'en' : 'pt';
+  const [open, setOpen] = useState(true);
 
-const statusLabel = {
-  completed: 'CONCLUÍDO',
-  'in-progress': 'EM PROGRESSO',
-  ongoing: 'CONTÍNUO',
-};
+  const statusLabel = {
+    completed: t('education.statusCompleted'),
+    'in-progress': t('education.statusInProgress'),
+    ongoing: t('education.statusOngoing'),
+  };
 
-const EducationCard = ({ education }: Props) => {
   return (
     <motion.div
-      whileHover={{ y: -8 }}
-      transition={{ type: 'spring', stiffness: 180 }}
-      className="relative group"
+      className="grid grid-cols-[64px_1fr] sm:grid-cols-[140px_64px_1fr] gap-x-3 sm:gap-x-5"
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ delay: index * 0.08, duration: 0.5 }}
     >
-      {/* Neon border */}
-      <div
-        className="
-          absolute -inset-[1px] rounded-[28px]
-          bg-gradient-to-r from-indigo-500/40 via-indigo-400/40 to-indigo-500/40
-          opacity-0 group-hover:opacity-100 blur-xl transition duration-700
-        "
-      />
+      {/* Período — escondido em mobile, mostrado dentro do header */}
+      <div className="hidden sm:flex flex-col items-end justify-start pt-3 text-right">
+        <span className="text-[var(--lime)] font-bold text-sm leading-snug">{education.period}</span>
+      </div>
 
-      <div
-        className="
-          relative rounded-[28px]
-          p-6 sm:p-8 md:p-12
-          bg-black/70 backdrop-blur-2xl
-          border border-neutral-800
-          shadow-[0_0_60px_rgba(0,0,0,0.6)]
-        "
-      >
-        {/* Header */}
-        <div
-          className="
-            flex flex-col items-center text-center
-            md:flex-row md:items-center md:text-left
-            gap-6 md:gap-8 mb-8 md:mb-10
-          "
+      {/* Marcador na linha */}
+      <div className="relative flex flex-col items-center">
+        {!isLast && (
+          <div
+            className="absolute left-1/2 -translate-x-1/2 top-6 sm:top-7 -bottom-12 w-[2px]"
+            style={{ background: 'linear-gradient(to bottom, var(--lime), var(--border))' }}
+          />
+        )}
+        <motion.div
+          whileHover={{ scale: 1.1 }}
+          className="relative z-10 w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-white border-2 border-[var(--border)] overflow-hidden flex items-center justify-center shrink-0
+                     group-hover:border-[var(--lime)]"
         >
           <img
             src={education.logo}
             alt={education.institution}
-            className="
-              w-14 h-14 sm:w-16 sm:h-16
-              rounded-xl object-cover
-              border border-neutral-700
-            "
+            className="w-full h-full object-cover"
           />
+        </motion.div>
+      </div>
 
-          <div className="flex-1">
-            <h3 className="text-lg sm:text-xl md:text-2xl font-semibold tracking-tight text-white">
-              {education.degree}
-            </h3>
-            <p className="text-neutral-400 mt-1 text-sm sm:text-base">
-              {education.institution}
-            </p>
-          </div>
-
-          <span
-            className="
-              px-4 py-2
-              rounded-full
-              text-[10px] sm:text-xs
-              font-semibold tracking-widest
-              text-cyan-200
-              border border-cyan-500/50
-              bg-cyan-500/20
-            "
-          >
-            {statusLabel[education.status]}
-          </span>
-        </div>
-
-        {/* Meta */}
-        <div
-          className="
-            flex flex-col items-center text-center
-            sm:flex-row sm:justify-center
-            md:justify-start md:text-left
-            gap-4 sm:gap-8
-            text-xs sm:text-sm
-            text-neutral-300
-            mb-6 md:mb-8
-          "
+      {/* Conteúdo */}
+      <div className="group pb-2">
+        <button
+          onClick={() => setOpen((o) => !o)}
+          className="w-full flex items-start justify-between gap-3 text-left pt-3"
         >
-          <div className="flex items-center gap-2">
-            <FaCalendarAlt />
-            <span>{education.period}</span>
+          <div className="min-w-0">
+            <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
+              <h3 className="text-white font-bold text-base sm:text-lg leading-snug">
+                {education.degree[lang]}
+              </h3>
+              <span className="text-[var(--muted)] text-sm">{education.institution}</span>
+            </div>
+            <div className="sm:hidden text-[var(--lime)] font-semibold text-xs mt-1">
+              {education.period}
+            </div>
           </div>
-          <div className="flex items-center gap-2">
-            <FaMapMarkerAlt />
-            <span>{education.location}</span>
-          </div>
-        </div>
 
-        {/* Description */}
-        <p
-          className="
-            text-neutral-200
-            text-sm sm:text-base md:text-lg
-            leading-relaxed
-            text-center md:text-left
-            max-w-3xl mx-auto md:mx-0
-            mb-8 md:mb-10
-          "
-        >
-          {education.description}
-        </p>
-
-        {/* Focus */}
-        {education.focus && (
-          <div
-            className="
-              flex flex-wrap
-              justify-center md:justify-start
-              gap-3 sm:gap-4
-            "
-          >
-            {education.focus.map((item, idx) => (
-              <span
-                key={idx}
-                className="
-                  px-4 py-2
-                  rounded-full
-                  text-[10px] sm:text-xs
-                  uppercase tracking-wider
-                  text-neutral-200
-                  border border-neutral-600
-                  bg-neutral-800/80
-                "
-              >
-                {item}
-              </span>
-            ))}
+          <div className="flex items-center gap-2 shrink-0 pt-1">
+            <span className="hidden sm:inline-block px-3 py-1 rounded-full text-[10px] font-bold tracking-wider bg-[var(--lime)]/10 text-[var(--lime)] border border-[var(--lime)]/20 whitespace-nowrap">
+              {statusLabel[education.status]}
+            </span>
+            <motion.span
+              animate={{ rotate: open ? 180 : 0 }}
+              transition={{ duration: 0.2 }}
+              className="text-[var(--muted)] group-hover:text-[var(--lime)] transition-colors"
+            >
+              <FaChevronDown className="text-xs" />
+            </motion.span>
           </div>
-        )}
+        </button>
+
+        <AnimatePresence initial={false}>
+          {open && (
+            <motion.div
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: 'auto', opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.3, ease: 'easeInOut' }}
+              className="overflow-hidden"
+            >
+              <div className="mt-3 rounded-xl border border-dashed border-[var(--border)] group-hover:border-[var(--lime)]/30 transition-colors duration-300 px-4 py-3 sm:px-5 sm:py-4">
+                <p className="text-[var(--muted)] text-sm leading-relaxed">
+                  {education.description[lang]}
+                </p>
+                <div className="text-xs text-[var(--muted)]/70 mt-3">
+                  {education.location[lang]}
+                </div>
+                {education.focus && (
+                  <div className="flex flex-wrap gap-2 mt-3">
+                    {education.focus.map((f, i) => (
+                      <span
+                        key={i}
+                        className="px-2 py-1 text-[10px] rounded-md border border-[var(--border)] text-[var(--muted)] uppercase tracking-wider"
+                      >
+                        {f}
+                      </span>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </motion.div>
   );
